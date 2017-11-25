@@ -12,11 +12,39 @@ public class AlertMgr : BaseManager<AlertMgr> {
     public Queue<MsgUIModel> msgModels;
     public Queue<TipUIModel> tipModels;
 
+    RectTransform staticCanvas;
+
     public override void Init() {
         base.Init();
+        LoadAlert();
         SceneManager.sceneLoaded += OnLoadScene;
         if (msgAlert != null) { msgAlert.SetActive(false); }
         if (tipAlert != null) { tipAlert.SetActive(false); }
+    }
+
+    void LoadAlert() {
+        if (GameObject.Find("StaticCanvas") == null) {
+            GameObject canvas = ResMgr.Ins.GetAsset<GameObject>(EM_ResType.StaticCanvas);
+            staticCanvas = Instantiate(canvas).transform as RectTransform;
+            staticCanvas.SetParent(transform, false);
+        }
+        else {
+            staticCanvas = GameObject.Find("StaticCanvas").transform as RectTransform;
+        }
+
+        if (msgAlert == null) {
+            GameObject obj = ResMgr.Ins.GetAsset<GameObject>(EM_ResType.MsgAlert);
+            RectTransform tra = Instantiate(obj).transform as RectTransform;
+            msgAlert = tra.gameObject;
+            tra.SetParent(staticCanvas, false);
+        }
+
+        if (tipAlert == null) {
+            GameObject obj = ResMgr.Ins.GetAsset<GameObject>(EM_ResType.TipAlert);
+            RectTransform tra = Instantiate(obj).transform as RectTransform;
+            tipAlert = tra.gameObject;
+            tra.SetParent(staticCanvas, false);
+        }
     }
 
     public void Update() {

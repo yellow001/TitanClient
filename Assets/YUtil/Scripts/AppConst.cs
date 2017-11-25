@@ -27,19 +27,10 @@ public static class AppConst{
     //public static readonly string gateIP = "127.0.0.1";
     public static readonly int gatePort = 12345;
 
-    public static string regionIP = string.Empty;
-    public static int regionPort = -1;
-
     public static readonly string[] dontPack = new string[] { ".cs", ".meta" };
 
     public static readonly string httpUrl = "http://localhost:7777/";
-
-    public static int regionID;
-    public static string accName;
-    public static string roleKey;
-    public static string roleName;
-
-    public static readonly int lvExp = 150;
+    
 
     public static string AssetEx = ".bundle";
 

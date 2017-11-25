@@ -23,7 +23,7 @@ public class EventAuClips : MonoBehaviour {
             }
 
             if (item.clip == null) {
-                item.clip = ResMgr.Ins.getAsset<AudioClip>(auAssetName, item.auPath);
+                item.clip = ResMgr.Ins.GetABAsset<AudioClip>(auAssetName, item.auPath);
             }
 
             if (item.eObj == null) {

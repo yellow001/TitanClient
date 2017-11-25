@@ -4,8 +4,11 @@ using System.IO;
 using UnityEngine;
 
 public class ResMgr : BaseManager<ResMgr> {
+
+    public LoadMode loadmode = LoadMode.Resources;
+
     /// <summary>
-    /// 已经加载的资源
+    /// 已经加载的AB包
     /// </summary>
     public static Dictionary<string, AssetBundle> loadedAssets;
 
@@ -37,12 +40,69 @@ public class ResMgr : BaseManager<ResMgr> {
         isInit = true;
     }
 
+    /// <summary>
+    /// 通过资源枚举查找资源
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="t"></param>
+    /// <returns></returns>
+    public T GetAsset<T>(EM_ResType t) where T : Object {
+        string path;
+        switch (loadmode) {
+            case LoadMode.Resources:
+
+                path = ResPath.Ins.GetResPath(t);
+                if (!string.IsNullOrEmpty(path)) {
+                    return GetResAsset<T>(path);
+                }
+                return default(T);
+
+            case LoadMode.AssetBundle:
+
+                path = ResPath.Ins.GetABPath(t);
+                if (!string.IsNullOrEmpty(path)) {
+                    return GetABAsset<T>(path, t.ToString());
+                }
+                return default(T);
+
+            default:
+                return null;
+        }
+    }
+
+    /// <summary>
+    /// 通过resources获取资源
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    public T GetResAsset<T>(string path) where T : Object {
+        if (resAssets == null) {
+            resAssets = new Dictionary<string, Object>();
+        }
+
+        if (resAssets.ContainsKey(path)) {
+            return (T)resAssets[path];
+        }
+
+        T value = Resources.Load<T>(path);
+
+        resAssets.Add(path, value);
+
+        return value;
+    }
+
+    /// <summary>
+    /// 加载assetbundle包
+    /// </summary>
+    /// <param name="abName"></param>
+    /// <returns></returns>
     public AssetBundle loadAssetBundle(string abName) {
 
         if (!isInit) { Init(); }
 
         //判断该资源是否存在
-        string path = getRealPath(abName + AppConst.AssetEx);
+        string path = GetAbRealPath(abName);
         if (path == string.Empty) {
             Debug.Log("the assetbundle (" + abName + ") you want to load is not exit");
             return null;
@@ -68,7 +128,14 @@ public class ResMgr : BaseManager<ResMgr> {
 
     }
 
-    public T getAsset<T>(string abName, string assetName) where T : Object {
+    /// <summary>
+    /// 获取ab包下的具体资源
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="abName"></param>
+    /// <param name="assetName"></param>
+    /// <returns></returns>
+    public T GetABAsset<T>(string abName, string assetName) where T : Object {
         AssetBundle ab = loadAssetBundle(abName);
 
         //foreach (string item in ab.GetAllAssetNames()) {
@@ -83,7 +150,101 @@ public class ResMgr : BaseManager<ResMgr> {
         return null;
     }
 
-    public string getRealPath(string path) {
+    /// <summary>
+    /// 通过资源枚举查找资源
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="t"></param>
+    /// <returns></returns>
+    public void GetAssetAsync<T>(EM_ResType t,System.Action<T> callBack) where T : Object {
+        string path;
+        switch (loadmode) {
+            case LoadMode.Resources:
+
+                path = ResPath.Ins.GetResPath(t);
+                if (!string.IsNullOrEmpty(path)) {
+                    StartCoroutine(GetResAssetAsync(path,callBack));
+                    return;
+                }
+                callBack(default(T));
+
+                break;
+            case LoadMode.AssetBundle:
+
+                path = ResPath.Ins.GetABPath(t);
+                if (!string.IsNullOrEmpty(path)) {
+                    StartCoroutine(GetABAssetAsync<T>(path, t.ToString(),callBack));
+                    return;
+                }
+                callBack(default(T));
+
+                break;
+            default:
+                callBack(default(T));
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 通过resources异步获取资源
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    public IEnumerator GetResAssetAsync<T>(string path,System.Action<T> callBack) where T : Object {
+        if (resAssets == null) {
+            resAssets = new Dictionary<string, Object>();
+        }
+
+        if (resAssets.ContainsKey(path)) {
+            callBack((T)resAssets[path]);
+            yield break;
+        }
+
+        ResourceRequest req = Resources.LoadAsync<T>(path);
+        yield return req;
+
+        if (req.asset != null) {
+            resAssets.Add(path, req.asset);
+            callBack((T)req.asset);
+            yield break;
+        }
+
+        callBack(default(T));
+        
+    }
+
+    /// <summary>
+    /// 异步获取ab包下的具体资源
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="abName"></param>
+    /// <param name="assetName"></param>
+    /// <returns></returns>
+    public IEnumerator GetABAssetAsync<T>(string abName, string assetName,System.Action<T> callBack) where T : Object {
+        AssetBundle ab = loadAssetBundle(abName);
+
+        if (ab != null && ab.Contains(assetName)) {
+            AssetBundleRequest req = ab.LoadAssetAsync<T>(assetName);
+            yield return req;
+
+            if (req.asset != null) {
+                callBack((T)req.asset);
+                yield break;
+            }
+            callBack(default(T));
+            yield break;
+        }
+
+        callBack(default(T));
+    }
+
+    /// <summary>
+    /// 获取ab包的真正路径
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    public string GetAbRealPath(string path) {
 
         path = path.ToLower();
 
@@ -95,23 +256,7 @@ public class ResMgr : BaseManager<ResMgr> {
 
         return string.Empty;
     }
-
-    public T GetResAsset<T>(string path) where T : Object {
-        if (resAssets == null) {
-            resAssets = new Dictionary<string, Object>();
-        }
-
-        if (resAssets.ContainsKey(path)) {
-            return (T)resAssets[path];
-        }
-
-        T value = Resources.Load<T>(path);
-
-        resAssets.Add(path, value);
-
-        return value;
-    }
-
+    
 
     public string getLua(string abName, string sname) {
         if (!AppConst.LuaAssetMode) {
@@ -123,15 +268,20 @@ public class ResMgr : BaseManager<ResMgr> {
         }
         else {
             Debug.Log("当前加载lua为资源模式，将从打包资源中加载lua脚本，找不到路径文件时请先打包文件，或修改 AppConst.cs 中的 LuaAssetMode 为 false");
-            return getAsset<TextAsset>(abName, sname).text;
+            return GetABAsset<TextAsset>(abName, sname).text;
         }
     }
 
     /// <summary>
-    /// 
+    /// 卸载资源
     /// </summary>
     /// <param name="abName"></param>
     /// <param name="unLoadAllObjs"></param>
-    public void UnLoadAssetBundle(string abName,bool unLoadAllObjs=false) {
+    public void UnLoadAssetBundle(string abName, bool unLoadAllObjs = false) {
+    }
+
+    public enum LoadMode {
+        Resources,
+        AssetBundle
     }
 }

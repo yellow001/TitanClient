@@ -58,7 +58,7 @@ public class PoolMgr : BaseManager<PoolMgr> {
             return obj;
         }
         else {
-            GameObject ga = ResMgr.Ins.getAsset<GameObject>(abName, assetName);
+            GameObject ga = ResMgr.Ins.GetABAsset<GameObject>(abName, assetName);
             if (ga == null) {
                 return null;
             }
