@@ -11,9 +11,9 @@ public class MessageHandler : MonoBehaviour {
 
     public void Update() {
 #if !WEBGL
-        if (NetIO.Instance.msg != null && NetIO.Instance.msg.Count > 0) {
-            OnMsgReceive(NetIO.Instance.msg[0]);
-            NetIO.Instance.msg.RemoveAt(0);
+        if (NetIO.Ins.msg != null && NetIO.Ins.msg.Count > 0) {
+            OnMsgReceive(NetIO.Ins.msg[0]);
+            NetIO.Ins.msg.RemoveAt(0);
         }
 #else
 
@@ -29,7 +29,8 @@ public class MessageHandler : MonoBehaviour {
         if (msgPool.ContainsKey(model.pID)) {
             lock (msgPool[model.pID]) {
                 foreach (var item in msgPool[model.pID]) {
-                    item(model);
+                    if(item!=null)
+                        item(model);
                 }
             }
         }
@@ -88,6 +89,14 @@ public class MessageHandler : MonoBehaviour {
     public static void RemoveAll() {
         msgPool.Clear();
         GC.Collect();
+    }
+
+    public static void Send(TransModel model) {
+#if !WEBGL
+        NetIO.Ins.Send(model);
+#else
+        NetIOH5.Ins.Send(model);
+#endif
     }
 }
 

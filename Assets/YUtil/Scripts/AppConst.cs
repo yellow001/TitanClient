@@ -23,9 +23,9 @@ public static class AppConst{
     public static readonly string LuaPath = Application.dataPath + "/RideClient/Res/lua/";  //调试模式下lua脚本存放路径
     public static readonly string connKey = "rideClient";
 
-    public static readonly string gateIP = "120.25.84.142";
+    public static readonly string gateIP = "127.0.0.1";
     //public static readonly string gateIP = "127.0.0.1";
-    public static readonly int gatePort = 8888;
+    public static readonly int gatePort = 12345;
 
     public static string regionIP = string.Empty;
     public static int regionPort = -1;

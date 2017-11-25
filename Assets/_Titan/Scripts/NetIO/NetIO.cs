@@ -4,17 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
+using UnityEngine;
 
 namespace NetFrame {
     public class NetIO {
-        private static NetIO instance;
+        private static NetIO ins;
 
-        public static NetIO Instance {
+        public static NetIO Ins {
             get {
-                if (instance == null) {
-                    instance = new NetIO();
+                if (ins == null) {
+                    ins = new NetIO();
                 }
-                return instance;
+                return ins;
             }
         }
         
@@ -49,7 +50,7 @@ namespace NetFrame {
                 socket.BeginReceive(readBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, null);
             }
             catch (Exception ex) {
-                Console.WriteLine("无法连接服务器，请重启客户端或联系服务器管理员");
+                Debug.Log("无法连接服务器，请重启客户端或联系服务器管理员");
             }
         }
 
