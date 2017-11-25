@@ -91,7 +91,7 @@ public class YUIEditor : MonoBehaviour {
 
         foreach (var item in tras) {
             if (!(item is RectTransform)) {
-                return;
+                continue;
             }
             Type t = GetMemberType(item);
             if (t != null) {
