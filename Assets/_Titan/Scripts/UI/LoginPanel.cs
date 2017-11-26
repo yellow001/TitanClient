@@ -90,18 +90,32 @@ public class LoginPanel : BaseUI {
     public override void CloseAni() {
         base.CloseAni();
         //@CloseAni
-        this.AddTimeEvent(0.25f, null, (t,p) => {
-            ((RectTransform)tra).sizeDelta = new Vector2(900, Mathf.Lerp(450, 400, p));
-            group.alpha = 1 - p;
-        });
+
+        ((RectTransform)tra).sizeDelta.ChangeValue(new Vector2(900, 400), 0.25f,(value)=> {
+            ((RectTransform)tra).sizeDelta = value;
+        },()=>gameObject.SetActive(false));
+
+        group.alpha.ChangeValue(0, 0.25f, (v) => group.alpha = v);
+
+        //this.AddTimeEvent(0.25f, ()=> {
+        //    gameObject.SetActive(false);
+        //}, (t,p) => {
+        //    ((RectTransform)tra).sizeDelta = new Vector2(900, Mathf.Lerp(450, 400, p));
+        //    group.alpha = 1 - p;
+        //});
     }
 
     public override void OpenAni() {
         base.OpenAni();
         //@OpenAni
-        this.AddTimeEvent(0.25f, null, (t, p) => {
-            ((RectTransform)tra).sizeDelta = new Vector2(900, Mathf.Lerp(400, 450, p));
-            group.alpha = p;
+        //this.AddTimeEvent(0.25f, null, (t, p) => {
+        //    ((RectTransform)tra).sizeDelta = new Vector2(900, Mathf.Lerp(400, 450, p));
+        //    group.alpha = p;
+        //});
+        ((RectTransform)tra).sizeDelta.ChangeValue(new Vector2(900, 450), 0.25f, (value) => {
+            ((RectTransform)tra).sizeDelta = value;
         });
+
+        group.alpha.ChangeValue(1, 0.25f, (v) => group.alpha = v);
     }
 }

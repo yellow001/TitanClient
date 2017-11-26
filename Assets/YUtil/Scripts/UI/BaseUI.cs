@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using DG.Tweening;
 
 [RequireComponent(typeof(AudioSource))]
 public class BaseUI : MonoBehaviour {
@@ -13,6 +14,8 @@ public class BaseUI : MonoBehaviour {
 
     [HideInInspector]
     public AudioSource au;
+
+    DOTweenAnimation[] anis;
 
     public void OnEnable() {
         if (!inited) {
@@ -35,7 +38,7 @@ public class BaseUI : MonoBehaviour {
     public virtual void Init() {
         AddEvent();
         inited = true;
-
+        anis = GetComponentsInChildren<DOTweenAnimation>();
     }
 
     public virtual void AddEvent() {
@@ -47,6 +50,15 @@ public class BaseUI : MonoBehaviour {
             au.clip = openClip;
             au.Play();
         }
+
+        if (anis != null && anis.Length > 0) {
+            for (int i = 0; i < anis.Length; i++) {
+                if (anis[i].id.Equals("open")) {
+                    anis[i].tween.Restart();
+                    //anis[i].DORestart(true);
+                }
+            }
+        }
     }
 
     public virtual void CloseAni() {
@@ -54,6 +66,15 @@ public class BaseUI : MonoBehaviour {
         {
             au.clip = closeClip;
             au.Play();
+        }
+
+        if (anis != null && anis.Length > 0) {
+            for (int i = 0; i < anis.Length; i++) {
+                if (anis[i].id.Equals("close")) {
+                    //anis[i].DORestart(true);
+                    anis[i].tween.Restart();
+                }
+            }
         }
     }
 }
