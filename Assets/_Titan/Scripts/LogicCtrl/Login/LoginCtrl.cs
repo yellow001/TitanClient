@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using NetFrame;
 using UnityEngine;
 
-public class LoginUICtrl : MonoBehaviour {
+public class LoginCtrl : MonoBehaviour {
     public BaseUI loginPanel;
     public BaseUI registerPanel;
 	// Use this for initialization
@@ -19,6 +21,19 @@ public class LoginUICtrl : MonoBehaviour {
         this.AddEventFun("openLoginPanel", (args) => {
             loginPanel.gameObject.SetActive(true);
         });
+
+        //注册反馈
+        MessageHandler.Register(1001002, (model) => RegisterSRES(model));
+
+        //登录反馈
+        MessageHandler.Register(1001004, (model) => LoginSRES(model));
+    }
+
+    private void RegisterSRES(TransModel model) {
+    }
+
+    void LoginSRES(TransModel model) {
+
     }
 
     private void OnGUI() {

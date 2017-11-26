@@ -29,8 +29,13 @@ public class MessageHandler : MonoBehaviour {
         if (msgPool.ContainsKey(model.pID)) {
             lock (msgPool[model.pID]) {
                 foreach (var item in msgPool[model.pID]) {
-                    if(item!=null)
+                    if (item != null) {
                         item(model);
+                    }
+                    else {
+                        RemoveFunByPid(model.pID, item);
+                    }
+                        
                 }
             }
         }

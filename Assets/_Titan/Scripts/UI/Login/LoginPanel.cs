@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using NetFrame;
 
 public class LoginPanel : BaseUI {
 
@@ -68,7 +69,8 @@ public class LoginPanel : BaseUI {
         //nameInput.onEndEdit.AddListener();
         //loginBtn.onClick.AddListener();
         //pwdInput.onEndEdit.AddListener();
-
+        //登录反馈
+        MessageHandler.Register(1001004, (model) => LoginSRES(model));
     }
 
     public override void UpdateView() {
@@ -104,6 +106,14 @@ public class LoginPanel : BaseUI {
         //    ((RectTransform)tra).sizeDelta = new Vector2(900, Mathf.Lerp(450, 400, p));
         //    group.alpha = 1 - p;
         //});
+    }
+
+    /// <summary>
+    /// 登录反馈，登录不成功时解除登陆按钮的不可点击状态
+    /// </summary>
+    /// <param name="model"></param>
+    public void LoginSRES(TransModel model) {
+
     }
 
     public override void OpenAni() {
