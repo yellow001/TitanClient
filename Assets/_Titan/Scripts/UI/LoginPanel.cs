@@ -34,8 +34,7 @@ public class LoginPanel : BaseUI {
     public Text tip13;
     [HideInInspector]
     public Transform tra;
-
-    CanvasGroup group;
+    
 
     new void OnEnable() {
         base.OnEnable();
@@ -57,8 +56,7 @@ public class LoginPanel : BaseUI {
         Placeholder11 = tra.Find("Right/pwdInput/Placeholder").GetComponent<Text>();
         defaultTx12 = tra.Find("Right/pwdInput/defaultTx").GetComponent<Text>();
         tip13 = tra.Find("Right/pwdInput/tip").GetComponent<Text>();
-
-        group = GetComponent<CanvasGroup>();
+        
         base.Init();
     }
 
@@ -93,7 +91,7 @@ public class LoginPanel : BaseUI {
 
         ((RectTransform)tra).sizeDelta.ChangeValue(new Vector2(900, 400), 0.25f,(value)=> {
             ((RectTransform)tra).sizeDelta = value;
-        },()=>gameObject.SetActive(false));
+        },null,()=>gameObject.SetActive(false));
 
         group.alpha.ChangeValue(0, 0.25f, (v) => group.alpha = v);
 

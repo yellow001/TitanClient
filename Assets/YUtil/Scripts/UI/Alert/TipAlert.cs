@@ -16,8 +16,6 @@ public class TipAlert : BaseUI,IAlert<TipUIModel> {
 
     TipUIModel model;
 
-    CanvasGroup group;
-
     new void OnEnable() {
         base.OnEnable();
     }
@@ -54,7 +52,6 @@ public class TipAlert : BaseUI,IAlert<TipUIModel> {
         base.OpenAni();
         //@OpenAni
         DOTween.To(() => group.alpha, x => group.alpha = x, 1, 0.2f).Play();
-        Debug.Log(model.duration);
         this.AddTimeEvent(model.duration, () => { CloseAni();Debug.Log("close"); }, null);
     }
 

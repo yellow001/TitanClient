@@ -19,8 +19,6 @@ public class MsgAlert : BaseUI,IAlert<MsgUIModel>{
     public Button okBtn;
     [HideInInspector]
     public Transform tra;
-    [HideInInspector]
-    public CanvasGroup group;
 
     MsgUIModel model;
 
