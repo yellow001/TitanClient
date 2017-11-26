@@ -61,7 +61,10 @@ public class LoginPanel : BaseUI {
     }
 
     public override void AddEvent() {
-        //registerBtn.onClick.AddListener();
+        registerBtn.onClick.AddListener(()=> {
+            CloseAni();
+            this.InvokeDeList("openRegisterPanel");
+        });
         //nameInput.onEndEdit.AddListener();
         //loginBtn.onClick.AddListener();
         //pwdInput.onEndEdit.AddListener();

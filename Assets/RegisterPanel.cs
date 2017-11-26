@@ -72,9 +72,12 @@ public class RegisterPanel : BaseUI {
 
     public override void AddEvent() {
         //nameInput.onEndEdit.AddListener();
-        //cancleBtn.onClick.AddListener();
+        cancleBtn.onClick.AddListener(() => {
+            CloseAni();
+            this.InvokeDeList("openLoginPanel");
+        });
         //pwdInputTwice.onEndEdit.AddListener();
-        //registerBtn.onClick.AddListener();
+        registerBtn.onClick.AddListener(()=>Register());
         //pwdInput.onEndEdit.AddListener();
 
     }
@@ -97,6 +100,10 @@ public class RegisterPanel : BaseUI {
         //tip15.text="";
         //root.sprite=null;
         //Image.sprite=null;
+
+    }
+
+    public void Register() {
 
     }
 

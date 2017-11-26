@@ -51,6 +51,7 @@ namespace NetFrame {
             }
             catch (Exception ex) {
                 Debug.Log("无法连接服务器，请重启客户端或联系服务器管理员");
+                AlertMgr.Ins.AddMsg("无法连接服务器，请重启客户端或联系服务器管理员");
             }
         }
 
