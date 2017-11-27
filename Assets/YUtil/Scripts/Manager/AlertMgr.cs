@@ -24,7 +24,7 @@ public class AlertMgr : BaseManager<AlertMgr> {
 
     void LoadAlert() {
         if (GameObject.Find("StaticCanvas") == null) {
-            GameObject canvas = ResMgr.Ins.GetAsset<GameObject>(EM_ResType.StaticCanvas);
+            GameObject canvas = ResMgr.Ins.GetAsset<GameObject>("StaticCanvas");
             staticCanvas = Instantiate(canvas).transform as RectTransform;
             staticCanvas.SetParent(transform, false);
         }
@@ -33,14 +33,14 @@ public class AlertMgr : BaseManager<AlertMgr> {
         }
 
         if (msgAlert == null) {
-            GameObject obj = ResMgr.Ins.GetAsset<GameObject>(EM_ResType.MsgAlert);
+            GameObject obj = ResMgr.Ins.GetAsset<GameObject>("MsgAlert");
             RectTransform tra = Instantiate(obj).transform as RectTransform;
             msgAlert = tra.gameObject;
             tra.SetParent(staticCanvas, false);
         }
 
         if (tipAlert == null) {
-            GameObject obj = ResMgr.Ins.GetAsset<GameObject>(EM_ResType.TipAlert);
+            GameObject obj = ResMgr.Ins.GetAsset<GameObject>("TipAlert");
             RectTransform tra = Instantiate(obj).transform as RectTransform;
             tipAlert = tra.gameObject;
             tra.SetParent(staticCanvas, false);

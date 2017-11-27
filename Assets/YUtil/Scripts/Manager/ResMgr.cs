@@ -46,7 +46,7 @@ public class ResMgr : BaseManager<ResMgr> {
     /// <typeparam name="T"></typeparam>
     /// <param name="t"></param>
     /// <returns></returns>
-    public T GetAsset<T>(EM_ResType t) where T : Object {
+    public T GetAsset<T>(string t) where T : Object {
         string path;
         switch (loadmode) {
             case LoadMode.Resources:
@@ -156,7 +156,7 @@ public class ResMgr : BaseManager<ResMgr> {
     /// <typeparam name="T"></typeparam>
     /// <param name="t"></param>
     /// <returns></returns>
-    public void GetAssetAsync<T>(EM_ResType t,System.Action<T> callBack) where T : Object {
+    public void GetAssetAsync<T>(string t,System.Action<T> callBack) where T : Object {
         string path;
         switch (loadmode) {
             case LoadMode.Resources:

@@ -5,10 +5,10 @@ using UnityEngine;
 public class ResPath {
     static ResPath ins;
 
-    Dictionary<int, string> resPathDic = new Dictionary<int, string>();
-    Dictionary<int, string> abPathDic = new Dictionary<int, string>();
+    Dictionary<string, string> resPathDic = new Dictionary<string, string>();
+    Dictionary<string, string> abPathDic = new Dictionary<string, string>();
 
-    public System.Action<Dictionary<int, string>, Dictionary<int, string>> resPathAction;
+    public System.Action<Dictionary<string, string>, Dictionary<string, string>> resPathAction;
 
     public static ResPath Ins{
         get {
@@ -20,16 +20,19 @@ public class ResPath {
     }
 
     ResPath() {
+
+        //todo 这里应该读表初始化
+
         #region Res
-        resPathDic.Add((int)EM_ResType.StaticCanvas, "UI");
-        resPathDic.Add((int)EM_ResType.MsgAlert, "UI");
-        resPathDic.Add((int)EM_ResType.TipAlert, "UI");
+        resPathDic.Add("StaticCanvas", "UI");
+        resPathDic.Add("MsgAlert", "UI");
+        resPathDic.Add("TipAlert", "UI");
         #endregion
 
         #region AB
-        abPathDic.Add((int)EM_ResType.StaticCanvas, "UI");
-        abPathDic.Add((int)EM_ResType.MsgAlert, "UI");
-        abPathDic.Add((int)EM_ResType.TipAlert, "UI");
+        abPathDic.Add("StaticCanvas", "UI");
+        abPathDic.Add("MsgAlert", "UI");
+        abPathDic.Add("TipAlert", "UI");
         #endregion
 
         if (resPathAction != null) {
@@ -37,16 +40,16 @@ public class ResPath {
         }
     }
 
-    public string GetResPath(EM_ResType t) {
-        if (resPathDic.ContainsKey((int)t))
-            return resPathDic[(int)t]+"/"+t.ToString();
+    public string GetResPath(string t) {
+        if (resPathDic.ContainsKey(t))
+            return resPathDic[t]+"/"+t.ToString();
 
         return string.Empty;
     }
 
-    public string GetABPath(EM_ResType t) {
-        if(abPathDic.ContainsKey((int)t))
-            return abPathDic[(int)t];
+    public string GetABPath(string t) {
+        if(abPathDic.ContainsKey(t))
+            return abPathDic[t];
 
         return string.Empty;
     }
