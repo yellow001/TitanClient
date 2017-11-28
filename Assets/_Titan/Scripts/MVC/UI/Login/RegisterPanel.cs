@@ -110,7 +110,6 @@ public class RegisterPanel : BaseUI {
     public override void CloseAni() {
         base.CloseAni();
         //@CloseAni
-        group.alpha.ChangeValue(0, 0.25f, (v) => group.alpha = v,null,()=>gameObject.SetActive(false));
     }
 
     public override void OpenAni() {

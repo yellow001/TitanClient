@@ -17,7 +17,7 @@ namespace NetFrame {
 
         public TransModel() { }
 
-        public TransModel(int pid, int a) {
+        public TransModel(int pid, int a=0) {
             pID = pid;
             area = a;
         }

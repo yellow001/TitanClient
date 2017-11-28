@@ -67,13 +67,22 @@ public class BaseUI : MonoBehaviour {
         }
 
         for (int i = 0; i < openTweens.Length; i++) {
-            TweenAnimation ani = openTweens[i];
-            if (group != null) {
+            TweenAnimation ani = closeTweens[i];
+
+            if (group != null && ani.tweenAlpha) {
                 group.alpha = ani.aFrom;
-                group.alpha.ChangeValue(ani.aTo, ani.duration, (v) => group.alpha = v,ani.curve);
+                group.alpha.ChangeValue(ani.aTo, ani.duration, (v) => group.alpha = v, ani.curve);
             }
-            transform.localPosition = ani.vFrom;
-            transform.localPosition.ChangeVaule(ani.vTo, ani.duration, (v) => transform.localPosition = v,ani.curve);
+
+            if (ani.tweenPos) {
+                transform.localPosition = ani.posFrom;
+                transform.localPosition.ChangeVaule(ani.posTo, ani.duration, (v) => transform.localPosition = v, ani.curve);
+            }
+
+            if (ani.tweenScale) {
+                transform.localScale = ani.scaleFrom;
+                transform.localScale.ChangeVaule(ani.scaleTo, ani.duration, (v) => transform.localScale = v, ani.curve);
+            }
         }
     }
 
@@ -92,23 +101,57 @@ public class BaseUI : MonoBehaviour {
             }
         }
 
+        float hideTime = 0;
+
         for (int i = 0; i < closeTweens.Length; i++) {
+            
             TweenAnimation ani = closeTweens[i];
-            if (group != null) {
+
+            if (hideTime < ani.duration) {
+                hideTime = ani.duration;
+            }
+
+            if (group != null&&ani.tweenAlpha) {
                 group.alpha = ani.aFrom;
                 group.alpha.ChangeValue(ani.aTo, ani.duration, (v) => group.alpha = v,ani.curve);
             }
-            transform.localPosition = ani.vFrom;
-            transform.localPosition.ChangeVaule(ani.vTo, ani.duration, (v) => transform.localPosition = v,ani.curve);
+
+            if (ani.tweenPos) {
+                transform.localPosition = ani.posFrom;
+                transform.localPosition.ChangeVaule(ani.posTo, ani.duration, (v) => transform.localPosition = v, ani.curve);
+            }
+
+            if (ani.tweenScale) {
+                transform.localScale = ani.scaleFrom;
+                transform.localScale.ChangeVaule(ani.scaleTo, ani.duration, (v) => transform.localScale = v, ani.curve);
+            }
+            
         }
+
+        this.AddTimeEvent(hideTime, () => gameObject.SetActive(false),null);
     }
 
     [System.Serializable]
     public class TweenAnimation {
         public float duration;
-        public Vector3 vFrom, vTo;
+        public Vector3 posFrom, posTo;
+        public Vector3 scaleFrom, scaleTo;
         public float aFrom, aTo;
         public AnimationCurve curve=new AnimationCurve();
+
+        public bool tweenPos = false;
+        public bool tweenScale = false;
+        public bool tweenAlpha = false;
+
+        public TweenAnimation() {
+            duration = 0.25f;
+            posFrom = Vector3.zero;
+            posTo=Vector3.zero;
+            scaleFrom = Vector3.zero;
+            scaleTo=Vector3.zero;
+            aFrom = 1;
+            aTo=1;
+    }
     }
 }
 

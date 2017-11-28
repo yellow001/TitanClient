@@ -35,7 +35,8 @@ public class LoginPanel : BaseUI {
     public Text tip13;
     [HideInInspector]
     public Transform tra;
-    
+
+    UserModel model;
 
     new void OnEnable() {
         base.OnEnable();
@@ -57,7 +58,8 @@ public class LoginPanel : BaseUI {
         Placeholder11 = tra.Find("Right/pwdInput/Placeholder").GetComponent<Text>();
         defaultTx12 = tra.Find("Right/pwdInput/defaultTx").GetComponent<Text>();
         tip13 = tra.Find("Right/pwdInput/tip").GetComponent<Text>();
-        
+
+        model = LoginCtrl.Ins.model;
         base.Init();
     }
 
@@ -69,8 +71,9 @@ public class LoginPanel : BaseUI {
         //nameInput.onEndEdit.AddListener();
         //loginBtn.onClick.AddListener();
         //pwdInput.onEndEdit.AddListener();
-        //登录反馈
-        MessageHandler.Register(1001004, (model) => LoginSRES(model));
+
+        //监听登录反馈事件
+        model.BindEvent("LoginSRES",LoginSRES);
     }
 
     public override void UpdateView() {
@@ -93,40 +96,18 @@ public class LoginPanel : BaseUI {
     public override void CloseAni() {
         base.CloseAni();
         //@CloseAni
-
-        ((RectTransform)tra).sizeDelta.ChangeValue(new Vector2(900, 400), 0.25f,(value)=> {
-            ((RectTransform)tra).sizeDelta = value;
-        },null,()=>gameObject.SetActive(false));
-
-        group.alpha.ChangeValue(0, 0.25f, (v) => group.alpha = v);
-
-        //this.AddTimeEvent(0.25f, ()=> {
-        //    gameObject.SetActive(false);
-        //}, (t,p) => {
-        //    ((RectTransform)tra).sizeDelta = new Vector2(900, Mathf.Lerp(450, 400, p));
-        //    group.alpha = 1 - p;
-        //});
     }
 
     /// <summary>
     /// 登录反馈，登录不成功时解除登陆按钮的不可点击状态
     /// </summary>
     /// <param name="model"></param>
-    public void LoginSRES(TransModel model) {
-
+    public void LoginSRES(params object[] args) {
+        int result = (int)args[0];
+        //todo 验证result
     }
 
     public override void OpenAni() {
         base.OpenAni();
-        //@OpenAni
-        //this.AddTimeEvent(0.25f, null, (t, p) => {
-        //    ((RectTransform)tra).sizeDelta = new Vector2(900, Mathf.Lerp(400, 450, p));
-        //    group.alpha = p;
-        //});
-        ((RectTransform)tra).sizeDelta.ChangeValue(new Vector2(900, 450), 0.25f, (value) => {
-            ((RectTransform)tra).sizeDelta = value;
-        });
-
-        group.alpha.ChangeValue(1, 0.25f, (v) => group.alpha = v);
     }
 }
