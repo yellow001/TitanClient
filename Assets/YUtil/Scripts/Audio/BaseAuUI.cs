@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(AudioSource))]
 public class BaseAuUI : MonoBehaviour,
         IPointerClickHandler,
         IPointerEnterHandler
@@ -13,8 +12,6 @@ public class BaseAuUI : MonoBehaviour,
     public string enAuname, ckAuname;
 
     public AudioClip enterAu, clickAu;
-    [HideInInspector]
-    public AudioSource au;
 
     void Start()
     {
@@ -25,8 +22,7 @@ public class BaseAuUI : MonoBehaviour,
     public void OnPointerClick(PointerEventData eventData)
     {
         if (clickAu != null) {
-            au.clip = clickAu;
-            au.Play();
+            AudioMgr.Ins.Play(clickAu);
         }
     }
 
@@ -34,8 +30,7 @@ public class BaseAuUI : MonoBehaviour,
     {
         if (enterAu != null)
         {
-            au.clip = enterAu;
-            au.Play();
+            AudioMgr.Ins.Play(enterAu);
             //this.addTip("enter",0.2f);
         }
     }
@@ -44,8 +39,6 @@ public class BaseAuUI : MonoBehaviour,
     public void OnStart()
     {
         //this.addTip("base onstart");
-        au = GetComponent<AudioSource>();
-        au.playOnAwake = false;
 
         //ResHandler res = FindObjectOfType<ResHandler>();
 

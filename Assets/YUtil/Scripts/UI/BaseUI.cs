@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Collections.Generic;
 
-[RequireComponent(typeof(AudioSource))]
 public class BaseUI : MonoBehaviour {
 
     public AudioClip openClip;
@@ -11,17 +11,17 @@ public class BaseUI : MonoBehaviour {
 
     [HideInInspector]
     public bool inited = false;
-
-    [HideInInspector]
-    public AudioSource au;
+    
 
     [HideInInspector]
     public CanvasGroup group;
 
     DOTweenAnimation[] anis;
 
-    public TweenAnimation[] openTweens;
-    public TweenAnimation[] closeTweens;
+    [HideInInspector]
+    public List<TweenAnimation> openTweens;
+    [HideInInspector]
+    public List<TweenAnimation> closeTweens;
 
     public void OnEnable() {
         if (!inited) {
@@ -36,9 +36,6 @@ public class BaseUI : MonoBehaviour {
         if (!inited) {
             Init();
         }
-        au = GetComponent<AudioSource>();
-        au.loop = false;
-        au.playOnAwake = false;
     }
 
     public virtual void Init() {
@@ -54,8 +51,7 @@ public class BaseUI : MonoBehaviour {
 
     public virtual void OpenAni() {
         if (openClip != null) {
-            au.clip = openClip;
-            au.Play();
+            AudioMgr.Ins.Play(openClip);
         }
 
         if (anis != null && anis.Length > 0) {
@@ -66,9 +62,40 @@ public class BaseUI : MonoBehaviour {
             }
         }
 
-        for (int i = 0; i < openTweens.Length; i++) {
-            TweenAnimation ani = closeTweens[i];
+        PlayTweenAni(openTweens);
+    }
 
+    public virtual void CloseAni() {
+        if (closeClip != null)
+        {
+            AudioMgr.Ins.Play(closeClip);
+        }
+
+        if (anis != null && anis.Length > 0) {
+            for (int i = 0; i < anis.Length; i++) {
+                if (anis[i].id.Equals("close")) {
+                    anis[i].tween.Restart();
+                }
+            }
+        }
+
+        float hideTime = 0;
+        foreach (var item in closeTweens) {
+            if (hideTime < item.duration) {
+                hideTime = item.duration;
+            }
+        }
+        PlayTweenAni(closeTweens);
+
+        this.AddTimeEvent(hideTime, () => gameObject.SetActive(false),null);
+    }
+
+    public void PlayTweenAni(List<TweenAnimation> tweens) {
+
+        for (int i = 0; i < tweens.Count; i++) {
+
+            TweenAnimation ani = tweens[i];
+            
             if (group != null && ani.tweenAlpha) {
                 group.alpha = ani.aFrom;
                 group.alpha.ChangeValue(ani.aTo, ani.duration, (v) => group.alpha = v, ani.curve);
@@ -83,52 +110,8 @@ public class BaseUI : MonoBehaviour {
                 transform.localScale = ani.scaleFrom;
                 transform.localScale.ChangeVaule(ani.scaleTo, ani.duration, (v) => transform.localScale = v, ani.curve);
             }
+
         }
-    }
-
-    public virtual void CloseAni() {
-        if (closeClip != null)
-        {
-            au.clip = closeClip;
-            au.Play();
-        }
-
-        if (anis != null && anis.Length > 0) {
-            for (int i = 0; i < anis.Length; i++) {
-                if (anis[i].id.Equals("close")) {
-                    anis[i].tween.Restart();
-                }
-            }
-        }
-
-        float hideTime = 0;
-
-        for (int i = 0; i < closeTweens.Length; i++) {
-            
-            TweenAnimation ani = closeTweens[i];
-
-            if (hideTime < ani.duration) {
-                hideTime = ani.duration;
-            }
-
-            if (group != null&&ani.tweenAlpha) {
-                group.alpha = ani.aFrom;
-                group.alpha.ChangeValue(ani.aTo, ani.duration, (v) => group.alpha = v,ani.curve);
-            }
-
-            if (ani.tweenPos) {
-                transform.localPosition = ani.posFrom;
-                transform.localPosition.ChangeVaule(ani.posTo, ani.duration, (v) => transform.localPosition = v, ani.curve);
-            }
-
-            if (ani.tweenScale) {
-                transform.localScale = ani.scaleFrom;
-                transform.localScale.ChangeVaule(ani.scaleTo, ani.duration, (v) => transform.localScale = v, ani.curve);
-            }
-            
-        }
-
-        this.AddTimeEvent(hideTime, () => gameObject.SetActive(false),null);
     }
 
     [System.Serializable]
@@ -147,8 +130,8 @@ public class BaseUI : MonoBehaviour {
             duration = 0.25f;
             posFrom = Vector3.zero;
             posTo=Vector3.zero;
-            scaleFrom = Vector3.zero;
-            scaleTo=Vector3.zero;
+            scaleFrom = Vector3.one;
+            scaleTo=Vector3.one;
             aFrom = 1;
             aTo=1;
     }
