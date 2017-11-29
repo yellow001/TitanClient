@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections.Generic;
+using System.Linq;
 
 public class BaseUI : MonoBehaviour {
 
@@ -11,27 +12,27 @@ public class BaseUI : MonoBehaviour {
 
     [HideInInspector]
     public bool inited = false;
-    
+
 
     [HideInInspector]
     public CanvasGroup group;
 
     DOTweenAnimation[] anis;
 
-    [HideInInspector]
-    public List<TweenAnimation> openTweens;
-    [HideInInspector]
-    public List<TweenAnimation> closeTweens;
+    List<UGUITween> tweens = new List<UGUITween>();
 
     public void OnEnable() {
         if (!inited) {
             Init();
         }
+        tweens.Clear();
+        tweens.AddRange(GetComponents<UGUITween>());
+
         UpdateView();
         OpenAni();
         //Debug.Log("enable p");
     }
-    
+
     public virtual void UpdateView() {
         if (!inited) {
             Init();
@@ -46,7 +47,7 @@ public class BaseUI : MonoBehaviour {
     }
 
     public virtual void AddEvent() {
-        
+
     }
 
     public virtual void OpenAni() {
@@ -62,12 +63,13 @@ public class BaseUI : MonoBehaviour {
             }
         }
 
-        PlayTweenAni(openTweens);
+        PlayTweenAni(tweens.FindAll((t) => {
+            return t.tweenType == UGUITween.EM_TweenType.Open;
+        }));
     }
 
     public virtual void CloseAni() {
-        if (closeClip != null)
-        {
+        if (closeClip != null) {
             AudioMgr.Ins.Play(closeClip);
         }
 
@@ -80,22 +82,28 @@ public class BaseUI : MonoBehaviour {
         }
 
         float hideTime = 0;
+
+        List<UGUITween> closeTweens = tweens.FindAll((t) => {
+            return t.tweenType == UGUITween.EM_TweenType.Close;
+        });
+
         foreach (var item in closeTweens) {
             if (hideTime < item.duration) {
                 hideTime = item.duration;
             }
         }
+
         PlayTweenAni(closeTweens);
 
-        this.AddTimeEvent(hideTime, () => gameObject.SetActive(false),null);
+        this.AddTimeEvent(hideTime, () => gameObject.SetActive(false), null);
     }
 
-    public void PlayTweenAni(List<TweenAnimation> tweens) {
+    public void PlayTweenAni(List<UGUITween> tweens) {
 
         for (int i = 0; i < tweens.Count; i++) {
 
-            TweenAnimation ani = tweens[i];
-            
+            UGUITween ani = tweens[i];
+
             if (group != null && ani.tweenAlpha) {
                 group.alpha = ani.aFrom;
                 group.alpha.ChangeValue(ani.aTo, ani.duration, (v) => group.alpha = v, ani.curve);
@@ -112,29 +120,6 @@ public class BaseUI : MonoBehaviour {
             }
 
         }
-    }
-
-    [System.Serializable]
-    public class TweenAnimation {
-        public float duration;
-        public Vector3 posFrom, posTo;
-        public Vector3 scaleFrom, scaleTo;
-        public float aFrom, aTo;
-        public AnimationCurve curve=new AnimationCurve();
-
-        public bool tweenPos = false;
-        public bool tweenScale = false;
-        public bool tweenAlpha = false;
-
-        public TweenAnimation() {
-            duration = 0.25f;
-            posFrom = Vector3.zero;
-            posTo=Vector3.zero;
-            scaleFrom = Vector3.one;
-            scaleTo=Vector3.one;
-            aFrom = 1;
-            aTo=1;
-    }
     }
 }
 
