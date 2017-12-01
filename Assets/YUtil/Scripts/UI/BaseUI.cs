@@ -64,7 +64,7 @@ public class BaseUI : MonoBehaviour {
         }
 
         PlayTweenAni(tweens.FindAll((t) => {
-            return t.tweenType == UGUITween.EM_TweenType.Open;
+            return t.tweenType == UGUITween.EM_TweenTime.Open;
         }));
     }
 
@@ -84,7 +84,7 @@ public class BaseUI : MonoBehaviour {
         float hideTime = 0;
 
         List<UGUITween> closeTweens = tweens.FindAll((t) => {
-            return t.tweenType == UGUITween.EM_TweenType.Close;
+            return t.tweenType == UGUITween.EM_TweenTime.Close;
         });
 
         foreach (var item in closeTweens) {
