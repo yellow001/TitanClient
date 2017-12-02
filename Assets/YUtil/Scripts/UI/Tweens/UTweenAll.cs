@@ -7,8 +7,9 @@ public class UTweenAll : UGUITween {
     #region 颜色
     public CanvasGroup group;
     public Graphic uiElement;
-    public float aFrom=1, aTo=1;
-    public Color cFrom=Color.white, cTo=Color.white;
+    public float aFrom = 1, aTo = 1;
+    public Color cFrom = Color.white, cTo = Color.white;
+    public bool tweenAlpha = false;
     public bool tweenColor = false;
     #endregion
 
@@ -31,36 +32,34 @@ public class UTweenAll : UGUITween {
 
         //delay秒后，以duration为周期播放动画
         this.AddTimeEvent(delay, () => {
-            
+
             this.AddTimeEvent(duration, () => {
 
                 #region 颜色
-                if (tweenColor) {
-                    if (group != null) {
-                        group.alpha = aFrom;
-                        group.alpha.ChangeValue(aTo, duration, (v) => { group.alpha = v; }, curve, ignoreTime,
-                            () => {
+                if (tweenAlpha && group != null) {
+                    group.alpha = aFrom;
+                    group.alpha.ChangeValue(aTo, duration, (v) => { group.alpha = v; }, curve, ignoreTime,
+                        () => {
+                            currentCount--;
+                            currentCount = currentCount < 0 ? 0 : currentCount;
+                            if (onFinish != null) {
+                                onFinish.Invoke();
+                            }
+                        });
+                }
+
+                if (tweenColor && uiElement != null) {
+                    uiElement.color = cFrom;
+                    uiElement.color.ChangeVaule(cTo, duration, (v) => { uiElement.color = v; }, curve, ignoreTime,
+                        () => {
+                            if (group == null) {
                                 currentCount--;
                                 currentCount = currentCount < 0 ? 0 : currentCount;
-                                if (onFinish != null) {
+                                if (!tweenAlpha && onFinish != null) {
                                     onFinish.Invoke();
                                 }
-                            });
-                    }
-
-                    if (uiElement != null) {
-                        uiElement.color = cFrom;
-                        uiElement.color.ChangeVaule(cTo, duration, (v) => { uiElement.color = v; }, curve, ignoreTime,
-                            () => {
-                                if (group == null) {
-                                    currentCount--;
-                                    currentCount = currentCount < 0 ? 0 : currentCount;
-                                    if (onFinish != null) {
-                                        onFinish.Invoke();
-                                    }
-                                }
-                            });
-                    }
+                            }
+                        });
                 }
                 #endregion
 
@@ -71,7 +70,7 @@ public class UTweenAll : UGUITween {
                         () => {
                             currentCount--;
                             currentCount = currentCount < 0 ? 0 : currentCount;
-                            if (!tweenColor&&onFinish != null) {
+                            if (!tweenColor && onFinish != null) {
                                 onFinish.Invoke();
                             }
                         });
@@ -202,7 +201,6 @@ public class UTweenAll : UGUITween {
     }
 
     public override void Start() {
-        base.Start();
         group = GetComponent<CanvasGroup>();
         uiElement = GetComponent<Graphic>();
         tra = transform;
@@ -210,5 +208,6 @@ public class UTweenAll : UGUITween {
         if (autoPlay) {
             PlayFroward();
         }
+        base.Start();
     }
 }
