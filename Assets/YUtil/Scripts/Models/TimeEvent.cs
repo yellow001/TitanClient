@@ -33,6 +33,10 @@ public class TimeEvent{
     /// 是否立即执行
     /// </summary>
     public bool now;
+
+    public bool ignoreTimeScale = false;
+
+
     /// <summary>
     /// 
     /// </summary>
@@ -50,5 +54,26 @@ public class TimeEvent{
         }
         count = c;
         updateDe = up_De;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="t">触发时间间隔</param>
+    /// <param name="over_de">触发事件</param>
+    /// <param name="ignoreTime">忽略时间缩放</param>
+    /// <param name="c">触发次数</param>
+    /// <param name="n">是否立即执行</param>
+    /// <param name="up_De">每帧调用事件</param>
+    public TimeEvent(float t, Action over_de,bool ignoreTime, Action<float, float> up_De = null, int c = 1, bool n = false) {
+        waitTime = t;
+        overDe = over_de;
+        now = n;
+        if (c == 0) {
+            c = 1;
+        }
+        count = c;
+        updateDe = up_De;
+        ignoreTimeScale = ignoreTime;
     }
 }

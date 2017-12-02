@@ -8,7 +8,7 @@ public class TipTrigger : MonoBehaviour {
     public float time = 3f;
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag(targetTag)) {
-            this.AddTip(tip,time);
+            AlertMgr.Ins.AddTip(tip,time);
         }
     }
 }

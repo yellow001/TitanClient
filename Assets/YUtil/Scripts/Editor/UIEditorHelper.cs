@@ -15,11 +15,17 @@ public static class UIEditorHelper{
         if (!GUILayout.Toggle(true,text,"dragtab")) { state = !state; }
     }
 
-    public static void BeginBox(string skin= "GroupBox") {
+    public static void BeginBox(string skin= "Box") {
         EditorGUILayout.BeginVertical(skin);
     }
 
-    public static void EndBox(string skin = "GroupBox") {
+    public static void BeginBox(Color c, string skin = "Box") {
+        GUI.backgroundColor = c;
+        EditorGUILayout.BeginVertical(skin);
+    }
+
+    public static void EndBox() {
         EditorGUILayout.EndVertical();
+        GUI.backgroundColor = Color.white;
     }
 }

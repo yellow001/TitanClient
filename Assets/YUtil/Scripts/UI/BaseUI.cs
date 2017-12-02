@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class BaseUI : MonoBehaviour {
 
@@ -19,14 +20,16 @@ public class BaseUI : MonoBehaviour {
 
     DOTweenAnimation[] anis;
 
-    List<UGUITween> tweens = new List<UGUITween>();
+    public Action openTweenAction, closeTweenAction;
+
+    //List<UGUITween> tweens = new List<UGUITween>();
 
     public void OnEnable() {
         if (!inited) {
             Init();
         }
-        tweens.Clear();
-        tweens.AddRange(GetComponents<UGUITween>());
+        //tweens.Clear();
+        //tweens.AddRange(GetComponents<UGUITween>());
 
         UpdateView();
         OpenAni();
@@ -63,12 +66,13 @@ public class BaseUI : MonoBehaviour {
             }
         }
 
-        PlayTweenAni(tweens.FindAll((t) => {
-            return t.tweenType == UGUITween.EM_TweenTime.Open;
-        }));
+        if (openTweenAction != null) {
+            openTweenAction();
+        }
     }
 
     public virtual void CloseAni() {
+
         if (closeClip != null) {
             AudioMgr.Ins.Play(closeClip);
         }
@@ -80,47 +84,12 @@ public class BaseUI : MonoBehaviour {
                 }
             }
         }
-
-        float hideTime = 0;
-
-        List<UGUITween> closeTweens = tweens.FindAll((t) => {
-            return t.tweenType == UGUITween.EM_TweenTime.Close;
-        });
-
-        foreach (var item in closeTweens) {
-            if (hideTime < item.duration) {
-                hideTime = item.duration;
-            }
-        }
-
-        PlayTweenAni(closeTweens);
-
-        this.AddTimeEvent(hideTime, () => gameObject.SetActive(false), null);
-    }
-
-    public void PlayTweenAni(List<UGUITween> tweens) {
-
-        for (int i = 0; i < tweens.Count; i++) {
-
-            UGUITween ani = tweens[i];
-
-            if (group != null && ani.tweenAlpha) {
-                group.alpha = ani.aFrom;
-                group.alpha.ChangeValue(ani.aTo, ani.duration, (v) => group.alpha = v, ani.curve);
-            }
-
-            if (ani.tweenPos) {
-                transform.localPosition = ani.posFrom;
-                transform.localPosition.ChangeVaule(ani.posTo, ani.duration, (v) => transform.localPosition = v, ani.curve);
-            }
-
-            if (ani.tweenScale) {
-                transform.localScale = ani.scaleFrom;
-                transform.localScale.ChangeVaule(ani.scaleTo, ani.duration, (v) => transform.localScale = v, ani.curve);
-            }
-
+        if (closeTweenAction != null) {
+            closeTweenAction();
         }
     }
+
+   
 }
 
 

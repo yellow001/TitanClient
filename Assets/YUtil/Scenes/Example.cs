@@ -10,14 +10,14 @@ public class Example : MonoBehaviour {
 	}
 
     public void ShowMsg() {
-        this.AddMsg("msg",()=> {
-            this.AddTip("you click ok");
+        AlertMgr.Ins.AddMsg("msg",()=> {
+            AlertMgr.Ins.AddTip("you click ok");
         },()=> {
-            this.AddTip("you click no");
+            AlertMgr.Ins.AddTip("you click no");
         });
     }
 
     public void ShowTip() {
-        this.AddTip("tip");
+        AlertMgr.Ins.AddTip("tip");
     }
 }

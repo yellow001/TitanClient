@@ -68,9 +68,20 @@ public class AlertMgr : BaseManager<AlertMgr> {
         if (msgModels == null) { msgModels = new Queue<MsgUIModel>(); }
         msgModels.Enqueue(m);
     }
+
+    public void AddMsg(string msg,Action okDe=null,Action noDe=null, string title = "消息") {
+        if (msgModels == null) { msgModels = new Queue<MsgUIModel>(); }
+        msgModels.Enqueue(new MsgUIModel(msg,title,okDe,noDe));
+    }
+
     public void AddTip(TipUIModel m) {
         if (tipModels == null) { tipModels = new Queue<TipUIModel>(); }
         tipModels.Enqueue(m);
     }
-    
+
+    public void AddTip(string tip,float t=1f) {
+        if (tipModels == null) { tipModels = new Queue<TipUIModel>(); }
+        tipModels.Enqueue(new TipUIModel(tip,t));
+    }
+
 }

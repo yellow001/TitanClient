@@ -219,10 +219,5 @@ public class AssetBundelEditor{
         md5Files.Clear();
         //DeleteTempLua();
     }
-
-    [MenuItem("YUtility/addCoin")]
-    static void AddCoin() {
-        //PlayerInfo.Ins.coin += 5000;
-        //PlayerInfo.Ins.Save();
-    }
+    
 }

@@ -1,38 +1,55 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public abstract class UGUITween : MonoBehaviour {
-    public EM_TweenTime tweenType = EM_TweenTime.Open;
-    public float duration=0.25f;
-    //public Vector3 posFrom, posTo;
-    //public Vector3 scaleFrom=Vector3.one, scaleTo=Vector3.one;
-    //public float aFrom=1f, aTo=1f;
-    public AnimationCurve curve = new AnimationCurve();
+public class UGUITween : MonoBehaviour {
+    public float delay = 0;
+    public float duration=1f;
 
-    //public bool tweenPos = false;
-    //public bool tweenScale = false;
-    //public bool tweenAlpha = false;
-    public bool autoPlay = true;
+    /// <summary>
+    /// 0和1均是执行一次，负数表示一直执行
+    /// </summary>
+    public int loopCount = 1;
 
-    #if UNITY_EDITOR
-    [HideInInspector]
-    public bool show = true;
-#endif
+    public bool ignoreTime = false;
 
-    public virtual void Play() {
+    public AnimationCurve curve =AnimationCurve.Linear(0,0,1,1);
+    public UnityEvent onFinish;
 
+    public virtual void PlayFroward() { }
+
+    public virtual void PlayReverse() { }
+
+    /// <summary>
+    /// 当前动画剩余次数
+    /// </summary>
+    protected int currentCount;
+
+    /// <summary>
+    /// 停止连续动画用
+    /// </summary>
+    public virtual void Hide() {
+        gameObject.SetActive(false);
+    }
+    /// <summary>
+    /// 再次展示连续动画用
+    /// </summary>
+    public virtual void Show() {
+        gameObject.SetActive(true);
+        if (currentCount == 0) {
+            PlayFroward();
+        }
     }
 
-    public enum EM_TweenTime {
-        Open,
-        Close
+    public virtual void Start() {
+        loopCount = loopCount == 0 ? 1 : loopCount;
     }
 
-    public enum EM_TweenType {
-        Alpha,
-        Position,
-        Scale,
-        Rotation
+    public enum EM_LoopType {
+        PingPong,
+        Restart
     }
+
+
 }

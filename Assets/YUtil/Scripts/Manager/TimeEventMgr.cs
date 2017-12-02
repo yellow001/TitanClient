@@ -52,8 +52,8 @@ public class TimeEventMgr : BaseManager<TimeEventMgr> {
 
                 }
                 else {
-                    item.deltaTime += Time.deltaTime;
-                    //models[i].dealTime += Time.fixedDeltaTime;
+                    float deltaTime = item.ignoreTimeScale ? Time.unscaledDeltaTime : Time.deltaTime;
+                    item.deltaTime += deltaTime;
 
                     if (item.updateDe != null) {
 
