@@ -7,18 +7,18 @@ using UnityEngine;
 [CanEditMultipleObjects]
 public class BaseUITweenEditor : UTweenAllEditor {
     public override void OnInspectorGUI() {
-
+        serializedObject.Update();
         BaseUITween t = target as BaseUITween;
 
         EditorGUILayout.Space();
         UIEditorHelper.DrawTab("展开动画播放设置", ref showTween);
+
         if (showTween) {
             UIEditorHelper.BeginBox();
-            TweenAllBaseGUI();
-
-            UIEditorHelper.BeginBox();
+            t.playTime = (BaseUITween.EM_PlayTime)EditorGUILayout.EnumPopup("播放时机", t.playTime);
             t.doubleTween = EditorGUILayout.ToggleLeft("同时附加在 BaseUI 的打开和关闭动画", t.doubleTween, GUILayout.MaxWidth(225));
-            UIEditorHelper.EndBox();
+
+            TweenAllBaseGUI();
 
             EditorGUILayout.Space();
             UIEditorHelper.DrawTab("展开设置", ref showSetting);
@@ -35,5 +35,6 @@ public class BaseUITweenEditor : UTweenAllEditor {
             UIEditorHelper.EndBox();
         }
         EditorGUILayout.Space();
+        serializedObject.ApplyModifiedProperties();
     }
 }

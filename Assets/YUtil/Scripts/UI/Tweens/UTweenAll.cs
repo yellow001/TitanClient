@@ -26,8 +26,8 @@ public class UTweenAll : UGUITween {
 
     public bool autoPlay = false;
 
-    public override void Start() {
-        base.Start();
+    public override void Awake() {
+        base.Awake();
     }
 
     public override void Init() {
@@ -35,7 +35,7 @@ public class UTweenAll : UGUITween {
         uiElement = GetComponent<Graphic>();
         tra = transform;
 
-        forwardAni = new TimeEvent(duration, () => {
+        forwardAni = new TimeEvent(delay, () => {
 
             #region 颜色
             if (tweenAlpha && group != null) {
@@ -44,8 +44,8 @@ public class UTweenAll : UGUITween {
                     () => {
                         currentCount--;
                         currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (onFinish != null) {
-                            onFinish.Invoke();
+                        if (onForwardFinish != null) {
+                            onForwardFinish.Invoke();
                         }
                     });
             }
@@ -57,8 +57,8 @@ public class UTweenAll : UGUITween {
                         if (group == null) {
                             currentCount--;
                             currentCount = currentCount < 0 ? 0 : currentCount;
-                            if (!tweenAlpha && onFinish != null) {
-                                onFinish.Invoke();
+                            if (!tweenAlpha && onForwardFinish != null) {
+                                onForwardFinish.Invoke();
                             }
                         }
                     });
@@ -72,8 +72,8 @@ public class UTweenAll : UGUITween {
                     () => {
                         currentCount--;
                         currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (!tweenColor && onFinish != null) {
-                            onFinish.Invoke();
+                        if (!tweenColor && onForwardFinish != null) {
+                            onForwardFinish.Invoke();
                         }
                     });
             }
@@ -86,8 +86,8 @@ public class UTweenAll : UGUITween {
                     () => {
                         currentCount--;
                         currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (!tweenPos && onFinish != null) {
-                            onFinish.Invoke();
+                        if (!tweenPos && onForwardFinish != null) {
+                            onForwardFinish.Invoke();
                         }
                     });
             }
@@ -100,17 +100,17 @@ public class UTweenAll : UGUITween {
                     () => {
                         currentCount--;
                         currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (!tweenScale && onFinish != null) {
-                            onFinish.Invoke();
+                        if (!tweenScale && onForwardFinish != null) {
+                            onForwardFinish.Invoke();
                         }
                     });
             }
             #endregion
 
 
-        }, ignoreTime, null, loopCount, true);
+        }, ignoreTime, null, loopCount);
 
-        reverseAni = new TimeEvent(duration, () => {
+        reverseAni = new TimeEvent(delay, () => {
 
             #region 颜色
             if (tweenColor) {
@@ -120,8 +120,8 @@ public class UTweenAll : UGUITween {
                         () => {
                             currentCount--;
                             currentCount = currentCount < 0 ? 0 : currentCount;
-                            if (onFinish != null) {
-                                onFinish.Invoke();
+                            if (onReverseFinish != null) {
+                                onReverseFinish.Invoke();
                             }
                         });
                 }
@@ -133,8 +133,8 @@ public class UTweenAll : UGUITween {
                             if (group == null) {
                                 currentCount--;
                                 currentCount = currentCount < 0 ? 0 : currentCount;
-                                if (onFinish != null) {
-                                    onFinish.Invoke();
+                                if (onReverseFinish != null) {
+                                    onReverseFinish.Invoke();
                                 }
                             }
                         });
@@ -149,8 +149,8 @@ public class UTweenAll : UGUITween {
                     () => {
                         currentCount--;
                         currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (!tweenColor && onFinish != null) {
-                            onFinish.Invoke();
+                        if (!tweenColor && onReverseFinish != null) {
+                            onReverseFinish.Invoke();
                         }
                     });
             }
@@ -163,8 +163,8 @@ public class UTweenAll : UGUITween {
                     () => {
                         currentCount--;
                         currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (!tweenPos && onFinish != null) {
-                            onFinish.Invoke();
+                        if (!tweenPos && onReverseFinish != null) {
+                            onReverseFinish.Invoke();
                         }
                     });
             }
@@ -177,15 +177,15 @@ public class UTweenAll : UGUITween {
                     () => {
                         currentCount--;
                         currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (!tweenScale && onFinish != null) {
-                            onFinish.Invoke();
+                        if (!tweenScale && onReverseFinish != null) {
+                            onReverseFinish.Invoke();
                         }
                     });
             }
             #endregion
 
 
-        }, ignoreTime,null, loopCount, true);
+        }, ignoreTime,null, loopCount);
 
 
         if (autoPlay) {

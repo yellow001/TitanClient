@@ -570,8 +570,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 398635269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 676, y: 357.5, z: 0}
-  m_LocalScale: {x: 0.9897511, y: 0.9897511, z: 0.9897511}
+  m_LocalPosition: {x: 374.5, y: 221.5, z: 0}
+  m_LocalScale: {x: 0.54831624, y: 0.54831624, z: 0.54831624}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -921,7 +921,6 @@ GameObject:
   - component: {fileID: 622045986}
   - component: {fileID: 622045985}
   - component: {fileID: 622045984}
-  - component: {fileID: 622045982}
   - component: {fileID: 622045981}
   m_Layer: 0
   m_Name: RegisterPanel
@@ -959,84 +958,72 @@ MonoBehaviour:
   m_GameObject: {fileID: 622045979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16319d04c30f5704c8ab1924a5f6a5e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 858e286398fdc1d49bd089455ede6659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenType: 1
+  delay: 0
   duration: 0.25
-  posFrom: {x: 0, y: 0, z: 0}
-  posTo: {x: 0, y: -350, z: 0}
-  scaleFrom: {x: 1, y: 1, z: 1}
-  scaleTo: {x: 0.1, y: 0.1, z: 1}
-  aFrom: 1
-  aTo: 0
+  loopCount: 1
+  ignoreTime: 0
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: -0.8265306
-      outSlope: -0.8265306
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
       time: 1
       value: 1
-      inSlope: 0.64655197
-      outSlope: 0.64655197
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  tweenPos: 1
-  tweenScale: 1
-  tweenAlpha: 1
---- !u!114 &622045982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 622045979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16319d04c30f5704c8ab1924a5f6a5e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tweenType: 0
-  duration: 0.25
-  posFrom: {x: 0, y: -350, z: 0}
-  posTo: {x: 0, y: 0, z: 0}
-  scaleFrom: {x: 0.1, y: 0.1, z: 1}
-  scaleTo: {x: 1, y: 1, z: 1}
-  aFrom: 0
-  aTo: 1
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
       inSlope: 2
       outSlope: 2
       tangentMode: 0
-    - serializedVersion: 2
-      time: 0.77169967
-      value: 1.0298077
-      inSlope: 0.69671327
-      outSlope: 0.69671327
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: -1.7812488
-      outSlope: -1.7812488
-      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  tweenPos: 1
-  tweenScale: 1
+  onForwardFinish:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onReverseFinish:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 622045979}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  group: {fileID: 0}
+  uiElement: {fileID: 0}
+  aFrom: 0
+  aTo: 1
+  cFrom: {r: 1, g: 1, b: 1, a: 1}
+  cTo: {r: 1, g: 1, b: 1, a: 1}
   tweenAlpha: 1
+  tweenColor: 0
+  pFrom: {x: 0, y: -400, z: 0}
+  pTo: {x: 0, y: 0, z: 0}
+  tweenPos: 1
+  sFrom: {x: 0, y: 0, z: 0}
+  sTo: {x: 0, y: 0, z: 0}
+  tweenScale: 0
+  rFrom: {x: 0, y: 0, z: 0}
+  rTo: {x: 0, y: 0, z: 0}
+  tweenRotate: 0
+  autoPlay: 0
+  playTime: 0
+  doubleTween: 1
 --- !u!114 &622045984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1925,6 +1912,7 @@ GameObject:
   - component: {fileID: 1004926795}
   - component: {fileID: 1004926799}
   - component: {fileID: 1004926800}
+  - component: {fileID: 1004926801}
   m_Layer: 0
   m_Name: LoginCanvas
   m_TagString: Untagged
@@ -2034,6 +2022,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a411fe70d7316184397bd9505ab38787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1004926801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1004926794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d824948755d8a314b94abf4125cec34f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0
+  duration: 1
+  loopCount: 1
+  ignoreTime: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  onForwardFinish:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onReverseFinish:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  group: {fileID: 0}
+  uiElement: {fileID: 0}
+  aFrom: 1
+  aTo: 1
+  cFrom: {r: 1, g: 1, b: 1, a: 1}
+  cTo: {r: 1, g: 1, b: 1, a: 1}
+  autoPlay: 0
 --- !u!1 &1022322232
 GameObject:
   m_ObjectHideFlags: 0
@@ -9613,7 +9651,6 @@ GameObject:
   - component: {fileID: 1627659311}
   - component: {fileID: 1627659310}
   - component: {fileID: 1627659313}
-  - component: {fileID: 1627659314}
   - component: {fileID: 1627659312}
   m_Layer: 0
   m_Name: LoginPanel
@@ -9708,38 +9745,72 @@ MonoBehaviour:
   m_GameObject: {fileID: 1627659306}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16319d04c30f5704c8ab1924a5f6a5e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 858e286398fdc1d49bd089455ede6659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweenType: 1
+  delay: 0
   duration: 0.25
-  posFrom: {x: 0, y: 0, z: 0}
-  posTo: {x: 0, y: 300, z: 0}
-  scaleFrom: {x: 1, y: 1, z: 1}
-  scaleTo: {x: 1, y: 1, z: 1}
-  aFrom: 1
-  aTo: 0
+  loopCount: 1
+  ignoreTime: 0
   curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: -0.8265306
-      outSlope: -0.8265306
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
       time: 1
       value: 1
-      inSlope: 0.64655197
-      outSlope: 0.64655197
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  tweenPos: 1
-  tweenScale: 0
+  onForwardFinish:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onReverseFinish:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1627659306}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  group: {fileID: 0}
+  uiElement: {fileID: 0}
+  aFrom: 0
+  aTo: 1
+  cFrom: {r: 1, g: 1, b: 1, a: 1}
+  cTo: {r: 1, g: 1, b: 1, a: 1}
   tweenAlpha: 1
+  tweenColor: 0
+  pFrom: {x: 0, y: 300, z: 0}
+  pTo: {x: 0, y: 0, z: 0}
+  tweenPos: 1
+  sFrom: {x: 1, y: 1, z: 1}
+  sTo: {x: 1, y: 1, z: 1}
+  tweenScale: 0
+  rFrom: {x: 0, y: 0, z: 0}
+  rTo: {x: 0, y: 0, z: 0}
+  tweenRotate: 0
+  autoPlay: 0
+  playTime: 0
+  doubleTween: 1
 --- !u!114 &1627659313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9770,46 +9841,6 @@ MonoBehaviour:
   defaultTx12: {fileID: 0}
   tip13: {fileID: 0}
   tra: {fileID: 0}
---- !u!114 &1627659314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1627659306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16319d04c30f5704c8ab1924a5f6a5e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tweenType: 0
-  duration: 0.25
-  posFrom: {x: 0, y: 300, z: 0}
-  posTo: {x: 0, y: 0, z: 0}
-  scaleFrom: {x: 1, y: 1, z: 1}
-  scaleTo: {x: 1, y: 1, z: 1}
-  aFrom: 0
-  aTo: 1
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  tweenPos: 1
-  tweenScale: 0
-  tweenAlpha: 1
 --- !u!1 &1651007864
 GameObject:
   m_ObjectHideFlags: 0

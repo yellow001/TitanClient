@@ -10,6 +10,7 @@ public class UGUITweenEditor : Editor {
 
     public bool showCurve = false;
     public bool showSetting = true;
+    public bool showEvent = false;
 
     public override void OnInspectorGUI() {
 
@@ -35,13 +36,10 @@ public class UGUITweenEditor : Editor {
 
 
     public void UGUITweenBaseGUI() {
+        UGUITween t = target as UGUITween;
         EditorGUILayout.PropertyField(serializedObject.FindProperty("delay"), true);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("duration"), true);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("ignoreTime"), true);
-
-
-        UGUITween t = target as UGUITween;
-
         EditorGUILayout.Space();
 
         UIEditorHelper.DrawTab("展开曲线", ref showCurve);
@@ -56,6 +54,10 @@ public class UGUITweenEditor : Editor {
 
         EditorGUILayout.Space();
 
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("onFinish"), true);
+        UIEditorHelper.DrawTab("展开事件", ref showEvent);
+        if (showEvent) {
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("onForwardFinish"), true);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("onReverseFinish"), true);
+        }
     }
 }

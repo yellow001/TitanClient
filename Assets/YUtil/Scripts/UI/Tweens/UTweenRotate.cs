@@ -9,36 +9,36 @@ public class UTweenRotate : UGUITween {
     public bool autoPlay = false;
     
     // Use this for initialization
-    public override void Start() {
-        base.Start();
+    public override void Awake() {
+        base.Awake();
     }
 
     public override void Init() {
         tra = transform;
 
-        forwardAni = new TimeEvent(duration, () => {
+        forwardAni = new TimeEvent(delay, () => {
             tra.localEulerAngles = rFrom;
             tra.localEulerAngles.ChangeVaule(rTo, duration, (v) => tra.localEulerAngles = v, curve, ignoreTime,
                 () => {
                     currentCount--;
                     currentCount = currentCount < 0 ? 0 : currentCount;
-                    if (onFinish != null) {
-                        onFinish.Invoke();
+                    if (onForwardFinish != null) {
+                        onForwardFinish.Invoke();
                     }
                 });
-        }, ignoreTime, null, loopCount, true);
+        }, ignoreTime, null, loopCount);
 
-        reverseAni = new TimeEvent(duration, () => {
+        reverseAni = new TimeEvent(delay, () => {
             tra.localEulerAngles = rTo;
             tra.localEulerAngles.ChangeVaule(rFrom, duration, (v) => tra.localEulerAngles = v, curve, ignoreTime,
                 () => {
                     currentCount--;
                     currentCount = currentCount < 0 ? 0 : currentCount;
-                    if (onFinish != null) {
-                        onFinish.Invoke();
+                    if (onReverseFinish != null) {
+                        onReverseFinish.Invoke();
                     }
                 });
-        }, ignoreTime,null, loopCount, true);
+        }, ignoreTime,null, loopCount);
 
         if (autoPlay) {
             PlayFroward();

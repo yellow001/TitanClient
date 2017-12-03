@@ -14,23 +14,23 @@ public class UTweenAlpha : UGUITween {
     public bool autoPlay = false;
     
     // Use this for initialization
-    public override void Start() {
-        base.Start();
+    public override void Awake() {
+        base.Awake();
     }
 
     public override void Init() {
         group = GetComponent<CanvasGroup>();
         uiElement = GetComponent<Graphic>();
 
-        forwardAni = new TimeEvent(duration, () => {
+        forwardAni = new TimeEvent(delay, () => {
             if (group != null) {
                 group.alpha = aFrom;
                 group.alpha.ChangeValue(aTo, duration, (v) => { group.alpha = v; }, curve, ignoreTime,
                     () => {
                         currentCount--;
                         currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (onFinish != null) {
-                            onFinish.Invoke();
+                        if (onForwardFinish != null) {
+                            onForwardFinish.Invoke();
                         }
                     });
             }
@@ -42,23 +42,23 @@ public class UTweenAlpha : UGUITween {
                         if (group == null) {
                             currentCount--;
                             currentCount = currentCount < 0 ? 0 : currentCount;
-                            if (onFinish != null) {
-                                onFinish.Invoke();
+                            if (onForwardFinish != null) {
+                                onForwardFinish.Invoke();
                             }
                         }
                     });
             }
-        }, ignoreTime,null, loopCount, true);
+        }, ignoreTime,null, loopCount);
 
-        reverseAni = new TimeEvent(duration, () => {
+        reverseAni = new TimeEvent(delay, () => {
             if (group != null) {
                 group.alpha = aTo;
                 group.alpha.ChangeValue(aFrom, duration, (v) => { group.alpha = v; }, curve, ignoreTime,
                     () => {
                         currentCount--;
                         currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (onFinish != null) {
-                            onFinish.Invoke();
+                        if (onReverseFinish != null) {
+                            onReverseFinish.Invoke();
                         }
                     });
             }
@@ -70,13 +70,13 @@ public class UTweenAlpha : UGUITween {
                         if (group == null) {
                             currentCount--;
                             currentCount = currentCount < 0 ? 0 : currentCount;
-                            if (onFinish != null) {
-                                onFinish.Invoke();
+                            if (onReverseFinish != null) {
+                                onForwardFinish.Invoke();
                             }
                         }
                     });
             }
-        }, ignoreTime, null, loopCount, true);
+        }, ignoreTime, null, loopCount);
 
 
         if (autoPlay) {

@@ -15,7 +15,8 @@ public class UGUITween : MonoBehaviour {
     public bool ignoreTime = false;
 
     public AnimationCurve curve = AnimationCurve.Linear(0, 0, 1, 1);
-    public UnityEvent onFinish;
+    public UnityEvent onForwardFinish;
+    public UnityEvent onReverseFinish;
 
     protected TimeEvent forwardAni, reverseAni;
 
@@ -23,22 +24,14 @@ public class UGUITween : MonoBehaviour {
         currentCount = loopCount;
 
         //delay秒后，以duration为周期播放动画
-        this.AddTimeEvent(delay, () => {
-
             this.AddTimeEvent(forwardAni);
-
-        }, null, ignoreTime);
     }
 
     public virtual void PlayReverse() {
         currentCount = loopCount;
 
         //delay秒后，以duration为周期播放动画
-        this.AddTimeEvent(delay, () => {
-
             this.AddTimeEvent(reverseAni);
-
-        }, null, ignoreTime);
     }
 
     /// <summary>
@@ -72,7 +65,7 @@ public class UGUITween : MonoBehaviour {
         }
     }
 
-    public virtual void Start() {
+    public virtual void Awake() {
         loopCount = loopCount == 0 ? 1 : loopCount;
         Init();
     }

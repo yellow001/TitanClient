@@ -10,7 +10,7 @@ public class BaseUITween : UTweenAll {
 
     BaseUI baseUI;
 
-    public override void Start() {
+    public override void Awake() {
         autoPlay = false;
         loopCount = 1;
         baseUI = GetComponentInParent<BaseUI>();
@@ -32,7 +32,8 @@ public class BaseUITween : UTweenAll {
                     break;
             }
         }
-        base.Start();
+        base.Awake();
+        baseUI.OpenAni();
     }
     
     public enum EM_PlayTime {
