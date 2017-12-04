@@ -113,32 +113,30 @@ public class UTweenAll : UGUITween {
         reverseAni = new TimeEvent(delay, () => {
 
             #region 颜色
-            if (tweenColor) {
-                if (group != null) {
-                    group.alpha = aTo;
-                    group.alpha.ChangeValue(aFrom, duration, (v) => { group.alpha = v; }, curve, ignoreTime,
-                        () => {
+            if (tweenAlpha && group != null) {
+                group.alpha = aTo;
+                group.alpha.ChangeValue(aFrom, duration, (v) => { group.alpha = v; }, curve, ignoreTime,
+                    () => {
+                        currentCount--;
+                        currentCount = currentCount < 0 ? 0 : currentCount;
+                        if (onForwardFinish != null) {
+                            onForwardFinish.Invoke();
+                        }
+                    });
+            }
+
+            if (tweenColor && uiElement != null) {
+                uiElement.color = cTo;
+                uiElement.color.ChangeVaule(cFrom, duration, (v) => { uiElement.color = v; }, curve, ignoreTime,
+                    () => {
+                        if (group == null) {
                             currentCount--;
                             currentCount = currentCount < 0 ? 0 : currentCount;
-                            if (onReverseFinish != null) {
-                                onReverseFinish.Invoke();
+                            if (!tweenAlpha && onForwardFinish != null) {
+                                onForwardFinish.Invoke();
                             }
-                        });
-                }
-
-                if (uiElement != null) {
-                    uiElement.color = cTo;
-                    uiElement.color.ChangeVaule(cFrom, duration, (v) => { uiElement.color = v; }, curve, ignoreTime,
-                        () => {
-                            if (group == null) {
-                                currentCount--;
-                                currentCount = currentCount < 0 ? 0 : currentCount;
-                                if (onReverseFinish != null) {
-                                    onReverseFinish.Invoke();
-                                }
-                            }
-                        });
-                }
+                        }
+                    });
             }
             #endregion
 
