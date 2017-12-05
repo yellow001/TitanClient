@@ -16,7 +16,7 @@ public class UTweenAll : UGUITween {
     public Vector3 pFrom, pTo;
     public bool tweenPos = true;
 
-    public Vector3 sFrom=Vector3.one, sTo=Vector3.one;
+    public Vector3 sFrom = Vector3.one, sTo = Vector3.one;
     public bool tweenScale = false;
 
     public Vector3 rFrom, rTo;
@@ -67,6 +67,20 @@ public class UTweenAll : UGUITween {
 
             #region 位置
             if (tweenPos) {
+                if (tra is RectTransform) {
+                    RectTransform rectTra = tra as RectTransform;
+                    rectTra.anchoredPosition3D = pFrom;
+                    rectTra.anchoredPosition3D.ChangeVaule(pTo, duration, (v) => rectTra.anchoredPosition3D = v, curve, ignoreTime,
+                        () => {
+                            currentCount--;
+                            currentCount = currentCount < 0 ? 0 : currentCount;
+                            if (!tweenColor && onForwardFinish != null) {
+                                onForwardFinish.Invoke();
+                            }
+                        });
+
+                    return;
+                }
                 tra.localPosition = pFrom;
                 tra.localPosition.ChangeVaule(pTo, duration, (v) => tra.localPosition = v, curve, ignoreTime,
                     () => {
@@ -76,6 +90,7 @@ public class UTweenAll : UGUITween {
                             onForwardFinish.Invoke();
                         }
                     });
+
             }
             #endregion
 
@@ -142,6 +157,19 @@ public class UTweenAll : UGUITween {
 
             #region 位置
             if (tweenPos) {
+                if (tra is RectTransform) {
+                    RectTransform rectTra = tra as RectTransform;
+                    rectTra.anchoredPosition3D = pTo;
+                    rectTra.anchoredPosition3D.ChangeVaule(pFrom, duration, (v) => rectTra.anchoredPosition3D = v, curve, ignoreTime,
+                        () => {
+                            currentCount--;
+                            currentCount = currentCount < 0 ? 0 : currentCount;
+                            if (!tweenColor && onReverseFinish != null) {
+                                onReverseFinish.Invoke();
+                            }
+                        });
+                    return;
+                }
                 tra.localPosition = pTo;
                 tra.localPosition.ChangeVaule(pFrom, duration, (v) => tra.localPosition = v, curve, ignoreTime,
                     () => {
@@ -183,7 +211,7 @@ public class UTweenAll : UGUITween {
             #endregion
 
 
-        }, ignoreTime,null, loopCount);
+        }, ignoreTime, null, loopCount);
 
 
         if (autoPlay) {
