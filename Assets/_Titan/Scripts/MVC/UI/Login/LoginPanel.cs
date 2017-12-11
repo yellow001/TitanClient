@@ -69,7 +69,7 @@ public class LoginPanel : BaseUI {
             this.InvokeDeList("openRegisterPanel");
         });
         //nameInput.onEndEdit.AddListener();
-        //loginBtn.onClick.AddListener();
+        loginBtn.onClick.AddListener(OnLoginBtnClick);
         //pwdInput.onEndEdit.AddListener();
 
         //监听登录反馈事件
@@ -93,6 +93,23 @@ public class LoginPanel : BaseUI {
 
     }
 
+    void OnLoginBtnClick() {
+        loginBtn.interactable = false;
+        if (string.IsNullOrWhiteSpace(nameInput.text)) {
+            this.AddMsg("用户名为空");
+        }
+        else if (string.IsNullOrWhiteSpace(pwdInput.text)) {
+            this.AddMsg("密码为空");
+        }
+        else {
+            model.SetUserData(nameInput.text, pwdInput.text);
+            LoginCtrl.Ins.LoginCREQ();
+            return;
+        }
+
+        loginBtn.interactable = true;
+    }
+
     public override void CloseAni() {
         base.CloseAni();
         //@CloseAni
@@ -105,6 +122,29 @@ public class LoginPanel : BaseUI {
     public void LoginSRES(params object[] args) {
         int result = (int)args[0];
         //todo 验证result
+        switch (result) {
+            case 1:
+                //todo 登录成功(加载场景)
+                this.AddMsg("登陆成功");
+                break;
+            case -3:
+                //用户不存在
+                this.AddMsg("用户不存在");
+                break;
+            case -4:
+                //用户或连接已登录
+                this.AddMsg("你已登录");
+                break;
+            case -6:
+                //密码错误
+                this.AddMsg("密码错误");
+                break;
+            default:
+                //其他错误
+                this.AddMsg("登录错误，请尝试重新打开客户端");
+                break;
+        }
+        loginBtn.interactable = true;
     }
 
     public override void OpenAni() {

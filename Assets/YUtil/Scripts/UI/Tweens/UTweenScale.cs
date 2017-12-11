@@ -15,7 +15,7 @@ public class UTweenScale : UGUITween {
     public override void Init() {
         tra = transform;
 
-        forwardAni = new TimeEvent(delay, () => {
+        forwardAni = new TimeEvent(delay + duration, () => {
             tra.localScale = sFrom;
             tra.localScale.ChangeVaule(sTo, duration, (v) => tra.localScale = v, curve, ignoreTime,
                 () => {
@@ -25,9 +25,9 @@ public class UTweenScale : UGUITween {
                         onForwardFinish.Invoke();
                     }
                 });
-        }, ignoreTime,null, loopCount);
+        }, ignoreTime,null, loopCount, true);
 
-        reverseAni = new TimeEvent(delay, () => {
+        reverseAni = new TimeEvent(delay + duration, () => {
             tra.localScale = sTo;
             tra.localScale.ChangeVaule(sFrom, duration, (v) => tra.localScale = v, curve, ignoreTime,
                 () => {
@@ -37,7 +37,7 @@ public class UTweenScale : UGUITween {
                         onReverseFinish.Invoke();
                     }
                 });
-        }, ignoreTime,null, loopCount);
+        }, ignoreTime,null, loopCount, true);
 
         if (autoPlay) {
             PlayFroward();

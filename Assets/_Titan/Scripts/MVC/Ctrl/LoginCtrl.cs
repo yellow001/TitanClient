@@ -17,14 +17,11 @@ public class LoginCtrl : BaseCtrl<LoginCtrl> {
         netLogic = new LoginNetLogic();
     }
 
-    public void LoginCREQ(UserDTO d) {
-        model.data = d;
+    public void LoginCREQ() {
         netLogic.LoginCREQ();
     }
 
-    public void RegisterCREQ(UserDTO d) {
-        model.data = d;
-
+    public void RegisterCREQ() {
         netLogic.LoginCREQ();
     }
 }

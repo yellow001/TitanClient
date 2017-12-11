@@ -18,11 +18,11 @@ public class LoginNetLogic : BaseNetLogic {
     }
 
     void OnRegisterSRES(TransModel m) {
-        LoginCtrl.Ins.model.OnRegosterSRES(m);
+        LoginCtrl.Ins.model.OnRegisterSRES(m);
     }
 
     void OnLoginSRES(TransModel m) {
-        LoginCtrl.Ins.model.OnRegosterSRES(m);
+        LoginCtrl.Ins.model.OnLoginSRES(m);
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ public class LoginNetLogic : BaseNetLogic {
     public void RegisterCREQ() {
         TransModel msg = new TransModel(1001001);
         msg.SetMsg(LoginCtrl.Ins.model.data);
-        NetIOH5.Ins.Send(msg);
+        MessageHandler.Send(msg);
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ public class LoginNetLogic : BaseNetLogic {
     public void LoginCREQ() {
         TransModel msg = new TransModel(1001003);
         msg.SetMsg(LoginCtrl.Ins.model.data);
-        NetIOH5.Ins.Send(msg);
+        MessageHandler.Send(msg);
     }
 
     

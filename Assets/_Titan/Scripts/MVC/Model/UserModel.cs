@@ -14,8 +14,6 @@ public class UserModel : BaseModel {
     /// 登录消息反馈
     /// </summary>
     public void OnLoginSRES(TransModel model) {
-        //todo 保存数据
-
         CallEvent("LoginSRES", model.area);
     }
 
@@ -23,7 +21,7 @@ public class UserModel : BaseModel {
     /// 注册消息反馈
     /// </summary>
     /// <param name="model"></param>
-    public void OnRegosterSRES(TransModel model) {
+    public void OnRegisterSRES(TransModel model) {
         CallEvent("RegisterSRES", model.area);
     }
 
@@ -33,5 +31,16 @@ public class UserModel : BaseModel {
         }
 
         return null;
+    }
+
+    public void SetUserData(string n,string p) {
+        p = YUtil.md5(p);
+        if (data == null) {
+            data = new UserDTO(n, p);
+        }
+        else {
+            data.name = n;
+            data.password = p;
+        }
     }
 }

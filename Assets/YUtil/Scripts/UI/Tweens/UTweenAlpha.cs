@@ -22,7 +22,7 @@ public class UTweenAlpha : UGUITween {
         group = GetComponent<CanvasGroup>();
         uiElement = GetComponent<Graphic>();
 
-        forwardAni = new TimeEvent(delay, () => {
+        forwardAni = new TimeEvent(delay + duration, () => {
             if (group != null) {
                 group.alpha = aFrom;
                 group.alpha.ChangeValue(aTo, duration, (v) => { group.alpha = v; }, curve, ignoreTime,
@@ -48,9 +48,9 @@ public class UTweenAlpha : UGUITween {
                         }
                     });
             }
-        }, ignoreTime,null, loopCount);
+        }, ignoreTime,null, loopCount, true);
 
-        reverseAni = new TimeEvent(delay, () => {
+        reverseAni = new TimeEvent(delay + duration, () => {
             if (group != null) {
                 group.alpha = aTo;
                 group.alpha.ChangeValue(aFrom, duration, (v) => { group.alpha = v; }, curve, ignoreTime,
@@ -76,7 +76,7 @@ public class UTweenAlpha : UGUITween {
                         }
                     });
             }
-        }, ignoreTime, null, loopCount);
+        }, ignoreTime, null, loopCount, true);
 
 
         if (autoPlay) {

@@ -23,8 +23,8 @@ public class UGUITween : MonoBehaviour {
     public virtual void PlayFroward() {
         currentCount = loopCount;
 
-        //delay秒后，以duration为周期播放动画
-            this.AddTimeEvent(forwardAni);
+        //以delay+duration为周期播放动画
+        this.AddTimeEvent(forwardAni);
     }
 
     public virtual void PlayReverse() {
