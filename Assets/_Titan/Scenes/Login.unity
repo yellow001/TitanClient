@@ -9754,6 +9754,8 @@ GameObject:
   - component: {fileID: 1457281684}
   - component: {fileID: 1457281683}
   - component: {fileID: 1457281686}
+  - component: {fileID: 1457281688}
+  - component: {fileID: 1457281687}
   m_Layer: 0
   m_Name: loginBtn
   m_TagString: Untagged
@@ -9870,6 +9872,86 @@ MonoBehaviour:
   ckAuname: 
   enterAu: {fileID: 0}
   clickAu: {fileID: 8300000, guid: cae3cb5693887444ba514e33152035a9, type: 3}
+--- !u!114 &1457281687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1457281681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be84203dac7cf45be8cdaeaceafcc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0
+  duration: 0.2
+  loopCount: 1
+  ignoreTime: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 2.000015
+      tangentMode: 65
+    - serializedVersion: 2
+      time: 0.5
+      value: 1.0000075
+      inSlope: -0.00007098653
+      outSlope: -0.00007098653
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: -0.000010251999
+      inSlope: -2.0000355
+      outSlope: 1
+      tangentMode: 5
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  onForwardFinish:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onReverseFinish:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  group: {fileID: 0}
+  uiElement: {fileID: 0}
+  aFrom: 1
+  aTo: 1
+  cFrom: {r: 1, g: 1, b: 1, a: 1}
+  cTo: {r: 1, g: 1, b: 1, a: 1}
+  tweenAlpha: 0
+  tweenColor: 0
+  pFrom: {x: 0, y: 0, z: 0}
+  pTo: {x: 0, y: 0, z: 0}
+  tweenPos: 0
+  sFrom: {x: 1, y: 1, z: 1}
+  sTo: {x: 0.85, y: 0.85, z: 1}
+  tweenScale: 1
+  rFrom: {x: 0, y: 0, z: 0}
+  rTo: {x: 0, y: 0, z: 0}
+  tweenRotate: 0
+  autoPlay: 0
+--- !u!114 &1457281688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1457281681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46071fa9566ad734e9664ae20ee8bd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverTween: {fileID: 0}
+  clickTween: {fileID: 1457281687}
 --- !u!1 &1498524163
 GameObject:
   m_ObjectHideFlags: 0

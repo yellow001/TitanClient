@@ -24,7 +24,9 @@ public class ButtonTween : MonoBehaviour {
         uiEvent.enterEvent.AddListener(PlayHoverAni);
 
         uiEvent.exitEvent.AddListener((data) => {
-            hoverTween.Stop();
+            if (hoverTween != null) {
+                hoverTween.Stop();
+            }
         });
 
         uiEvent.clickEvent.AddListener(PlayClickAni);

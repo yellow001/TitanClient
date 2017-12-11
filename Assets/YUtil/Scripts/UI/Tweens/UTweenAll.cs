@@ -122,7 +122,7 @@ public class UTweenAll : UGUITween {
             }
             #endregion
 
-            if (first) {
+            if (first && loopCount != 1) {
                 first = false;
                 forwardAni.waitTime = delay + duration;
             }
@@ -213,7 +213,7 @@ public class UTweenAll : UGUITween {
             }
             #endregion
 
-            if (first) {
+            if (first&&loopCount!=1) {
                 first = false;
                 forwardAni.waitTime = delay + duration;
             }

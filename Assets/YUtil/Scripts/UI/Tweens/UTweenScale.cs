@@ -26,7 +26,7 @@ public class UTweenScale : UGUITween {
                     }
                 });
 
-            if (first) {
+            if (first && loopCount != 1) {
                 first = false;
                 forwardAni.waitTime = delay + duration;
             }
@@ -43,7 +43,7 @@ public class UTweenScale : UGUITween {
                     }
                 });
 
-            if (first) {
+            if (first && loopCount != 1) {
                 first = false;
                 forwardAni.waitTime = delay + duration;
             }
