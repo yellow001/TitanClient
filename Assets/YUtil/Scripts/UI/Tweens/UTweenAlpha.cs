@@ -49,7 +49,10 @@ public class UTweenAlpha : UGUITween {
                     });
             }
 
-            if (currentCount != loopCount) { forwardAni.waitTime = delay + duration; }
+            if (first) {
+                first = false;
+                forwardAni.waitTime = delay + duration;
+            }
 
         }, ignoreTime,null, loopCount, true);
 
@@ -80,7 +83,10 @@ public class UTweenAlpha : UGUITween {
                     });
             }
 
-            if (currentCount != loopCount) { forwardAni.waitTime = delay + duration; }
+            if (first) {
+                first = false;
+                forwardAni.waitTime = delay + duration;
+            }
 
         }, ignoreTime, null, loopCount, true);
 

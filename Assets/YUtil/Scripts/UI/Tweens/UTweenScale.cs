@@ -26,7 +26,10 @@ public class UTweenScale : UGUITween {
                     }
                 });
 
-            if (currentCount != loopCount) { forwardAni.waitTime = delay + duration; }
+            if (first) {
+                first = false;
+                forwardAni.waitTime = delay + duration;
+            }
         }, ignoreTime,null, loopCount, true);
 
         reverseAni = new TimeEvent(delay, () => {
@@ -40,7 +43,10 @@ public class UTweenScale : UGUITween {
                     }
                 });
 
-            if (currentCount != loopCount) { forwardAni.waitTime = delay + duration; }
+            if (first) {
+                first = false;
+                forwardAni.waitTime = delay + duration;
+            }
         }, ignoreTime,null, loopCount, true);
 
         if (autoPlay) {

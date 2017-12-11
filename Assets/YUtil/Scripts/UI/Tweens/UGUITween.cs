@@ -19,7 +19,8 @@ public class UGUITween : MonoBehaviour {
     public UnityEvent onReverseFinish;
 
     protected TimeEvent forwardAni, reverseAni;
-    
+
+    protected bool first = true;
     public virtual void PlayFroward() {
         currentCount = loopCount;
 
