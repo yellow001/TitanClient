@@ -58,8 +58,14 @@ public class AlertMgr : BaseManager<AlertMgr> {
     }
 
     private void OnLoadScene(Scene arg0, LoadSceneMode arg1) {
-        msgModels.Clear();
-        tipModels.Clear();
+        if (msgModels != null) {
+            msgModels.Clear();
+        }
+
+        if (tipModels != null) {
+            tipModels.Clear();
+        }
+        
         msgAlert.SetActive(false);
         tipAlert.SetActive(false);
     }

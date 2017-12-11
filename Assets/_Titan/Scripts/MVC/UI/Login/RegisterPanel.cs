@@ -42,7 +42,10 @@ public class RegisterPanel : BaseUI {
     public Image Image;
     [HideInInspector]
     public Transform tra;
-    
+    [HideInInspector]
+    public GameObject waitMask;
+
+    UserModel model;
     new void OnEnable() {
         base.OnEnable();
     }
@@ -67,6 +70,9 @@ public class RegisterPanel : BaseUI {
         tip15 = tra.Find("Mid/pwdInputTwice/tip").GetComponent<Text>();
         root = GetComponent<Image>();
         Image = tra.Find("Image").GetComponent<Image>();
+        waitMask = tra.Find("waitMask").gameObject;
+
+        model = LoginCtrl.Ins.model;
         base.Init();
     }
 
@@ -77,9 +83,10 @@ public class RegisterPanel : BaseUI {
             this.InvokeDeList("openLoginPanel");
         });
         //pwdInputTwice.onEndEdit.AddListener();
-        registerBtn.onClick.AddListener(()=>Register());
+        registerBtn.onClick.AddListener(()=>OnRegisterBtnClick());
         //pwdInput.onEndEdit.AddListener();
 
+        model.BindEvent("RegisterSRES",RegisterSRES);
     }
 
     public override void UpdateView() {
@@ -103,9 +110,54 @@ public class RegisterPanel : BaseUI {
 
     }
 
-    public void Register() {
+    public void OnRegisterBtnClick() {
+        waitMask.SetActive(true);
+
+        if (string.IsNullOrWhiteSpace(nameInput.text)) {
+            this.AddMsg("用户名不能为空");
+        }
+        else if (string.IsNullOrWhiteSpace(pwdInput.text)) {
+            this.AddMsg("请输入密码");
+        }
+        else if (!pwdInputTwice.text.Equals(pwdInput.text)) {
+            this.AddMsg("密码不匹配");
+        }
+        else {
+            model.SetUserData(nameInput.text, pwdInput.text);
+            LoginCtrl.Ins.RegisterCREQ();
+            return;
+        }
+
+        waitMask.SetActive(false);
 
     }
+
+    //1  注册成功;-1 dto错误;-2 用户名以及密码出错;-3 用户已存在
+    void RegisterSRES(params object[] args) {
+        int result = (int)args[0];
+        //todo 验证result
+        switch (result) {
+            case 1:
+                this.AddTip("注册成功");
+                cancleBtn.onClick.Invoke();
+                break;
+            case -3:
+                this.AddMsg("用户已存在");
+                break;
+            default:
+                this.AddMsg("注册出错，请检查输入或网络设置");
+                break;
+        }
+        Clear();
+        waitMask.SetActive(false);
+    }
+
+    void Clear() {
+        nameInput.text = string.Empty;
+        pwdInput.text = string.Empty;
+        pwdInputTwice.text = string.Empty;
+    }
+    
 
     public override void CloseAni() {
         base.CloseAni();

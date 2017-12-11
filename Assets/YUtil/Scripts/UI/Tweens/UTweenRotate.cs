@@ -12,6 +12,7 @@ public class UTweenRotate : UGUITween {
     public override void Awake() {
         base.Awake();
     }
+    
 
     public override void Init() {
         tra = transform;

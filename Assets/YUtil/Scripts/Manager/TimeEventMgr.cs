@@ -65,7 +65,13 @@ public class TimeEventMgr : BaseManager<TimeEventMgr> {
 
                         percent = (int)(percent * 100) / 100f;//0.1~1
 
-                        item.updateDe(Mathf.Max(0, leaveTime), Mathf.Min(1, percent));
+                        try {
+                            item.updateDe(Mathf.Max(0, leaveTime), Mathf.Min(1, percent));
+                        }
+                        catch (System.Exception ex) {
+                            RemoveTimeEvent(item);
+                        }
+                        
                     }
                 }
             }

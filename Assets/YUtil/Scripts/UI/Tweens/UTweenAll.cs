@@ -29,6 +29,7 @@ public class UTweenAll : UGUITween {
     public override void Awake() {
         base.Awake();
     }
+    
 
     public override void Init() {
         group = GetComponent<CanvasGroup>();

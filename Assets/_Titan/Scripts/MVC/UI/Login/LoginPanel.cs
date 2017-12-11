@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using NetFrame;
+using UnityEngine.SceneManagement;
 
 public class LoginPanel : BaseUI {
 
@@ -101,10 +102,10 @@ public class LoginPanel : BaseUI {
     void OnLoginBtnClick() {
         waitMask.SetActive(true);
         if (string.IsNullOrWhiteSpace(nameInput.text)) {
-            this.AddMsg("用户名为空");
+            this.AddMsg("用户名不能为空");
         }
         else if (string.IsNullOrWhiteSpace(pwdInput.text)) {
-            this.AddMsg("密码为空");
+            this.AddMsg("密码不能为空");
         }
         else {
             model.SetUserData(nameInput.text, pwdInput.text);
@@ -130,7 +131,8 @@ public class LoginPanel : BaseUI {
         switch (result) {
             case 1:
                 //todo 登录成功(加载场景)
-                this.AddMsg("登陆成功");
+                this.AddTip("登陆成功");
+                SceneManager.LoadScene("Match");
                 break;
             case -3:
                 //用户不存在

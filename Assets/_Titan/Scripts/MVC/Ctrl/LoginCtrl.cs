@@ -22,6 +22,6 @@ public class LoginCtrl : BaseCtrl<LoginCtrl> {
     }
 
     public void RegisterCREQ() {
-        netLogic.LoginCREQ();
+        netLogic.RegisterCREQ();
     }
 }
