@@ -16,7 +16,7 @@ public class UTweenPos : UGUITween {
     public override void Init() {
         tra = transform;
 
-        forwardAni = new TimeEvent(delay + duration, () => {
+        forwardAni = new TimeEvent(delay, () => {
             if (tra is RectTransform) {
                 RectTransform rectTra = tra as RectTransform;
                 rectTra.anchoredPosition3D = pFrom;
@@ -40,9 +40,11 @@ public class UTweenPos : UGUITween {
                         onForwardFinish.Invoke();
                     }
                 });
+
+            if (currentCount != loopCount) { forwardAni.waitTime = delay + duration; }
         }, ignoreTime,null, loopCount, true);
 
-        reverseAni = new TimeEvent(delay + duration, () => {
+        reverseAni = new TimeEvent(delay, () => {
             if (tra is RectTransform) {
                 RectTransform rectTra = tra as RectTransform;
                 rectTra.anchoredPosition3D = pTo;
@@ -67,6 +69,8 @@ public class UTweenPos : UGUITween {
                         onReverseFinish.Invoke();
                     }
                 });
+
+            if (currentCount != loopCount) { forwardAni.waitTime = delay + duration; }
         }, ignoreTime, null, loopCount, true);
 
         if (autoPlay) {

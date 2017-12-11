@@ -36,6 +36,9 @@ public class LoginPanel : BaseUI {
     [HideInInspector]
     public Transform tra;
 
+    [HideInInspector]
+    public GameObject waitMask;
+
     UserModel model;
 
     new void OnEnable() {
@@ -58,6 +61,8 @@ public class LoginPanel : BaseUI {
         Placeholder11 = tra.Find("Right/pwdInput/Placeholder").GetComponent<Text>();
         defaultTx12 = tra.Find("Right/pwdInput/defaultTx").GetComponent<Text>();
         tip13 = tra.Find("Right/pwdInput/tip").GetComponent<Text>();
+
+        waitMask = tra.Find("waitMask").gameObject;
 
         model = LoginCtrl.Ins.model;
         base.Init();
@@ -94,7 +99,7 @@ public class LoginPanel : BaseUI {
     }
 
     void OnLoginBtnClick() {
-        loginBtn.interactable = false;
+        waitMask.SetActive(true);
         if (string.IsNullOrWhiteSpace(nameInput.text)) {
             this.AddMsg("用户名为空");
         }
@@ -107,7 +112,7 @@ public class LoginPanel : BaseUI {
             return;
         }
 
-        loginBtn.interactable = true;
+        waitMask.SetActive(false);
     }
 
     public override void CloseAni() {
@@ -144,7 +149,7 @@ public class LoginPanel : BaseUI {
                 this.AddMsg("登录错误，请尝试重新打开客户端");
                 break;
         }
-        loginBtn.interactable = true;
+        waitMask.SetActive(false);
     }
 
     public override void OpenAni() {

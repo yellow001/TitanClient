@@ -19,19 +19,19 @@ public class UGUITween : MonoBehaviour {
     public UnityEvent onReverseFinish;
 
     protected TimeEvent forwardAni, reverseAni;
-
+    
     public virtual void PlayFroward() {
         currentCount = loopCount;
 
-        //以delay+duration为周期播放动画
+        //播放动画
         this.AddTimeEvent(forwardAni);
     }
 
     public virtual void PlayReverse() {
         currentCount = loopCount;
 
-        //delay秒后，以duration为周期播放动画
-            this.AddTimeEvent(reverseAni);
+        //播放动画
+        this.AddTimeEvent(reverseAni);
     }
 
     /// <summary>
@@ -70,7 +70,8 @@ public class UGUITween : MonoBehaviour {
         Init();
     }
 
-    public virtual void Init() { }
+    public virtual void Init() {
+    }
 
     public enum EM_LoopType {
         PingPong,

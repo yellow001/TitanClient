@@ -35,7 +35,7 @@ public class UTweenAll : UGUITween {
         uiElement = GetComponent<Graphic>();
         tra = transform;
 
-        forwardAni = new TimeEvent(delay+duration, () => {
+        forwardAni = new TimeEvent(delay, () => {
 
             #region 颜色
             if (tweenAlpha && group != null) {
@@ -121,10 +121,12 @@ public class UTweenAll : UGUITween {
                     });
             }
             #endregion
-            
+
+            if (currentCount != loopCount) { forwardAni.waitTime = delay + duration; }
+
         }, ignoreTime, null, loopCount, true);
 
-        reverseAni = new TimeEvent(delay + duration, () => {
+        reverseAni = new TimeEvent(delay, () => {
 
             #region 颜色
             if (tweenAlpha && group != null) {
@@ -209,7 +211,7 @@ public class UTweenAll : UGUITween {
             }
             #endregion
 
-
+            if (currentCount != loopCount) { forwardAni.waitTime = delay + duration; }
         }, ignoreTime, null, loopCount, true);
 
 

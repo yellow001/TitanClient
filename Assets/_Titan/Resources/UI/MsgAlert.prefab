@@ -713,7 +713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0
-  duration: 0.2
+  duration: 0.25
   loopCount: 1
   ignoreTime: 0
   curve:

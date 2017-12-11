@@ -16,7 +16,7 @@ public class UTweenRotate : UGUITween {
     public override void Init() {
         tra = transform;
 
-        forwardAni = new TimeEvent(delay + duration, () => {
+        forwardAni = new TimeEvent(delay, () => {
             tra.localEulerAngles = rFrom;
             tra.localEulerAngles.ChangeVaule(rTo, duration, (v) => tra.localEulerAngles = v, curve, ignoreTime,
                 () => {
@@ -26,9 +26,11 @@ public class UTweenRotate : UGUITween {
                         onForwardFinish.Invoke();
                     }
                 });
+
+            if (currentCount != loopCount) { forwardAni.waitTime = delay + duration; }
         }, ignoreTime, null, loopCount, true);
 
-        reverseAni = new TimeEvent(delay + duration, () => {
+        reverseAni = new TimeEvent(delay, () => {
             tra.localEulerAngles = rTo;
             tra.localEulerAngles.ChangeVaule(rFrom, duration, (v) => tra.localEulerAngles = v, curve, ignoreTime,
                 () => {
@@ -38,6 +40,8 @@ public class UTweenRotate : UGUITween {
                         onReverseFinish.Invoke();
                     }
                 });
+
+            if (currentCount != loopCount) { forwardAni.waitTime = delay + duration; }
         }, ignoreTime,null, loopCount, true);
 
         if (autoPlay) {
