@@ -40,9 +40,14 @@ public class TimeEventMgr : BaseManager<TimeEventMgr> {
                 //已经到达时间
                 if (item.deltaTime >= item.waitTime) {
                     //执行方法，并移除model
-                    if (item.overDe != null) {
-                        item.overDe();
+                    try {
+                        item.overDe?.Invoke();
                     }
+                    catch (System.Exception ex) {
+                        RemoveTimeEvent(item);
+                        return;
+                    }
+
                     item.deltaTime = 0;
                     item.count = item.count > 0 ? --item.count : item.count;
                     if (item.count == 0) {

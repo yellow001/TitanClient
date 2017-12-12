@@ -16,7 +16,7 @@ public class NetIOTest : MonoBehaviour {
             OnMsgReceive(NetIO.Ins.msg[0]);
             NetIO.Ins.msg.RemoveAt(0);
         }
-	}
+    }
 
     public void OnMsgReceive(TransModel model) {
         Debug.Log(model.GetMsg<string>());
@@ -24,7 +24,7 @@ public class NetIOTest : MonoBehaviour {
 
     public void Send() {
         TransModel m = new TransModel(1001001, 1);
-        m.SetMsg("i am client");
+        m.SetMsg("i am client asdasdasdasdasdasdasdsadasdsadasdsadsadasdasdasdasdasdadasdasd");
         MessageHandler.Send(m);
     }
 }

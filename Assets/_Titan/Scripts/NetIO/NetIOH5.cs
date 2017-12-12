@@ -39,6 +39,7 @@ public class NetIOH5:MonoBehaviour {
                 }
                 obj.AddComponent<NetIOH5>();
                 ins = obj.GetComponent<NetIOH5>();
+                AbsCoding.Ins = new PbCoding();
             }
 
             return ins;
@@ -49,8 +50,8 @@ public class NetIOH5:MonoBehaviour {
     IEnumerator Start() {
         DontDestroyOnLoad(this.gameObject);
 
-        WebSocket w = new WebSocket(new Uri("ws://"+AppConst.gateIP+":"+AppConst.gatePort));
-        yield return StartCoroutine(w.Connect());
+        socket = new WebSocket(new Uri("ws://"+AppConst.gateIP+":"+AppConst.gatePort));
+        yield return StartCoroutine(socket.Connect());
         init = true;
     }
 
@@ -60,6 +61,10 @@ public class NetIOH5:MonoBehaviour {
         }
 
         byte[] data= socket.Recv();
+
+        if (data == null || data.Length == 0) {
+            return;
+        }
 
         cache.AddRange(data);
 

@@ -97,11 +97,7 @@ public class MessageHandler : MonoBehaviour {
     }
 
     public static void Send(TransModel model) {
-#if !WEBGL
         NetIO.Ins.Send(model);
-#else
-        NetIOH5.Ins.Send(model);
-#endif
     }
 }
 
