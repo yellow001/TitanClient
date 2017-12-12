@@ -2500,6 +2500,7 @@ GameObject:
   - component: {fileID: 783293480}
   - component: {fileID: 783293482}
   - component: {fileID: 783293481}
+  - component: {fileID: 783293483}
   m_Layer: 5
   m_Name: RoomInfoItem
   m_TagString: Untagged
@@ -2560,6 +2561,33 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 783293479}
+--- !u!114 &783293483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 783293479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a0b548706f34f41a5d62a29cdfdfaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openClip: {fileID: 0}
+  closeClip: {fileID: 0}
+  inited: 0
+  group: {fileID: 0}
+  nameTx: {fileID: 0}
+  EnterBtn: {fileID: 0}
+  Image: {fileID: 0}
+  Text: {fileID: 0}
+  Right: {fileID: 0}
+  numImg: {fileID: 0}
+  Index: {fileID: 0}
+  indexTX: {fileID: 0}
+  root: {fileID: 0}
+  numTx: {fileID: 0}
+  nameImg: {fileID: 0}
+  tra: {fileID: 0}
 --- !u!1 &794806021
 GameObject:
   m_ObjectHideFlags: 0

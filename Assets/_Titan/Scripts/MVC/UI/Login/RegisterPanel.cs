@@ -124,7 +124,7 @@ public class RegisterPanel : BaseUI {
         }
         else {
             model.SetUserData(nameInput.text, pwdInput.text);
-            LoginCtrl.Ins.RegisterCREQ();
+            LoginCtrl.Ins.RegisterCREQ(model.data);
             return;
         }
 

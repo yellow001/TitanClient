@@ -109,7 +109,7 @@ public class LoginPanel : BaseUI {
         }
         else {
             model.SetUserData(nameInput.text, pwdInput.text);
-            LoginCtrl.Ins.LoginCREQ();
+            LoginCtrl.Ins.LoginCREQ(model.data);
             return;
         }
 

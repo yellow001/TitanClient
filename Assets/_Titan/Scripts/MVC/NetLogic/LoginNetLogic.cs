@@ -25,23 +25,4 @@ public class LoginNetLogic : BaseNetLogic {
         LoginCtrl.Ins.model.OnLoginSRES(m);
     }
 
-    /// <summary>
-    /// 注册请求
-    /// </summary>
-    public void RegisterCREQ() {
-        TransModel msg = new TransModel(1001001);
-        msg.SetMsg(LoginCtrl.Ins.model.data);
-        MessageHandler.Send(msg);
-    }
-
-    /// <summary>
-    /// 登录请求
-    /// </summary>
-    public void LoginCREQ() {
-        TransModel msg = new TransModel(1001003);
-        msg.SetMsg(LoginCtrl.Ins.model.data);
-        MessageHandler.Send(msg);
-    }
-
-    
 }

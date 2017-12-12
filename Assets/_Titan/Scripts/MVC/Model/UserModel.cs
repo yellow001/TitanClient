@@ -7,7 +7,7 @@ using UnityEngine;
 public class UserModel : BaseModel {
     public UserDTO data {
         get;
-        set;
+        protected set;
     }
 
     /// <summary>
