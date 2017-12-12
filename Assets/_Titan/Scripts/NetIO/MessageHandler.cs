@@ -10,18 +10,10 @@ public class MessageHandler : MonoBehaviour {
     
 
     public void Update() {
-#if !WEBGL
         if (NetIO.Ins.msg != null && NetIO.Ins.msg.Count > 0) {
             OnMsgReceive(NetIO.Ins.msg[0]);
             NetIO.Ins.msg.RemoveAt(0);
         }
-#else
-
-        if (NetIOH5.Ins.msg != null && NetIOH5.Ins.msg.Count > 0) {
-            OnMsgReceive(NetIOH5.Ins.msg[0]);
-            NetIOH5.Ins.msg.RemoveAt(0);
-        }
-#endif
     }
 
     public void OnMsgReceive(TransModel model) {

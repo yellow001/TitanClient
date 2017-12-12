@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using ServerSimple.DTO.Match;
 
 public class RoomInfoItem : BaseUI {
 
@@ -30,6 +31,17 @@ public class RoomInfoItem : BaseUI {
     public Transform tra;
 
 
+    public MatchRoomDTO Dto {
+        get {
+            return dto;
+        }
+        set {
+            dto = value;
+            UpdateView();
+        }
+    }
+
+    private MatchRoomDTO dto;
     new void OnEnable() {
         base.OnEnable();
     }

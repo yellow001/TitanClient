@@ -95,7 +95,7 @@ public class YUIEditor : MonoBehaviour {
             }
             Type t = GetMemberType(item);
             if (t != null) {
-                string n = item.name;
+                string n = item.name.Replace(" ","");
                 if (item == root) {
                     n = "root";
                 }
