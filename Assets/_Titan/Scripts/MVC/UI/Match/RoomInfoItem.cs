@@ -30,7 +30,7 @@ public class RoomInfoItem : BaseUI {
     [HideInInspector]
     public Transform tra;
 
-
+    float aniCountValue,countValue;
     public MatchRoomDTO Dto {
         get {
             return dto;
@@ -65,7 +65,9 @@ public class RoomInfoItem : BaseUI {
     }
 
     public override void AddEvent() {
-        //EnterBtn.onClick.AddListener();
+        EnterBtn.onClick.AddListener(EnterBtnClick);
+
+        closeTweenAction += () => Destroy(gameObject, GetComponent<BaseUITween>().duration);
     }
 
     void EnterBtnClick() {
@@ -76,6 +78,14 @@ public class RoomInfoItem : BaseUI {
         else {
             //有密码先打开输入密码框
             this.InvokeDeList("openPwdWin",this);
+        }
+    }
+
+    private void Update() {
+        if (Dto != null) {
+            aniCountValue = Mathf.Lerp(aniCountValue, countValue, Time.deltaTime * 10);
+            numImg.fillAmount = aniCountValue;
+            numImg.color = Color.Lerp(Color.white, Color.red, aniCountValue);
         }
     }
 
@@ -93,7 +103,10 @@ public class RoomInfoItem : BaseUI {
         //nameImg.sprite=null;
         if (Dto == null) { return; }
 
-
+        indexTX.text = Dto.index.ToString();
+        nameTx.text = Dto.masterName;
+        numTx.text = Dto.playerList.Count + " / " + Dto.maxNum;
+        countValue = (float)Dto.playerList.Count / (float)Dto.maxNum;
     }
 
     public override void CloseAni() {

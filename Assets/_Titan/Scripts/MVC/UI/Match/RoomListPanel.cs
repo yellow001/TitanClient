@@ -95,7 +95,7 @@ public class RoomListPanel : BaseUI {
             while (count<0) {
                 RoomInfoItem info = roomList[roomList.Count - 1];
                 roomList.Remove(info);
-                Destroy(info.gameObject);
+                info.CloseAni();
                 count++;
             }
         }

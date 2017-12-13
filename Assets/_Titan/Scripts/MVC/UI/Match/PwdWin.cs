@@ -59,10 +59,10 @@ public class PwdWin : BaseUI {
         okBtn.onClick.AddListener(() => {
             CloseAni();
             if (info == null) {
-                MatchCtrl.Ins.CreateCREQ(pwdInput.text);
+                MatchCtrl.Ins.CreateCREQ(string.IsNullOrEmpty(pwdInput.text)?"":YUtil.md5(pwdInput.text));
             }
             else {
-                MatchCtrl.Ins.EnterCREQ(info.Dto.index,pwdInput.text);
+                MatchCtrl.Ins.EnterCREQ(info.Dto.index, string.IsNullOrEmpty(pwdInput.text) ? "" : YUtil.md5(pwdInput.text));
             }
             pwdInput.text = "";
         });

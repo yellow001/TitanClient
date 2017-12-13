@@ -36,13 +36,13 @@ public class UGUITweenEditor : Editor {
 
 
     public void UGUITweenBaseGUI() {
+        serializedObject.Update();
         Undo.RecordObject(target, "UGUITween");
         UGUITween t = target as UGUITween;
         EditorGUILayout.PropertyField(serializedObject.FindProperty("delay"), true);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("duration"), true);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("ignoreTime"), true);
         EditorGUILayout.Space();
-
         UIEditorHelper.DrawTab("展开曲线", ref showCurve);
         if (showCurve) {
             UIEditorHelper.BeginBox();
@@ -60,5 +60,6 @@ public class UGUITweenEditor : Editor {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("onForwardFinish"), true);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("onReverseFinish"), true);
         }
+        serializedObject.ApplyModifiedProperties();
     }
 }

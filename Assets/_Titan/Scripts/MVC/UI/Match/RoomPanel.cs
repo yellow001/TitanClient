@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 public class RoomPanel : BaseUI {
 
@@ -46,7 +47,19 @@ public class RoomPanel : BaseUI {
         });
         //startBtn.onClick.AddListener();
 
+        model.BindEvent("EnterSRES", EnterSRES);
         model.BindEvent("ExitSRES", ExitSRES);
+    }
+
+    private void EnterSRES(object[] args) {
+        int result = (int)args[0];
+        switch (result) {
+            case 1:
+                UpdateView();
+                break;
+            default:
+                break;
+        }
     }
 
     void ExitSRES(object[] args) {
@@ -88,7 +101,7 @@ public class RoomPanel : BaseUI {
             while (count < 0) {
                 UserItem info = itemList[itemList.Count - 1];
                 itemList.Remove(info);
-                Destroy(info.gameObject);
+                info.CloseAni();
                 count++;
             }
         }
@@ -117,7 +130,7 @@ public class RoomPanel : BaseUI {
         while (itemList.Count>0) {
             UserItem info = itemList[itemList.Count - 1];
             itemList.Remove(info);
-            Destroy(info.gameObject);
+            info.CloseAni();
         }
     }
 

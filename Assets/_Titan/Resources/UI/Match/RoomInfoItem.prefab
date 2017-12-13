@@ -39,6 +39,8 @@ GameObject:
   - component: {fileID: 222112103869365880}
   - component: {fileID: 114858366694405640}
   - component: {fileID: 114410020760700038}
+  - component: {fileID: 225396393303486086}
+  - component: {fileID: 114870930125322072}
   m_Layer: 5
   m_Name: RoomInfoItem
   m_TagString: Untagged
@@ -592,6 +594,81 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114870930125322072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1127037160903094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858e286398fdc1d49bd089455ede6659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0
+  duration: 0.45
+  loopCount: 1
+  ignoreTime: 0
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  onForwardFinish:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onReverseFinish:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1231743846685098, guid: a328153c45aa56647b04703af0b4c11c,
+          type: 2}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  group: {fileID: 0}
+  uiElement: {fileID: 0}
+  aFrom: 0
+  aTo: 1
+  cFrom: {r: 1, g: 1, b: 1, a: 1}
+  cTo: {r: 1, g: 1, b: 1, a: 1}
+  tweenAlpha: 1
+  tweenColor: 0
+  pFrom: {x: 0, y: 0, z: 0}
+  pTo: {x: 0, y: 0, z: 0}
+  tweenPos: 0
+  sFrom: {x: 0.8, y: 0.8, z: 1}
+  sTo: {x: 1, y: 1, z: 1}
+  tweenScale: 1
+  rFrom: {x: 0, y: 0, z: 0}
+  rTo: {x: 0, y: 0, z: 0}
+  tweenRotate: 0
+  autoPlay: 0
+  playTime: 0
+  doubleTween: 1
 --- !u!114 &114895587298617392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -955,3 +1032,14 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -24}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225396393303486086
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1127037160903094}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

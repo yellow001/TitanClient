@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +32,30 @@ public class MatchUICtrl : MonoBehaviour {
         });
 
         model.BindEvent("CreateSRES", CreateSRES);
+        model.BindEvent("EnterSRES", EnterSRES);
+    }
+
+    void EnterSRES(object[] args) {
+        //1 进入房间成功;-1 房间不存在或已过期;-2 连接还在某房间中;-3 连接未登录;-4 密码错误;-5 人数已满;-6 进入房间出错
+        int result = (int)args[0];
+        switch (result) {
+            case 1:
+                if (!roomPanel.gameObject.activeSelf) {
+                    this.InvokeDeList("openRoomPanel");
+                }
+                break;
+            case -1:
+                this.AddMsg("房间已过期");
+                break;
+            case -4:
+                this.AddMsg("密码错误");
+                break;
+            case -5:
+                this.AddMsg("人数已满");
+                break;
+            default:
+                break;
+        }
     }
 
     void CreateSRES(object[] args) {

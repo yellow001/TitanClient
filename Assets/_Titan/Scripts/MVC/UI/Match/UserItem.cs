@@ -34,6 +34,8 @@ public class UserItem : BaseUI {
         closeBtn.onClick.AddListener(()=> {
             //todo 踢人请求
         });
+
+        closeTweenAction += () => Destroy(gameObject,GetComponent<BaseUITween>().duration);
     }
 
     public override void UpdateView() {
@@ -44,7 +46,8 @@ public class UserItem : BaseUI {
         if (string.IsNullOrEmpty(uname)) { return; }
 
         //不是房主或者item是自己
-        if (!MatchCtrl.Ins.model.currentRoom.masterName.Equals(uname) || uname.Equals(LoginCtrl.Ins.model.GetUserName())) {
+        string userName = LoginCtrl.Ins.model.GetUserName();
+        if (!MatchCtrl.Ins.model.currentRoom.masterName.Equals(userName) || uname.Equals(userName)) {
             closeBtn.gameObject.SetActive(false);
         }
         else {

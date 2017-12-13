@@ -7,7 +7,6 @@ using UnityEngine;
 [CanEditMultipleObjects]
 public class BaseUITweenEditor : UTweenAllEditor {
     public override void OnInspectorGUI() {
-        Undo.RecordObject(target, "BaseUITween");
         BaseUITween t = target as BaseUITween;
 
         EditorGUILayout.Space();

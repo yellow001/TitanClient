@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BaseModel{
@@ -21,7 +22,8 @@ public class BaseModel{
     public void CallEvent(string eventName, params object[] args) {
 
         if (callBackDic.ContainsKey(eventName) && callBackDic[eventName].Count > 0) {
-            foreach (var item in callBackDic[eventName]) {
+            List<ModelEventCallBack> fun = callBackDic[eventName].ToList();
+            foreach (var item in fun) {
                 if(item!=null)
                     item(args);
             }
