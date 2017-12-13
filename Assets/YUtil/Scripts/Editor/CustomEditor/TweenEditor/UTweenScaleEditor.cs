@@ -7,6 +7,8 @@ using UnityEngine;
 [CanEditMultipleObjects]
 public class UTweenScaleEditor : UGUITweenEditor {
     public override void OnInspectorGUI() {
+        Undo.RecordObject(target, "UTweenScale");
+
         UTweenScale t = target as UTweenScale;
         t.autoPlay = EditorGUILayout.Toggle("自动播放", t.autoPlay);
         UIEditorHelper.BeginBox();

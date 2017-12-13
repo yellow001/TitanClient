@@ -19,13 +19,14 @@ public class LoginCtrl : BaseCtrl<LoginCtrl> {
     }
 
     public void LoginCREQ(UserDTO dto) {
-        TransModel msg = new TransModel(1001001);
+        TransModel msg = new TransModel(1001003);
         msg.SetMsg(dto);
+        model.SetUserData(dto.name, dto.password);
         MessageHandler.Send(msg);
     }
 
     public void RegisterCREQ(UserDTO dto) {
-        TransModel msg = new TransModel(1001003);
+        TransModel msg = new TransModel(1001001);
         msg.SetMsg(dto);
         MessageHandler.Send(msg);
     }

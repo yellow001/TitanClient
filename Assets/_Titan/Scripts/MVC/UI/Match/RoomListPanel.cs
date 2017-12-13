@@ -4,10 +4,12 @@ using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 
-public class MatchListPanel : BaseUI {
+public class RoomListPanel : BaseUI {
 
     [HideInInspector]
     public Button refreshBtn;
+    [HideInInspector]
+    public Button createBtn;
     [HideInInspector]
     public Text Text;
     [HideInInspector]
@@ -31,23 +33,33 @@ public class MatchListPanel : BaseUI {
     public override void Init() {
         tra = transform;
         refreshBtn = tra.Find("refreshBtn").GetComponent<Button>();
+        createBtn = tra.Find("createBtn").GetComponent<Button>();
         Text = tra.Find("refreshBtn/Text").GetComponent<Text>();
         root = GetComponent<Image>();
         content = tra.Find("Scroll View/Viewport/Content").GetComponent<GridLayoutGroup>();
 
         model = MatchCtrl.Ins.model;
 
-        base.Init();
-
         refreshEvent = new TimeEvent(2.5f, () => {
             MatchCtrl.Ins.RefreshCREQ();
-        }, null, -1);
+        }, null, -1, true);
+
+        base.Init();
     }
 
     public override void AddEvent() {
-        //refreshBtn.onClick.AddListener();
+        refreshBtn.onClick.AddListener(()=> {
+            refreshBtn.interactable = false;
+            MatchCtrl.Ins.RefreshCREQ();
+            this.AddTimeEvent(2.5f, ()=>refreshBtn.interactable = true, null);
+        });
+
+        createBtn.onClick.AddListener(()=> {
+            this.InvokeDeList("openPwdWin",null);
+        });
 
         model.BindEvent("RefreshSRES", RefreshRoomList);
+        
     }
 
     void RefreshRoomList(object[] args) {
@@ -70,7 +82,7 @@ public class MatchListPanel : BaseUI {
         //Viewport.sprite=null;
         //Handle.sprite=null;
 
-        //todo 更新列表项数目（多减少补）
+        //更新列表项数目（多减少补）
         int count = model.roomList.Count - roomList.Count;
         if (count > 0) {
             while (count>0) {
@@ -96,6 +108,7 @@ public class MatchListPanel : BaseUI {
     }
 
     public override void CloseAni() {
+        this.RemoveTimeEvent(refreshEvent);
         base.CloseAni();
         //@CloseAni
     }
@@ -103,5 +116,6 @@ public class MatchListPanel : BaseUI {
     public override void OpenAni() {
         base.OpenAni();
         //@OpenAni
+        this.AddTimeEvent(refreshEvent);
     }
 }

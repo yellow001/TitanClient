@@ -36,6 +36,7 @@ public class UGUITweenEditor : Editor {
 
 
     public void UGUITweenBaseGUI() {
+        Undo.RecordObject(target, "UGUITween");
         UGUITween t = target as UGUITween;
         EditorGUILayout.PropertyField(serializedObject.FindProperty("delay"), true);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("duration"), true);

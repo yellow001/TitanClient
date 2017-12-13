@@ -20,7 +20,9 @@ public class MatchModel : BaseModel {
     public void OnRefreshSRES(TransModel model) {
         if (model.area == 1) {
             roomList.Clear();
-            roomList.AddRange(model.GetMsg<MatchRoomDTO[]>());
+            if (model.GetMsg<MatchRoomDTO[]>() != null) {
+                roomList.AddRange(model.GetMsg<MatchRoomDTO[]>());
+            }
         }
 
         CallEvent("RefreshSRES", model.area);

@@ -7,7 +7,7 @@ using UnityEngine;
 [CanEditMultipleObjects]
 public class UTweenRotateEditor : UGUITweenEditor {
     public override void OnInspectorGUI() {
-        
+        Undo.RecordObject(target, "UTweenRotate");
         UTweenRotate t = target as UTweenRotate;
         t.autoPlay = EditorGUILayout.Toggle("自动播放", t.autoPlay);
         UIEditorHelper.BeginBox();

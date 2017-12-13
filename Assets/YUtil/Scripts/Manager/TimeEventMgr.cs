@@ -84,6 +84,10 @@ public class TimeEventMgr : BaseManager<TimeEventMgr> {
     }
 
     public void AddTimeEvent(TimeEvent model) {
+        if (model == null) {
+            Debug.Log("the model you add is null");
+            return;
+        }
         model.deltaTime = 0;
         if (!tEvents.Contains(model)) {
             tEvents.Add(model);

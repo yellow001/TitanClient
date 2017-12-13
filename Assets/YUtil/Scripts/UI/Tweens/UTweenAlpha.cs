@@ -78,7 +78,7 @@ public class UTweenAlpha : UGUITween {
                             currentCount--;
                             currentCount = currentCount < 0 ? 0 : currentCount;
                             if (onReverseFinish != null) {
-                                onForwardFinish.Invoke();
+                                onReverseFinish.Invoke();
                             }
                         }
                     });

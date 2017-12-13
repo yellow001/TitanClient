@@ -9,6 +9,8 @@ public class UTweenPosEditor : UGUITweenEditor {
 
 
     public override void OnInspectorGUI() {
+        Undo.RecordObject(target, "UTweenPos");
+
         UTweenPos t = target as UTweenPos;
 
         t.autoPlay = EditorGUILayout.Toggle("自动播放", t.autoPlay);

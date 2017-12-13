@@ -7,7 +7,7 @@ using UnityEngine;
 [CanEditMultipleObjects]
 public class BaseUITweenEditor : UTweenAllEditor {
     public override void OnInspectorGUI() {
-        serializedObject.Update();
+        Undo.RecordObject(target, "BaseUITween");
         BaseUITween t = target as BaseUITween;
 
         EditorGUILayout.Space();
@@ -35,6 +35,5 @@ public class BaseUITweenEditor : UTweenAllEditor {
             UIEditorHelper.EndBox();
         }
         EditorGUILayout.Space();
-        serializedObject.ApplyModifiedProperties();
     }
 }

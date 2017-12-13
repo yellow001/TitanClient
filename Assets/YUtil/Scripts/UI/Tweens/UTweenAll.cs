@@ -138,8 +138,8 @@ public class UTweenAll : UGUITween {
                     () => {
                         currentCount--;
                         currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (onForwardFinish != null) {
-                            onForwardFinish.Invoke();
+                        if (onReverseFinish != null) {
+                            onReverseFinish.Invoke();
                         }
                     });
             }

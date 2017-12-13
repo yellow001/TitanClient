@@ -27,6 +27,7 @@ public class UTweenAllEditor : UGUITweenEditor {
     public bool showTween = true;
 
     public override void OnInspectorGUI() {
+        Undo.RecordObject(target, "UTweenAll");
 
         UTweenAll t = target as UTweenAll;
 

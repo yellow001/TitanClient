@@ -42,6 +42,7 @@ public class RoomInfoItem : BaseUI {
     }
 
     private MatchRoomDTO dto;
+    
     new void OnEnable() {
         base.OnEnable();
     }
@@ -59,13 +60,23 @@ public class RoomInfoItem : BaseUI {
         root = GetComponent<Image>();
         numTx = tra.Find("Right/nameImg/numTx").GetComponent<Text>();
         nameImg = tra.Find("Right/nameImg").GetComponent<Image>();
-
+        
         base.Init();
     }
 
     public override void AddEvent() {
         //EnterBtn.onClick.AddListener();
+    }
 
+    void EnterBtnClick() {
+        if (string.IsNullOrEmpty(Dto.passwd)) {
+            //无密码直接发送请求
+            MatchCtrl.Ins.EnterCREQ(Dto.index, "");
+        }
+        else {
+            //有密码先打开输入密码框
+            this.InvokeDeList("openPwdWin",this);
+        }
     }
 
     public override void UpdateView() {
@@ -80,6 +91,8 @@ public class RoomInfoItem : BaseUI {
         //root.sprite=null;
         //numTx.text="";
         //nameImg.sprite=null;
+        if (Dto == null) { return; }
+
 
     }
 

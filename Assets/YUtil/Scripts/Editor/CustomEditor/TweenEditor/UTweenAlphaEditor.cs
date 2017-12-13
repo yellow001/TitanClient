@@ -12,6 +12,8 @@ public class UTweenAlphaEditor : UGUITweenEditor {
     //public bool autoPlay = false;
 
     public override void OnInspectorGUI() {
+        Undo.RecordObject(target, "UTweenAlpha");
+
         UTweenAlpha t = target as UTweenAlpha;
 
         t.autoPlay=EditorGUILayout.Toggle("自动播放", t.autoPlay);
