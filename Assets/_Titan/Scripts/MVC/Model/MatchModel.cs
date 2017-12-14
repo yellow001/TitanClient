@@ -3,6 +3,7 @@ using ServerSimple.DTO.Match;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MatchModel : BaseModel {
 
@@ -26,6 +27,10 @@ public class MatchModel : BaseModel {
         }
 
         CallEvent("RefreshSRES", model.area);
+    }
+
+    internal void OnStartSRES(TransModel model) {
+        CallEvent("StartSRES", model.area);
     }
 
     //1 创建成功;-1 连接已在房间中;-2 连接未登录;-3 获取房间出错

@@ -19,6 +19,13 @@ public class MatchNetLogic : BaseNetLogic {
         MessageHandler.Register(1002006, OnEnterSRES);
         //离开房间反馈（广播）
         MessageHandler.Register(1002008, OnExitSRES);
+
+        //开始游戏反馈（广播）
+        MessageHandler.Register(1002011, OnStartSRES);
+    }
+
+    private void OnStartSRES(TransModel model) {
+        MatchCtrl.Ins.model.OnStartSRES(model);
     }
 
     private void OnExitSRES(TransModel model) {

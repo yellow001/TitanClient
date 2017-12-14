@@ -42,15 +42,14 @@ public class RoomPanel : BaseUI {
     }
 
     public override void AddEvent() {
-        exitBtn.onClick.AddListener(() => {
-            MatchCtrl.Ins.ExitCREQ();
-        });
-        //startBtn.onClick.AddListener();
+        exitBtn.onClick.AddListener(() =>MatchCtrl.Ins.ExitCREQ());
+
+        startBtn.onClick.AddListener(()=>MatchCtrl.Ins.StartCREQ());
 
         model.BindEvent("EnterSRES", EnterSRES);
         model.BindEvent("ExitSRES", ExitSRES);
     }
-
+    
     private void EnterSRES(object[] args) {
         int result = (int)args[0];
         switch (result) {
@@ -63,11 +62,15 @@ public class RoomPanel : BaseUI {
     }
 
     void ExitSRES(object[] args) {
+        //"1  离开成功;- 1 不在房间中;- 2 连接未登录;- 3 连接不在该房间中;0有人离开房间"
         int result = (int)args[0];
         switch (result) {
             case 1:
                 CloseAni();
                 this.InvokeDeList("openRoomList");
+                break;
+            case 0:
+                UpdateView();
                 break;
             default:
                 break;
@@ -121,6 +124,13 @@ public class RoomPanel : BaseUI {
             startBtn.gameObject.SetActive(false);
         }
 
+        //只有一个人时不可以开始游戏
+        if (model.currentRoom.playerList.Count <= 1) {
+            startBtn.interactable = false;
+        }
+        else {
+            startBtn.interactable = true;
+        }
     }
 
     public override void CloseAni() {

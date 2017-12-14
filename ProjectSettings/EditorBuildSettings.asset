@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Titan/Scenes/Match.unity
     guid: 522143edea4fa6141afdefcff3d94a83
+  - enabled: 1
+    path: Assets/_Titan/Scenes/Fight.unity
+    guid: 346f5a3fc0f4ec64ea8da88c5cbed8ec

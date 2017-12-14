@@ -39,4 +39,15 @@ public class MatchCtrl : BaseCtrl<MatchCtrl> {
         TransModel model = new TransModel(1002007);
         MessageHandler.Send(model);
     }
+
+    public void RemoveCREQ(string n) {
+        TransModel model = new TransModel(1002009);
+        model.SetMsg(n);
+        MessageHandler.Send(model);
+    }
+
+    public void StartCREQ() {
+        TransModel model = new TransModel(1002010);
+        MessageHandler.Send(model);
+    }
 }

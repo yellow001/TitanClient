@@ -16,6 +16,7 @@ public class UserItem : BaseUI {
     public Transform tra;
 
     public string uname;
+    Color OColor;
     new void OnEnable() {
         base.OnEnable();
     }
@@ -27,12 +28,14 @@ public class UserItem : BaseUI {
         root = GetComponent<Image>();
         closeBtn = tra.Find("closeBtn").GetComponent<Button>();
 
+        OColor = root.color;
         base.Init();
     }
 
     public override void AddEvent() {
         closeBtn.onClick.AddListener(()=> {
-            //todo 踢人请求
+            //踢人请求
+            MatchCtrl.Ins.RemoveCREQ(uname);
         });
 
         closeTweenAction += () => Destroy(gameObject,GetComponent<BaseUITween>().duration);
@@ -52,6 +55,13 @@ public class UserItem : BaseUI {
         }
         else {
             closeBtn.gameObject.SetActive(true);
+        }
+
+        if (uname.Equals(userName)) {
+            root.color = Color.white;
+        }
+        else {
+            root.color = OColor;
         }
 
         nameTx.text = uname;

@@ -83,9 +83,8 @@ public class RoomInfoItem : BaseUI {
 
     private void Update() {
         if (Dto != null) {
-            aniCountValue = Mathf.Lerp(aniCountValue, countValue, Time.deltaTime * 10);
+            aniCountValue = Mathf.Lerp(aniCountValue, countValue, Time.deltaTime);
             numImg.fillAmount = aniCountValue;
-            numImg.color = Color.Lerp(Color.white, Color.red, aniCountValue);
         }
     }
 

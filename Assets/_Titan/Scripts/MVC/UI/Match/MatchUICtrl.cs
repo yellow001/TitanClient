@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MatchUICtrl : MonoBehaviour {
     public RoomListPanel roomList;
@@ -9,6 +11,7 @@ public class MatchUICtrl : MonoBehaviour {
     public RoomPanel roomPanel;
     public GameObject waitMask;
 
+    public Text progressTx;
     MatchModel model;
 	// Use this for initialization
 	void Start () {
@@ -33,6 +36,8 @@ public class MatchUICtrl : MonoBehaviour {
 
         model.BindEvent("CreateSRES", CreateSRES);
         model.BindEvent("EnterSRES", EnterSRES);
+        model.BindEvent("StartSRES", StartSRES);
+
     }
 
     void EnterSRES(object[] args) {
@@ -64,8 +69,25 @@ public class MatchUICtrl : MonoBehaviour {
         switch (result) {
             case 1:
                 this.InvokeDeList("openRoomPanel");
+                this.AddTimeEvent(0.2f, () => roomPanel.UpdateView(),null);
                 break;
             default:
+                break;
+        }
+    }
+
+    private void StartSRES(object[] args) {
+        int result = (int)args[0];
+        switch (result) {
+            case 1:
+                //todo 开始游戏(加载场景)
+                waitMask.SetActive(true);
+
+                AsyncOperation async= SceneManager.LoadSceneAsync("Fight");
+                progressTx.text = (int)(async.progress * 100) + "%";
+                break;
+            default:
+                Debug.Log(result);
                 break;
         }
     }

@@ -40,6 +40,9 @@ public class BaseUI : MonoBehaviour {
         if (!inited) {
             Init();
         }
+        if (!gameObject.activeSelf) {
+            gameObject.SetActive(true);
+        }
     }
 
     public virtual void Init() {
