@@ -20,6 +20,8 @@ public class RoomPanel : BaseUI {
     public Button startBtn;
     [HideInInspector]
     public Transform tra;
+    [HideInInspector]
+    public Text roomInfo;
 
     List<UserItem> itemList=new List<UserItem>();
     public UserItem item;
@@ -36,6 +38,7 @@ public class RoomPanel : BaseUI {
         root = GetComponent<Image>();
         Text = tra.Find("startBtn/Text").GetComponent<Text>();
         startBtn = tra.Find("startBtn").GetComponent<Button>();
+        roomInfo = tra.Find("roomInfo").GetComponent<Text>();
 
         model = MatchCtrl.Ins.model;
         base.Init();
@@ -131,6 +134,8 @@ public class RoomPanel : BaseUI {
         else {
             startBtn.interactable = true;
         }
+
+        roomInfo.text = string.Format("房间号：{0}    房主：{1}", model.currentRoom.index, model.currentRoom.masterName);
     }
 
     public override void CloseAni() {
