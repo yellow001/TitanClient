@@ -92,6 +92,30 @@ public class ResMgr : BaseManager<ResMgr> {
         return value;
     }
 
+    
+
+    /// <summary>
+    /// 获取ab包下的具体资源
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="abName"></param>
+    /// <param name="assetName"></param>
+    /// <returns></returns>
+    public T GetABAsset<T>(string abName, string assetName) where T : Object {
+        AssetBundle ab = loadAssetBundle(abName);
+
+        //foreach (string item in ab.GetAllAssetNames()) {
+        //    Debug.Log(item);
+        //}
+
+        if (ab != null && ab.Contains(assetName)) {
+            return ab.LoadAsset<T>(assetName);
+        }
+
+        //Debug.Log("the asset you want to load is null");
+        return null;
+    }
+
     /// <summary>
     /// 加载assetbundle包
     /// </summary>
@@ -126,28 +150,6 @@ public class ResMgr : BaseManager<ResMgr> {
         loadedAssets.Add(path, asset);
         return asset;
 
-    }
-
-    /// <summary>
-    /// 获取ab包下的具体资源
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="abName"></param>
-    /// <param name="assetName"></param>
-    /// <returns></returns>
-    public T GetABAsset<T>(string abName, string assetName) where T : Object {
-        AssetBundle ab = loadAssetBundle(abName);
-
-        //foreach (string item in ab.GetAllAssetNames()) {
-        //    Debug.Log(item);
-        //}
-
-        if (ab != null && ab.Contains(assetName)) {
-            return ab.LoadAsset<T>(assetName);
-        }
-
-        //Debug.Log("the asset you want to load is null");
-        return null;
     }
 
     /// <summary>

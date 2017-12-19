@@ -27,12 +27,14 @@ public class ResPath {
         resPathDic.Add("StaticCanvas", "UI");
         resPathDic.Add("MsgAlert", "UI");
         resPathDic.Add("TipAlert", "UI");
+        resPathDic.Add("localization", "Localization");
         #endregion
 
         #region AB
         abPathDic.Add("StaticCanvas", "UI");
         abPathDic.Add("MsgAlert", "UI");
         abPathDic.Add("TipAlert", "UI");
+        abPathDic.Add("localization", "Localization");
         #endregion
 
         if (resPathAction != null) {
