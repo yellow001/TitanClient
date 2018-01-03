@@ -79,18 +79,18 @@ public class UTweenAll : UGUITween {
                                 onForwardFinish.Invoke();
                             }
                         });
-
-                    return;
                 }
-                tra.localPosition = pFrom;
-                tra.localPosition.ChangeVaule(pTo, duration, (v) => tra.localPosition = v, curve, ignoreTime,
-                    () => {
-                        currentCount--;
-                        currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (!tweenColor && onForwardFinish != null) {
-                            onForwardFinish.Invoke();
-                        }
-                    });
+                else {
+                    tra.localPosition = pFrom;
+                    tra.localPosition.ChangeVaule(pTo, duration, (v) => tra.localPosition = v, curve, ignoreTime,
+                        () => {
+                            currentCount--;
+                            currentCount = currentCount < 0 ? 0 : currentCount;
+                            if (!tweenColor && onForwardFinish != null) {
+                                onForwardFinish.Invoke();
+                            }
+                        });
+                }
 
             }
             #endregion
@@ -172,17 +172,19 @@ public class UTweenAll : UGUITween {
                                 onReverseFinish.Invoke();
                             }
                         });
-                    return;
                 }
-                tra.localPosition = pTo;
-                tra.localPosition.ChangeVaule(pFrom, duration, (v) => tra.localPosition = v, curve, ignoreTime,
-                    () => {
-                        currentCount--;
-                        currentCount = currentCount < 0 ? 0 : currentCount;
-                        if (!tweenColor && onReverseFinish != null) {
-                            onReverseFinish.Invoke();
-                        }
-                    });
+                else {
+                    tra.localPosition = pTo;
+                    tra.localPosition.ChangeVaule(pFrom, duration, (v) => tra.localPosition = v, curve, ignoreTime,
+                        () => {
+                            currentCount--;
+                            currentCount = currentCount < 0 ? 0 : currentCount;
+                            if (!tweenColor && onReverseFinish != null) {
+                                onReverseFinish.Invoke();
+                            }
+                        });
+                }
+                
             }
             #endregion
 

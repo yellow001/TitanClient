@@ -52,7 +52,9 @@ public class TipAlert : BaseUI,IAlert<TipUIModel> {
         base.OpenAni();
         //@OpenAni
         DOTween.To(() => group.alpha, x => group.alpha = x, 1, 0.2f).Play();
-        this.AddTimeEvent(model.duration, () => { CloseAni();}, null);
+        if (model != null) {
+            this.AddTimeEvent(model.duration, () => { CloseAni(); }, null);
+        }
     }
 
     public void SetAlertWin(TipUIModel m) {

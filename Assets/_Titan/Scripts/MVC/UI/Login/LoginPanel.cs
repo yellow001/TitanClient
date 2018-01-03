@@ -1,44 +1,60 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using NetFrame;
 using UnityEngine.SceneManagement;
 
 public class LoginPanel : BaseUI {
 
     [HideInInspector]
-    public Image Image;
+    public Text loginTx;
+    [HideInInspector]
+    public Image LBroad;
+    [HideInInspector]
+    public Image UBroad;
+    [HideInInspector]
+    public Image LGradient;
+    [HideInInspector]
+    public Image RGradient;
+    [HideInInspector]
+    public InputField uInput;
+    [HideInInspector]
+    public Image rotate;
+    [HideInInspector]
+    public GameObject waitMask;
     [HideInInspector]
     public Text Text;
     [HideInInspector]
-    public Button registerBtn;
-    [HideInInspector]
-    public InputField nameInput;
-    [HideInInspector]
     public Text Placeholder;
     [HideInInspector]
-    public Text defaultTx;
+    public Image rotate2;
     [HideInInspector]
-    public Text tip;
+    public Image RGradient11;
+    [HideInInspector]
+    public Text Text12;
+    [HideInInspector]
+    public Button registerBtn;
+    [HideInInspector]
+    public Text registerTx;
+    [HideInInspector]
+    public Image LBroad15;
+    [HideInInspector]
+    public Image RBroad;
+    [HideInInspector]
+    public Image UBroad17;
     [HideInInspector]
     public Image root;
     [HideInInspector]
-    public Text Text8;
-    [HideInInspector]
     public Button loginBtn;
     [HideInInspector]
-    public InputField pwdInput;
+    public Image RBroad20;
     [HideInInspector]
-    public Text Placeholder11;
+    public Image LGradient21;
     [HideInInspector]
-    public Text defaultTx12;
+    public InputField pInput;
     [HideInInspector]
-    public Text tip13;
+    public Text Placeholder23;
     [HideInInspector]
     public Transform tra;
-
-    [HideInInspector]
-    public GameObject waitMask;
 
     UserModel model;
 
@@ -48,77 +64,90 @@ public class LoginPanel : BaseUI {
 
     public override void Init() {
         tra = transform;
-        Image = tra.Find("Image").GetComponent<Image>();
-        Text = tra.Find("Right/registerBtn/Text").GetComponent<Text>();
-        registerBtn = tra.Find("Right/registerBtn").GetComponent<Button>();
-        nameInput = tra.Find("Right/nameInput").GetComponent<InputField>();
-        Placeholder = tra.Find("Right/nameInput/Placeholder").GetComponent<Text>();
-        defaultTx = tra.Find("Right/nameInput/defaultTx").GetComponent<Text>();
-        tip = tra.Find("Right/nameInput/tip").GetComponent<Text>();
-        root = GetComponent<Image>();
-        Text8 = tra.Find("Right/loginBtn/Text").GetComponent<Text>();
-        loginBtn = tra.Find("Right/loginBtn").GetComponent<Button>();
-        pwdInput = tra.Find("Right/pwdInput").GetComponent<InputField>();
-        Placeholder11 = tra.Find("Right/pwdInput/Placeholder").GetComponent<Text>();
-        defaultTx12 = tra.Find("Right/pwdInput/defaultTx").GetComponent<Text>();
-        tip13 = tra.Find("Right/pwdInput/tip").GetComponent<Text>();
-
+        loginTx = tra.Find("loginBtn/loginTx").GetComponent<Text>();
+        LBroad = tra.Find("loginBtn/LBroad").GetComponent<Image>();
+        UBroad = tra.Find("loginBtn/UBroad").GetComponent<Image>();
+        LGradient = tra.Find("uInput/LGradient").GetComponent<Image>();
+        RGradient = tra.Find("uInput/RGradient").GetComponent<Image>();
+        uInput = tra.Find("uInput").GetComponent<InputField>();
+        rotate = tra.Find("waitMask/rotate").GetComponent<Image>();
         waitMask = tra.Find("waitMask").gameObject;
+        Text = tra.Find("uInput/Text").GetComponent<Text>();
+        Placeholder = tra.Find("uInput/Placeholder").GetComponent<Text>();
+        rotate2 = tra.Find("waitMask/rotate2").GetComponent<Image>();
+        RGradient11 = tra.Find("pInput/RGradient").GetComponent<Image>();
+        Text12 = tra.Find("pInput/Text").GetComponent<Text>();
+        registerBtn = tra.Find("registerBtn").GetComponent<Button>();
+        registerTx = tra.Find("registerBtn/registerTx").GetComponent<Text>();
+        LBroad15 = tra.Find("registerBtn/LBroad").GetComponent<Image>();
+        RBroad = tra.Find("registerBtn/RBroad").GetComponent<Image>();
+        UBroad17 = tra.Find("registerBtn/UBroad").GetComponent<Image>();
+        loginBtn = tra.Find("loginBtn").GetComponent<Button>();
+        RBroad20 = tra.Find("loginBtn/RBroad").GetComponent<Image>();
+        LGradient21 = tra.Find("pInput/LGradient").GetComponent<Image>();
+        pInput = tra.Find("pInput").GetComponent<InputField>();
+        Placeholder23 = tra.Find("pInput/Placeholder").GetComponent<Text>();
 
         model = LoginCtrl.Ins.model;
+
         base.Init();
     }
 
     public override void AddEvent() {
-        registerBtn.onClick.AddListener(()=> {
+        //uInput.onEndEdit.AddListener();
+        //pInput.onEndEdit.AddListener();
+        registerBtn.onClick.AddListener(() => {
             CloseAni();
             this.InvokeDeList("openRegisterPanel");
         });
-        //nameInput.onEndEdit.AddListener();
         loginBtn.onClick.AddListener(OnLoginBtnClick);
-        //pwdInput.onEndEdit.AddListener();
 
         //监听登录反馈事件
-        model.BindEvent("LoginSRES",LoginSRES);
+        model.BindEvent("LoginSRES", LoginSRES);
     }
 
     public override void UpdateView() {
         base.UpdateView();
-        //Image.sprite=null;
+        //loginTx.text="";
+        //LBroad.sprite=null;
+        //UBroad.sprite=null;
+        //LGradient.sprite=null;
+        //RGradient.sprite=null;
+        //uInput.text=;
+        //rotate.sprite=null;
+        //waitMask.sprite=null;
         //Text.text="";
-        //nameInput.text=;
         //Placeholder.text="";
-        //defaultTx.text="";
-        //tip.text="";
+        //rotate2.sprite=null;
+        //RGradient11.sprite=null;
+        //Text12.text="";
+        //registerTx.text="";
+        //LBroad15.sprite=null;
+        //RBroad.sprite=null;
+        //UBroad17.sprite=null;
         //root.sprite=null;
-        //Text8.text="";
-        //pwdInput.text=;
-        //Placeholder11.text="";
-        //defaultTx12.text="";
-        //tip13.text="";
+        //RBroad20.sprite=null;
+        //LGradient21.sprite=null;
+        //pInput.text=;
+        //Placeholder23.text="";
 
     }
 
     void OnLoginBtnClick() {
         waitMask.SetActive(true);
-        if (string.IsNullOrWhiteSpace(nameInput.text)) {
+        if (string.IsNullOrWhiteSpace(uInput.text)) {
             this.AddMsg("用户名不能为空");
         }
-        else if (string.IsNullOrWhiteSpace(pwdInput.text)) {
+        else if (string.IsNullOrWhiteSpace(pInput.text)) {
             this.AddMsg("密码不能为空");
         }
         else {
-            model.SetUserData(nameInput.text, pwdInput.text);
+            model.SetUserData(uInput.text, pInput.text);
             LoginCtrl.Ins.LoginCREQ(model.data);
             return;
         }
 
         waitMask.SetActive(false);
-    }
-
-    public override void CloseAni() {
-        base.CloseAni();
-        //@CloseAni
     }
 
     /// <summary>
@@ -154,7 +183,13 @@ public class LoginPanel : BaseUI {
         waitMask.SetActive(false);
     }
 
+    public override void CloseAni() {
+        base.CloseAni();
+        //@CloseAni
+    }
+
     public override void OpenAni() {
         base.OpenAni();
+        //@OpenAni
     }
 }
