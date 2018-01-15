@@ -7,8 +7,7 @@ using System.Text;
 using UnityEngine;
 
 public static class AppConst{
-
-    public static readonly string UIScriptPath = Application.dataPath + "/";
+    
     public static readonly string UITemplePath = Application.dataPath + "/YUtil/Scripts/Template/BaseUITemple.cs";
     //public static readonly string AbPath = Application.streamingAssetsPath;
 

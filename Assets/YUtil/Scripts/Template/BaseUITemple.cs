@@ -12,17 +12,20 @@ public class BaseUITemple : BaseUI {
 
     public override void Init()
     {
+
 //@Init
         base.Init();
     }
 
     public override void AddEvent() {
+
 //@AddEvent
     }
 
     public override void UpdateView()
     {
         base.UpdateView();
+        
 //@UpdateView
     }
 

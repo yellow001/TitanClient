@@ -13,6 +13,9 @@ public class YUIEditor : MonoBehaviour {
     static string content = "";
     static Dictionary<string,Type> memberTypes = new Dictionary<string, Type>();
     static Dictionary<string, Transform> memberTras = new Dictionary<string, Transform>();
+    static Dictionary<Transform, UICreateElement> traElementDic = new Dictionary<Transform, UICreateElement>();
+    static string m_path;
+    static string m_lastDicPath;
 
     [MenuItem("YUtil/Create Normal UI Script")]
     public static void CreateUI() {
@@ -35,19 +38,23 @@ public class YUIEditor : MonoBehaviour {
             return;
         }
 
-        string path =AppConst.UIScriptPath + tras[0].name + ".cs";
-        if (File.Exists(path)) {
-            if (!EditorUtility.DisplayDialog("提醒", "已存在该UI脚本，是否覆盖？", "是", "否")) {
-                return;
-            }
-        }
+        //m_path = AppConst.UIScriptPath + tras[0].name + ".cs";
+        m_path=EditorUtility.SaveFilePanel("选择保存路径", m_lastDicPath, tras[0].name, "cs");
 
-        WriteScript(path, tras[0]);
-        
+        if (string.IsNullOrEmpty(m_path)) { return; }
+
+        //if (File.Exists(m_path)) {
+        //    if (!EditorUtility.DisplayDialog("提醒", "已存在该UI脚本，是否覆盖？", "是", "否")) {
+        //        return;
+        //    }
+        //}
+        m_lastDicPath = m_path;
+        //WriteScript(path, tras[0]);
+        MultiUICreateWindow.GetWindow(tras[0]);
     }
 
 
-    static void WriteScript(string path, Transform root) {
+    public static void WriteScript(Transform root,Dictionary<Transform,UICreateElement> dic) {
 
         if (!File.Exists(AppConst.UITemplePath)) {
             EditorUtility.DisplayDialog("提醒", "额。。。模板 BaseUITemple.cs 没找到，请到 YUtil/AppConst.cs 设置一下 UITemplePath", "确定");
@@ -69,8 +76,10 @@ public class YUIEditor : MonoBehaviour {
         //Debug.Log(content);
         //Clear();
 
-        StreamWriter sw = new StreamWriter(path,false, Encoding.UTF8);
+        StreamWriter sw = new StreamWriter(m_path, false, Encoding.UTF8);
         content = content.Replace("BaseUITemple", root.name);
+
+        traElementDic = dic;
 
         AddMember(root);
         AddInit(root);
@@ -79,6 +88,7 @@ public class YUIEditor : MonoBehaviour {
 
         sw.Write(content);
         sw.Close();
+        Debug.Log(string.Format("生成成功，路径:{0}", m_path));
         Clear();
         AssetDatabase.Refresh();
     }
@@ -90,24 +100,43 @@ public class YUIEditor : MonoBehaviour {
         Transform[] tras = Selection.GetTransforms(SelectionMode.Deep);
 
         foreach (var item in tras) {
+
+            if (traElementDic.ContainsKey(item) && !traElementDic[item].m_Write) {
+                continue;
+            }
+
             if (!(item is RectTransform)) {
                 continue;
             }
             Type t = GetMemberType(item);
             if (t != null) {
-                string n = item.name.Replace(" ","");
+                string n = traElementDic[item].m_Rename;
                 if (item == root) {
                     n = "root";
                 }
-                if (memberTypes.ContainsKey(item.name)) {
+                if (memberTypes.ContainsKey(traElementDic[item].m_Rename)) {
                     n += memberTypes.Count + "";
                 }
                 memberTypes.Add(n, t);
                 memberTras.Add(n, item);
                 string[] tempType = t.ToString().Split('.');
-                string m = "public " + tempType[tempType.Length-1] + " "+n+";\n";
+                string m = "public " + tempType[tempType.Length - 1] + " " + n + ";\n";
                 contents[0] += "\t" + "[HideInInspector]\n";
-                contents[0] += "\t"+m;
+                contents[0] += "\t" + m;
+            }
+            else if (traElementDic[item].m_Write) {
+                string n = traElementDic[item].m_Rename;
+                if (item == root) {
+                    n = "root";
+                }
+                if (memberTypes.ContainsKey(traElementDic[item].m_Rename)) {
+                    n += memberTypes.Count + "";
+                }
+                memberTypes.Add(n, typeof(Transform));
+                memberTras.Add(n, item);
+                string m = "public Transform " + n + ";\n";
+                contents[0] += "\t" + "[HideInInspector]\n";
+                contents[0] += "\t" + m;
             }
         }
 
@@ -127,9 +156,12 @@ public class YUIEditor : MonoBehaviour {
             string[] t = memberTypes[item.Key].ToString().Split('.');
 
             if (c != null) {
-
-                c = item.Key + "=tra.Find(\"" + c + "\").GetComponent<" + t[t.Length - 1] + ">();\n";
-                
+                if (Type.GetType(t[t.Length - 1]) == typeof(Transform)) {
+                    c = item.Key + "=tra.Find(\"" + c + "\");\n";
+                }
+                else {
+                    c = item.Key + "=tra.Find(\"" + c + "\").GetComponent<" + t[t.Length - 1] + ">();\n";
+                }
             } else {
 
                 c= item.Key + "=GetComponent <" + t[t.Length - 1] + ">();\n";
@@ -276,7 +308,9 @@ public class YUIEditor : MonoBehaviour {
 
     static void Clear() {
         content = "";
+        m_path = "";
         memberTypes.Clear();
         memberTras.Clear();
+        traElementDic.Clear();
     }
 }
