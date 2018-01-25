@@ -26,6 +26,7 @@ public class EditorStyleViewer : EditorWindow {
                 GUILayout.Space(7);
                 if (GUILayout.Button(style.name, style)) {
                     EditorGUIUtility.systemCopyBuffer = "\"" + style.name + "\"";
+                    Debug.Log(style.normal.background.name);
                 }
                 GUILayout.FlexibleSpace();
                 EditorGUILayout.SelectableLabel("\"" + style.name + "\"");

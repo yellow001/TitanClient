@@ -13,8 +13,9 @@ public class UGUITweenEditor : Editor {
     public bool showEvent = false;
 
     public override void OnInspectorGUI() {
+        UGUITween t = target as UGUITween;
 
-        serializedObject.Update();
+        Undo.RecordObject(target, "UGUITween");
 
         EditorGUILayout.Space();
         UIEditorHelper.DrawTab("展开设置", ref showSetting);
@@ -23,7 +24,7 @@ public class UGUITweenEditor : Editor {
 
             UIEditorHelper.BeginBox();
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("loopCount"), true);
+            t.loopCount= EditorGUILayout.IntField("Loop Count",t.loopCount);
 
             UGUITweenBaseGUI();
 
@@ -31,7 +32,6 @@ public class UGUITweenEditor : Editor {
         }
 
         EditorGUILayout.Space();
-        serializedObject.ApplyModifiedProperties();
     }
 
 

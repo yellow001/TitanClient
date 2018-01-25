@@ -3,9 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class UserItem : BaseUI {
-
-    [HideInInspector]
-    public Image effect;
+    
     [HideInInspector]
     public Text nameTx;
     [HideInInspector]
@@ -23,7 +21,6 @@ public class UserItem : BaseUI {
 
     public override void Init() {
         tra = transform;
-        effect = tra.Find("effect").GetComponent<Image>();
         nameTx = tra.Find("nameBg/name").GetComponent<Text>();
         root = GetComponent<Image>();
         closeBtn = tra.Find("closeBtn").GetComponent<Button>();
