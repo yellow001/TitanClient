@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using UnityEngine;
 
 namespace NetFrame.EnDecode
 {
@@ -96,6 +97,7 @@ namespace NetFrame.EnDecode
                 return result;
             }
             catch (Exception ex) {
+                Debug.Log(ex.ToString());
                 ms.Dispose();
                 return null;
             }
@@ -113,6 +115,7 @@ namespace NetFrame.EnDecode
                 result = Serializer.Deserialize<T>(ms);
             }
             catch (Exception ex) {
+                Debug.Log(ex.ToString());
                 ms.Dispose();
                 return default(T);
             }

@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FightCtrl : MonoBehaviour {
+public class FightCtrl : BaseCtrl<FightCtrl> {
+    public FightModel model;
+    FightNetLogic netLogic;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public FightCtrl() {
+        Init();
+    }
+
+    void Init() {
+        model = new FightModel();
+        netLogic = new FightNetLogic();
+    }
 }

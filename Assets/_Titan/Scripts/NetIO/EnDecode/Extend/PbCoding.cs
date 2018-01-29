@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
 
 namespace NetFrame.EnDecode.Extend
 {
@@ -75,7 +76,7 @@ namespace NetFrame.EnDecode.Extend
                 return EnDecodeFuntion.PbDecoding<T>(value2);
             }
             catch (Exception ex) {
-                //Console.WriteLine(ex.ToString());
+                Debug.Log(ex.ToString());
                 return null;
             }
 

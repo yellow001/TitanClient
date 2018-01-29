@@ -13,9 +13,12 @@ public class MatchUICtrl : MonoBehaviour {
 
     public Text progressTx;
     MatchModel model;
+
+    FightModel fightModel;
 	// Use this for initialization
 	void Start () {
         model = MatchCtrl.Ins.model;
+        fightModel = FightCtrl.Ins.model;//初始化
         AddEvent();
 	}
 
@@ -38,6 +41,7 @@ public class MatchUICtrl : MonoBehaviour {
         model.BindEvent("EnterSRES", EnterSRES);
         model.BindEvent("StartSRES", StartSRES);
 
+        fightModel.BindEvent("OnFightRoomInitDataSRES", InitFightRoomData);
     }
 
     void EnterSRES(object[] args) {
@@ -80,15 +84,18 @@ public class MatchUICtrl : MonoBehaviour {
         int result = (int)args[0];
         switch (result) {
             case 1:
-                //todo 开始游戏(加载场景)
+                //显示等待面板但不加载场景(收到战斗房间初始化信息时才加载场景)
                 waitMask.SetActive(true);
-
-                AsyncOperation async= SceneManager.LoadSceneAsync("Fight");
-                progressTx.text = (int)(async.progress * 100) + "%";
+                
                 break;
             default:
                 Debug.Log(result);
                 break;
         }
+    }
+
+    private void InitFightRoomData(object[] args) {
+        AsyncOperation op = SceneManager.LoadSceneAsync("Fight");
+        progressTx.text = (int)(op.progress * 100) + "%";
     }
 }

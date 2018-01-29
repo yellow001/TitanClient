@@ -3,6 +3,7 @@ using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine;
 
 namespace NetFrame {
     [Serializable]
@@ -41,7 +42,7 @@ namespace NetFrame {
                 return default(T);
             }
             catch (Exception ex) {
-                //Console.WriteLine(ex.ToString());
+                Debug.Log(ex.ToString());
                 return default(T);
             }
 
