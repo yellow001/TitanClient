@@ -51,6 +51,9 @@ public class UserModel : BaseModel {
 
     public void RefreshUserData(UserDTO dto) {
         data = dto;
+
+        data.headID = string.IsNullOrEmpty(data.headID) ? "0" : data.headID;
+
         if (string.IsNullOrEmpty(data.hairData) || data.hairData.Split('_').Length < 2) {
             hairID = "0";
             hairColor = "#ffffff";

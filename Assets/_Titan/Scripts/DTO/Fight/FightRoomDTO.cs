@@ -10,16 +10,16 @@ namespace ServerSimple.DTO.Fight
     public class FightRoomDTO
     {
         [ProtoMember(1)]
-        Dictionary<string, int> nameToModelID = new Dictionary<string, int>();
+        public Dictionary<string, int> nameToModelID = new Dictionary<string, int>();
 
         [ProtoMember(2)]
-        Dictionary<int, BaseModel> baseModelDic = new Dictionary<int, BaseModel>();
+        public Dictionary<int, BaseModel> baseModelDic = new Dictionary<int, BaseModel>();
 
         [ProtoMember(3)]
-        float allTime = 0;
+        public float allTime = 0;
 
         [ProtoMember(5)]
-        List<string> enterName = new List<string>();
+        public List<string> enterName = new List<string>();
 
         public FightRoomDTO() { }
     }
