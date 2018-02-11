@@ -76,11 +76,11 @@ public class RegisterPanel : BaseUI {
 
         closeBtn.onClick.AddListener(() => {
             CloseAni();
-            this.InvokeDeList("openLoginPanel");
+            this.CallEventList("openLoginPanel");
         });
         registerBtn.onClick.AddListener(() => OnRegisterBtnClick());
 
-        model.BindEvent("RegisterSRES", RegisterSRES);
+        model.BindEvent(LoginEvent.RegisterSRES, RegisterSRES);
     }
 
     public override void UpdateView() {

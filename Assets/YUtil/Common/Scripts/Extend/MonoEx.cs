@@ -49,9 +49,9 @@ public static class MonoEx{
         StringEventMgr.Ins.RemoveEventFun(name, fun);
     }
 
-    public static void InvokeDeList(this MonoBehaviour mono, string name, params object[] objs)
+    public static void CallEventList(this MonoBehaviour mono, string name, params object[] objs)
     {
-        StringEventMgr.Ins.InvokeDeList(name, objs);
+        StringEventMgr.Ins.CallEventList(name, objs);
     }
     #endregion
 

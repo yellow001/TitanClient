@@ -77,7 +77,7 @@ public class RoomInfoItem : BaseUI {
         }
         else {
             //有密码先打开输入密码框
-            this.InvokeDeList("openPwdWin",this);
+            this.CallEventList("openPwdWin",this);
         }
     }
 

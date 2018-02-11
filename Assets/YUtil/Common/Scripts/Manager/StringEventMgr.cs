@@ -76,7 +76,7 @@ public class StringEventMgr : BaseManager<StringEventMgr> {
         }
     }
 
-    public void InvokeDeList(string name, params object[] objs) {
+    public void CallEventList(string name, params object[] objs) {
         lock (Ins) {
             if (!DeList.ContainsKey(name)) {
 #if UNITY_EDITOR

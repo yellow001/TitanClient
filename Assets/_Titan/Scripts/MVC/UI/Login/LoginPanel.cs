@@ -98,12 +98,12 @@ public class LoginPanel : BaseUI {
         //pInput.onEndEdit.AddListener();
         registerBtn.onClick.AddListener(() => {
             CloseAni();
-            this.InvokeDeList("openRegisterPanel");
+            this.CallEventList("openRegisterPanel");
         });
         loginBtn.onClick.AddListener(OnLoginBtnClick);
 
         //监听登录反馈事件
-        model.BindEvent("LoginSRES", LoginSRES);
+        model.BindEvent(LoginEvent.LoginSRES, LoginSRES);
     }
 
     public override void UpdateView() {

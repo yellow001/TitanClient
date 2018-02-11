@@ -17,11 +17,23 @@ namespace ServerSimple.DTO.Login
         [ProtoMember(3)]
         public int winCount;
 
+        [ProtoMember(4)]
+        public string headID;
+
+        [ProtoMember(5)]
+        public string hairData;
+
+        [ProtoMember(6)]
+        public string clothData;
+
         public UserDTO() { }
 
-        public UserDTO(string n, string p,int wc=0) {
+        public UserDTO(string n, string p, string head, string hair, string cloth, int wc = 0) {
             name = n;
             password = p;
+            headID = head;
+            hairData = hair;
+            clothData = cloth;
             winCount = wc;
         }
     }

@@ -37,9 +37,9 @@ public class MatchUICtrl : MonoBehaviour {
             roomPanel.gameObject.SetActive(true);
         });
 
-        model.BindEvent("CreateSRES", CreateSRES);
-        model.BindEvent("EnterSRES", EnterSRES);
-        model.BindEvent("StartSRES", StartSRES);
+        model.BindEvent(MatchEvent.CreateSRES, CreateSRES);
+        model.BindEvent(MatchEvent.EnterSRES, EnterSRES);
+        model.BindEvent(MatchEvent.StartSRES, StartSRES);
 
         fightModel.BindEvent("OnFightRoomInitDataSRES", InitFightRoomData);
     }
@@ -50,7 +50,7 @@ public class MatchUICtrl : MonoBehaviour {
         switch (result) {
             case 1:
                 if (!roomPanel.gameObject.activeSelf) {
-                    this.InvokeDeList("openRoomPanel");
+                    this.CallEventList("openRoomPanel");
                 }
                 break;
             case -1:
@@ -72,7 +72,7 @@ public class MatchUICtrl : MonoBehaviour {
         int result = (int)args[0];
         switch (result) {
             case 1:
-                this.InvokeDeList("openRoomPanel");
+                this.CallEventList("openRoomPanel");
                 this.AddTimeEvent(0.2f, () => roomPanel.UpdateView(),null);
                 break;
             default:

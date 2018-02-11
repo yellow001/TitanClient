@@ -26,11 +26,11 @@ public class MatchModel : BaseModel {
             }
         }
 
-        CallEvent("RefreshSRES", model.area);
+        CallEvent(MatchEvent.RefreshSRES, model.area);
     }
 
     internal void OnStartSRES(TransModel model) {
-        CallEvent("StartSRES", model.area);
+        CallEvent(MatchEvent.StartSRES, model.area);
     }
 
     //1 创建成功;-1 连接已在房间中;-2 连接未登录;-3 获取房间出错
@@ -38,7 +38,7 @@ public class MatchModel : BaseModel {
         if (model.area == 1) {
             currentRoom = model.GetMsg<MatchRoomDTO>();
         }
-        CallEvent("CreateSRES", model.area);
+        CallEvent(MatchEvent.CreateSRES, model.area);
     }
 
 
@@ -47,7 +47,7 @@ public class MatchModel : BaseModel {
         if (model.area == 1) {
             currentRoom = model.GetMsg<MatchRoomDTO>();
         }
-        CallEvent("EnterSRES", model.area);
+        CallEvent(MatchEvent.EnterSRES, model.area);
     }
 
     public void OnExitSRES(TransModel model) {
@@ -55,6 +55,33 @@ public class MatchModel : BaseModel {
         if (model.area == 0) {
             currentRoom = model.GetMsg<MatchRoomDTO>();
         }
-        CallEvent("ExitSRES", model.area);
+        CallEvent(MatchEvent.ExitSRES, model.area);
     }
+}
+
+public enum MatchEvent {
+    /// <summary>
+    /// 房间列表刷新
+    /// </summary>
+    RefreshSRES,
+
+    /// <summary>
+    /// 创建房间
+    /// </summary>
+    CreateSRES,
+
+    /// <summary>
+    /// 进入房间
+    /// </summary>
+    EnterSRES,
+
+    /// <summary>
+    /// 离开房间
+    /// </summary>
+    ExitSRES,
+
+    /// <summary>
+    /// 开始战斗
+    /// </summary>
+    StartSRES,
 }

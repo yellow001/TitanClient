@@ -49,8 +49,8 @@ public class RoomPanel : BaseUI {
 
         startBtn.onClick.AddListener(()=>MatchCtrl.Ins.StartCREQ());
 
-        model.BindEvent("EnterSRES", EnterSRES);
-        model.BindEvent("ExitSRES", ExitSRES);
+        model.BindEvent(MatchEvent.EnterSRES, EnterSRES);
+        model.BindEvent(MatchEvent.ExitSRES, ExitSRES);
     }
     
     private void EnterSRES(object[] args) {
@@ -70,7 +70,7 @@ public class RoomPanel : BaseUI {
         switch (result) {
             case 1:
                 CloseAni();
-                this.InvokeDeList("openRoomList");
+                this.CallEventList("openRoomList");
                 break;
             case 0:
                 UpdateView();
@@ -89,7 +89,7 @@ public class RoomPanel : BaseUI {
         if (model.currentRoom == null) {
             //返回房间列表界面
             CloseAni();
-            this.InvokeDeList("openRoomList");
+            this.CallEventList("openRoomList");
             return;
         }
 

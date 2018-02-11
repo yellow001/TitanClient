@@ -55,10 +55,10 @@ public class RoomListPanel : BaseUI {
         });
 
         createBtn.onClick.AddListener(()=> {
-            this.InvokeDeList("openPwdWin",null);
+            this.CallEventList("openPwdWin",null);
         });
 
-        model.BindEvent("RefreshSRES", RefreshRoomList);
+        model.BindEvent(MatchEvent.RefreshSRES, RefreshRoomList);
         
     }
 
