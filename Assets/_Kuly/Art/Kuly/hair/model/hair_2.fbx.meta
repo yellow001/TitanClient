@@ -1,0 +1,162 @@
+fileFormatVersion: 2
+guid: f389383d9f2ba8f42aa75ef135b158a7
+timeCreated: 1518800978
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: b_left
+    100002: b_left1
+    100004: b_left2
+    100006: b_left3
+    100008: b_left4
+    100010: b_left5
+    100012: b_left6
+    100014: b_right
+    100016: b_right1
+    100018: b_right2
+    100020: b_right3
+    100022: b_right4
+    100024: b_right5
+    100026: b_right6
+    100028: Base001
+    100030: Couettes001
+    100032: f_left
+    100034: f_left1
+    100036: f_left2
+    100038: f_left3
+    100040: f_left4
+    100042: f_right
+    100044: f_right1
+    100046: f_right2
+    100048: f_right3
+    100050: f_right4
+    100052: FrangeHL001
+    100054: hair
+    100056: //RootNode
+    100058: hbase
+    100060: Rubans001
+    400000: b_left
+    400002: b_left1
+    400004: b_left2
+    400006: b_left3
+    400008: b_left4
+    400010: b_left5
+    400012: b_left6
+    400014: b_right
+    400016: b_right1
+    400018: b_right2
+    400020: b_right3
+    400022: b_right4
+    400024: b_right5
+    400026: b_right6
+    400028: Base001
+    400030: Couettes001
+    400032: f_left
+    400034: f_left1
+    400036: f_left2
+    400038: f_left3
+    400040: f_left4
+    400042: f_right
+    400044: f_right1
+    400046: f_right2
+    400048: f_right3
+    400050: f_right4
+    400052: FrangeHL001
+    400054: hair
+    400056: //RootNode
+    400058: hbase
+    400060: Rubans001
+    2100000: hair_base_brown
+    2100002: hair_front_brown
+    2100004: hair_pony_brown
+    2100006: hair_ribbon
+    4300000: Base001
+    4300002: FrangeHL001
+    4300004: Couettes001
+    4300006: Rubans001
+    9500000: //RootNode
+    13700000: Base001
+    13700002: Couettes001
+    13700004: FrangeHL001
+    13700006: Rubans001
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

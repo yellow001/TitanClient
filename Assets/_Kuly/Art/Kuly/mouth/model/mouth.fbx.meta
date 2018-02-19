@@ -1,0 +1,269 @@
+fileFormatVersion: 2
+guid: 9399f3e1b78b3fd4c9049f437580c5d5
+timeCreated: 1517577701
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: base
+    100002: base 1
+    100004: down
+    100006: //RootNode
+    100008: teeth
+    100010: teeth 1
+    100012: tooth1
+    100014: tooth1 1
+    100016: tooth10
+    100018: tooth10 1
+    100020: tooth11
+    100022: tooth11 1
+    100024: tooth12
+    100026: tooth12 1
+    100028: tooth13
+    100030: tooth13 1
+    100032: tooth14
+    100034: tooth14 1
+    100036: tooth15
+    100038: tooth15 1
+    100040: tooth16
+    100042: tooth16 1
+    100044: tooth2
+    100046: tooth2 1
+    100048: tooth3
+    100050: tooth3 1
+    100052: tooth4
+    100054: tooth4 1
+    100056: tooth5
+    100058: tooth5 1
+    100060: tooth6
+    100062: tooth6 1
+    100064: tooth7
+    100066: tooth7 1
+    100068: tooth8
+    100070: tooth8 1
+    100072: tooth9
+    100074: tooth9 1
+    100076: up
+    400000: base
+    400002: base 1
+    400004: down
+    400006: //RootNode
+    400008: teeth
+    400010: teeth 1
+    400012: tooth1
+    400014: tooth1 1
+    400016: tooth10
+    400018: tooth10 1
+    400020: tooth11
+    400022: tooth11 1
+    400024: tooth12
+    400026: tooth12 1
+    400028: tooth13
+    400030: tooth13 1
+    400032: tooth14
+    400034: tooth14 1
+    400036: tooth15
+    400038: tooth15 1
+    400040: tooth16
+    400042: tooth16 1
+    400044: tooth2
+    400046: tooth2 1
+    400048: tooth3
+    400050: tooth3 1
+    400052: tooth4
+    400054: tooth4 1
+    400056: tooth5
+    400058: tooth5 1
+    400060: tooth6
+    400062: tooth6 1
+    400064: tooth7
+    400066: tooth7 1
+    400068: tooth8
+    400070: tooth8 1
+    400072: tooth9
+    400074: tooth9 1
+    400076: up
+    2100000: teeth1
+    2100002: temu
+    2300000: base
+    2300002: base 1
+    2300004: tooth1
+    2300006: tooth1 1
+    2300008: tooth10
+    2300010: tooth10 1
+    2300012: tooth11
+    2300014: tooth11 1
+    2300016: tooth12
+    2300018: tooth12 1
+    2300020: tooth13
+    2300022: tooth13 1
+    2300024: tooth14
+    2300026: tooth14 1
+    2300028: tooth15
+    2300030: tooth15 1
+    2300032: tooth16
+    2300034: tooth16 1
+    2300036: tooth2
+    2300038: tooth2 1
+    2300040: tooth3
+    2300042: tooth3 1
+    2300044: tooth4
+    2300046: tooth4 1
+    2300048: tooth5
+    2300050: tooth5 1
+    2300052: tooth6
+    2300054: tooth6 1
+    2300056: tooth7
+    2300058: tooth7 1
+    2300060: tooth8
+    2300062: tooth8 1
+    2300064: tooth9
+    2300066: tooth9 1
+    3300000: base
+    3300002: base 1
+    3300004: tooth1
+    3300006: tooth1 1
+    3300008: tooth10
+    3300010: tooth10 1
+    3300012: tooth11
+    3300014: tooth11 1
+    3300016: tooth12
+    3300018: tooth12 1
+    3300020: tooth13
+    3300022: tooth13 1
+    3300024: tooth14
+    3300026: tooth14 1
+    3300028: tooth15
+    3300030: tooth15 1
+    3300032: tooth16
+    3300034: tooth16 1
+    3300036: tooth2
+    3300038: tooth2 1
+    3300040: tooth3
+    3300042: tooth3 1
+    3300044: tooth4
+    3300046: tooth4 1
+    3300048: tooth5
+    3300050: tooth5 1
+    3300052: tooth6
+    3300054: tooth6 1
+    3300056: tooth7
+    3300058: tooth7 1
+    3300060: tooth8
+    3300062: tooth8 1
+    3300064: tooth9
+    3300066: tooth9 1
+    4300000: tooth1
+    4300002: tooth2
+    4300004: tooth3
+    4300006: tooth4
+    4300008: tooth5
+    4300010: tooth6
+    4300012: tooth7
+    4300014: tooth8
+    4300016: tooth9
+    4300018: tooth10
+    4300020: tooth11
+    4300022: tooth12
+    4300024: tooth13
+    4300026: tooth14
+    4300028: tooth15
+    4300030: tooth16
+    4300032: base
+    4300034: tooth1
+    4300036: tooth2
+    4300038: tooth3
+    4300040: tooth4
+    4300042: tooth5
+    4300044: tooth6
+    4300046: tooth7
+    4300048: tooth8
+    4300050: tooth9
+    4300052: tooth10
+    4300054: tooth11
+    4300056: tooth12
+    4300058: tooth13
+    4300060: tooth14
+    4300062: tooth15
+    4300064: tooth16
+    4300066: base
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
