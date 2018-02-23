@@ -52,10 +52,10 @@ public class UserModel : BaseModel {
     public void RefreshUserData(UserDTO dto) {
         data = dto;
 
-        data.headID = string.IsNullOrEmpty(data.headID) ? "0" : data.headID;
+        data.headID = string.IsNullOrEmpty(data.headID) ? "head0" : data.headID;
 
         if (string.IsNullOrEmpty(data.hairData) || data.hairData.Split('_').Length < 2) {
-            hairID = "0";
+            hairID = "hair0";
             hairColor = "#ffffff";
         }
         else {
@@ -65,7 +65,7 @@ public class UserModel : BaseModel {
         }
 
         if (string.IsNullOrEmpty(data.clothData) || data.clothData.Split('_').Length < 2) {
-            clothID = "0";
+            clothID = "cloth0";
             clothColor = "#ffffff";
         }
         else {
