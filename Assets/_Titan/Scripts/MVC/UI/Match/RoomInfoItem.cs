@@ -14,8 +14,6 @@ public class RoomInfoItem : BaseUI {
     [HideInInspector]
     public Text Text;
     [HideInInspector]
-    public Image Right;
-    [HideInInspector]
     public Image numImg;
     [HideInInspector]
     public Image Index;
@@ -49,17 +47,16 @@ public class RoomInfoItem : BaseUI {
 
     public override void Init() {
         tra = transform;
-        nameTx = tra.Find("Right/nameImg/nameTx").GetComponent<Text>();
-        EnterBtn = tra.Find("Right/EnterBtn").GetComponent<Button>();
-        Image = tra.Find("Right/EnterBtn/Image").GetComponent<Image>();
-        Text = tra.Find("Right/EnterBtn/Text").GetComponent<Text>();
-        Right = tra.Find("Right").GetComponent<Image>();
+        nameTx = tra.Find("nameImg/nameTx").GetComponent<Text>();
+        EnterBtn = tra.Find("EnterBtn").GetComponent<Button>();
+        Image = tra.Find("EnterBtn/Image").GetComponent<Image>();
+        Text = tra.Find("EnterBtn/Text").GetComponent<Text>();
         numImg = tra.Find("Index/numImg").GetComponent<Image>();
         Index = tra.Find("Index").GetComponent<Image>();
         indexTX = tra.Find("Index/indexTX").GetComponent<Text>();
         root = GetComponent<Image>();
-        numTx = tra.Find("Right/nameImg/numTx").GetComponent<Text>();
-        nameImg = tra.Find("Right/nameImg").GetComponent<Image>();
+        numTx = tra.Find("nameImg/numTx").GetComponent<Text>();
+        nameImg = tra.Find("nameImg").GetComponent<Image>();
         
         base.Init();
     }
