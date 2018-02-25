@@ -36,6 +36,11 @@ ModelImporter:
     100056: //RootNode
     100058: hbase
     100060: Rubans001
+    100062: 32324
+    100064: b_left7
+    100066: b_right7
+    100068: Frange001
+    100070: hair5
     400000: b_left
     400002: b_left1
     400004: b_left2
@@ -67,14 +72,34 @@ ModelImporter:
     400056: //RootNode
     400058: hbase
     400060: Rubans001
+    400062: 32324
+    400064: b_left7
+    400066: b_right7
+    400068: Frange001
+    400070: hair5
     2100000: hair_base_brown
     2100002: hair_front_brown
     2100004: hair_pony_brown
     2100006: hair_ribbon
+    2100008: Frange
+    2300000: 32324
+    2300002: Base001
+    2300004: Couettes001
+    2300006: Frange001
+    2300008: FrangeHL001
+    2300010: Rubans001
+    3300000: 32324
+    3300002: Base001
+    3300004: Couettes001
+    3300006: Frange001
+    3300008: FrangeHL001
+    3300010: Rubans001
     4300000: Base001
     4300002: FrangeHL001
     4300004: Couettes001
     4300006: Rubans001
+    4300008: 32324
+    4300010: Frange001
     9500000: //RootNode
     13700000: Base001
     13700002: Couettes001
