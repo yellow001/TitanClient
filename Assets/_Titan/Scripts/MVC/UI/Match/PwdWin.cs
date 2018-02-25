@@ -3,9 +3,6 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PwdWin : BaseUI {
-
-    [HideInInspector]
-    public Image titleImg;
     [HideInInspector]
     public Text Placeholder;
     [HideInInspector]
@@ -36,7 +33,6 @@ public class PwdWin : BaseUI {
 
     public override void Init() {
         tra = transform;
-        titleImg = tra.Find("bg/titleImg").GetComponent<Image>();
         Placeholder = tra.Find("bg/pwdInput/Placeholder").GetComponent<Text>();
         closeBtn = tra.Find("bg/closeBtn").GetComponent<Button>();
         okBtn = tra.Find("bg/okBtn").GetComponent<Button>();

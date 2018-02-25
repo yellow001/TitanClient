@@ -723,7 +723,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224613876355500530}
-  - component: {fileID: 114340240905268514}
   - component: {fileID: 222138903476514516}
   - component: {fileID: 114478968952982200}
   - component: {fileID: 225712798094119714}
@@ -2419,36 +2418,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: ' /'
---- !u!114 &114340240905268514
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1602736694058902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69657661335df8f4dbcf3cd6e8f75593, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_WindowId: 8
-  m_CustomWindowId: 1
-  m_StartingState: 0
-  m_EscapeKeyAction: 1
-  m_UseBlackOverlay: 0
-  m_FocusAllowReparent: 1
-  m_Transition: 1
-  m_TransitionEasing: 13
-  m_TransitionDuration: 0.1
-  onTransitionBegin:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: DuloGames.UI.UIWindow+TransitionBeginEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  onTransitionComplete:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: DuloGames.UI.UIWindow+TransitionCompleteEvent, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114344375226528198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4056,7 +4025,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114340240905268514}
+      - m_Target: {fileID: 0}
         m_MethodName: Hide
         m_Mode: 1
         m_Arguments:

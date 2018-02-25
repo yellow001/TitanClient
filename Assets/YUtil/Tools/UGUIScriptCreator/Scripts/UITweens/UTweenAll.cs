@@ -125,9 +125,9 @@ public class UTweenAll : UGUITween {
 
             if (first && loopCount != 1) {
                 first = false;
-                forwardAni.waitTime = delay + duration;
+                forwardAni.waitTime = duration;
             }
-        }, ignoreTime, null, loopCount, true);
+        }, ignoreTime, null, loopCount);
 
         reverseAni = new TimeEvent(delay, () => {
 
@@ -218,9 +218,9 @@ public class UTweenAll : UGUITween {
 
             if (first&&loopCount!=1) {
                 first = false;
-                forwardAni.waitTime = delay + duration;
+                forwardAni.waitTime = duration;
             }
-        }, ignoreTime, null, loopCount, true);
+        }, ignoreTime, null, loopCount);
 
 
         if (autoPlay) {

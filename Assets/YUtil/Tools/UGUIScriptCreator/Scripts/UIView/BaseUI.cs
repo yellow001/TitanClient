@@ -24,6 +24,8 @@ public class BaseUI : MonoBehaviour {
 
     //List<UGUITween> tweens = new List<UGUITween>();
 
+    bool state;
+
     public void OnEnable() {
         if (!inited) {
             Init();
@@ -32,7 +34,11 @@ public class BaseUI : MonoBehaviour {
         //tweens.AddRange(GetComponents<UGUITween>());
 
         UpdateView();
-        OpenAni();
+        if (state != gameObject.activeSelf) {
+            state = gameObject.activeSelf;
+            OpenAni();
+        }
+        
         //Debug.Log("enable p");
     }
 
@@ -72,6 +78,10 @@ public class BaseUI : MonoBehaviour {
         if (openTweenAction != null) {
             openTweenAction();
         }
+    }
+
+    private void OnDisable() {
+        state = gameObject.activeSelf;
     }
 
     public virtual void CloseAni() {

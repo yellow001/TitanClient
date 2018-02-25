@@ -34,7 +34,9 @@ public class ButtonTween : MonoBehaviour {
             }
         });
 
-        uiEvent.clickEvent.AddListener(PlayClickAni);
+        uiEvent.downEvent.AddListener(PlayClickAni);
+        uiEvent.upEvent.AddListener(PlayClickAniReverse);
+        //uiEvent.clickEvent.AddListener(PlayClickAni);
     }
 
     private void PlayHoverAni(PointerEventData data) {
@@ -52,6 +54,15 @@ public class ButtonTween : MonoBehaviour {
                 return;
             }
             clickTween.Play();
+        }
+    }
+
+    void PlayClickAniReverse(PointerEventData data) {
+        if (clickTween != null) {
+            if (btn != null && !btn.interactable) {
+                return;
+            }
+            clickTween.Play(true);
         }
     }
 }
