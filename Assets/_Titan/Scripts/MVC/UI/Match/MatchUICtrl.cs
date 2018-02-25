@@ -39,9 +39,9 @@ public class MatchUICtrl : MonoBehaviour {
 
         model.BindEvent(MatchEvent.CreateSRES, CreateSRES);
         model.BindEvent(MatchEvent.EnterSRES, EnterSRES);
-        model.BindEvent(MatchEvent.StartSRES, StartSRES);
+        //model.BindEvent(MatchEvent.StartSRES, StartSRES);
 
-        fightModel.BindEvent("OnFightRoomInitDataSRES", InitFightRoomData);
+        //fightModel.BindEvent("OnFightRoomInitDataSRES", InitFightRoomData);
     }
 
     void EnterSRES(object[] args) {
@@ -49,9 +49,9 @@ public class MatchUICtrl : MonoBehaviour {
         int result = (int)args[0];
         switch (result) {
             case 1:
-                if (!roomPanel.gameObject.activeSelf) {
-                    this.CallEventList("openRoomPanel");
-                }
+                //if (!roomPanel.gameObject.activeSelf) {
+                //    this.CallEventList("openRoomPanel");
+                //}
                 break;
             case -1:
                 this.AddMsg("房间已过期");

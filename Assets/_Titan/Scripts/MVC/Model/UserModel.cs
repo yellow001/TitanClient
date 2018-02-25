@@ -1,8 +1,10 @@
 ﻿using NetFrame;
 using ServerSimple.DTO.Login;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class UserModel : BaseModel {
 
@@ -13,7 +15,8 @@ public class UserModel : BaseModel {
 
     public string hairID, hairColor;
 
-    public string clothID, clothColor;
+    public string clothID;
+    public string[] clothColor;
 
     /// <summary>
     /// 登录消息反馈
@@ -66,12 +69,12 @@ public class UserModel : BaseModel {
 
         if (string.IsNullOrEmpty(data.clothData) || data.clothData.Split('_').Length < 2) {
             clothID = "cloth0";
-            clothColor = "#ffffff";
+            clothColor = new string[]{ "#ffffff" };
         }
         else {
             string[] d = data.clothData.Split('_');
             clothID = d[0];
-            clothColor = d[1];
+            Array.Copy(d, 1, clothColor, 0, d.Length - 1);
         }
 
         CallEvent(UserEvent.RefreshUserModel, this);
