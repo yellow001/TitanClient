@@ -82,6 +82,7 @@ ModelImporter:
     2100004: hair_pony_brown
     2100006: hair_ribbon
     2100008: Frange
+    2100010: hair_base_brown1
     2300000: 32324
     2300002: Base001
     2300004: Couettes001
@@ -105,6 +106,8 @@ ModelImporter:
     13700002: Couettes001
     13700004: FrangeHL001
     13700006: Rubans001
+    13700008: 32324
+    13700010: Frange001
   externalObjects: {}
   materials:
     importMaterials: 1
