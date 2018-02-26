@@ -6465,7 +6465,7 @@ Animator:
   m_GameObject: {fileID: 1947398425740340}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 97ee19024d9c7f44f85fa43ce6b3da6a, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c337a631f4d8cd1479b44cc727490c93, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -6516,14 +6516,14 @@ MonoBehaviour:
   m_Root: {fileID: 4362742263897900}
   m_UpdateRate: 30
   m_UpdateMode: 0
-  m_Damping: 0.2
+  m_Damping: 0.4
   m_DampingDistrib:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Elasticity: 0.05
+  m_Elasticity: 0.25
   m_ElasticityDistrib:
     serializedVersion: 2
     m_Curve: []
@@ -6589,14 +6589,14 @@ MonoBehaviour:
   m_Root: {fileID: 4616447532549372}
   m_UpdateRate: 30
   m_UpdateMode: 0
-  m_Damping: 0.2
+  m_Damping: 0.4
   m_DampingDistrib:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_Elasticity: 0.05
+  m_Elasticity: 0.25
   m_ElasticityDistrib:
     serializedVersion: 2
     m_Curve: []
@@ -6675,6 +6675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clothCtrl: {fileID: 114153746833938504}
   hairCtrl: {fileID: 114118371709139070}
+  hairID: hair1
 --- !u!114 &114971451504731954
 MonoBehaviour:
   m_ObjectHideFlags: 1

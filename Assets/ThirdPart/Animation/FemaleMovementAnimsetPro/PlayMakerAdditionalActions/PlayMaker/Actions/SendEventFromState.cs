@@ -1,0 +1,79 @@
+/*
+http://www.cgsoso.com/forum-211-1.html
+
+CG搜搜 Unity3d 每日Unity3d插件免费更新 更有VIP资源！
+
+CGSOSO 主打游戏开发，影视设计等CG资源素材。
+
+插件如若商用，请务必官网购买！
+
+daily assets update for try.
+
+U should buy the asset from home store if u use it in your project!
+*/
+
+// (c) Copyright HutongGames, LLC 2010-2012. All rights reserved.
+
+using UnityEngine;
+using System;
+
+namespace HutongGames.PlayMaker.Actions
+{
+	[ActionCategory(ActionCategory.StateMachine)]
+	[Tooltip("Sends an Event. If optional delay is set, WILL ONLY SEND THE DELAYED EVENT IF IT IS STILL IN THE STATE.\n" +
+	 	"NOTE: 'Send Event' will fire a delayed event even if the action is not running anymore as the state exited. \n" +
+	 	"NOTE: To send events between FSMs they must be marked as Global in the Events Browser.")]
+	public class SendEventFromState : FsmStateAction
+	{
+		[Tooltip("Where to send the event.")]
+		public FsmEventTarget eventTarget;
+		
+		[RequiredField]
+		[Tooltip("The event to send. NOTE: Events must be marked Global to send between FSMs.")]
+		public FsmEvent sendEvent;
+		
+		[HasFloatSlider(0, 10)]
+		[Tooltip("Optional delay in seconds. NOTE: The event will not be fired if the state has exited before the delay")]
+		public FsmFloat delay;
+
+
+		private float startTime;
+		
+		public override void Reset()
+		{
+			eventTarget = null;
+			sendEvent = null;
+			delay = null;
+
+		}
+
+		public override void OnEnter()
+		{
+			if (delay.Value < 0.001f)
+			{
+				Fsm.Event(eventTarget, sendEvent);
+				Finish();
+			}
+			else
+			{
+				// start a timer to know when to send the delayed event.
+				startTime = Time.realtimeSinceStartup;
+			
+			}
+		}
+
+		
+		public override void OnUpdate()
+		{
+			
+			// check the delta time against the delay
+			float deltaTime = Time.realtimeSinceStartup- startTime;
+			if (deltaTime >= delay.Value)
+			{
+				// we fire a normal event.
+				Fsm.Event(eventTarget, sendEvent);
+				Finish();	
+			}
+		}
+	}
+}
