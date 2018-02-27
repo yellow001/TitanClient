@@ -471,6 +471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4420208030880028}
   - component: {fileID: 137965107989107984}
+  - component: {fileID: 114402413004675910}
   m_Layer: 0
   m_Name: base
   m_TagString: Untagged
@@ -6468,7 +6469,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: c337a631f4d8cd1479b44cc727490c93, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -6575,6 +6576,22 @@ MonoBehaviour:
   m_DistantDisable: 0
   m_ReferenceObject: {fileID: 0}
   m_DistanceToObject: 20
+--- !u!114 &114402413004675910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1181243677135874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 784c02d7db18cfc46af19e8c0b98112f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  change: 1
+  render: {fileID: 137965107989107984}
+  changeIDs: 0000000001000000
+  changeTime: 0.25
+  LastMaxTime: 5
 --- !u!114 &114446882694279960
 MonoBehaviour:
   m_ObjectHideFlags: 1

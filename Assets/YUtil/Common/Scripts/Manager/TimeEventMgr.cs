@@ -74,6 +74,7 @@ public class TimeEventMgr : BaseManager<TimeEventMgr> {
                             item.updateDe(Mathf.Max(0, leaveTime), Mathf.Min(1, percent));
                         }
                         catch (System.Exception ex) {
+                            Debug.Log(ex);
                             RemoveTimeEvent(item);
                         }
                         
