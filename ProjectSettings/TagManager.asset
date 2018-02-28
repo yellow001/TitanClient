@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerTrigger
+  - Vaultable_05m
+  - Vaultable
+  - Vaultable_1m
+  - Vaultable_2m
   layers:
   - Default
   - TransparentFX
@@ -14,10 +19,10 @@ TagManager:
   - 
   - 
   - render
-  - 
-  - 
-  - 
-  - 
+  - FogVolumeShadowCaster
+  - FogVolume
+  - FogVolumeSurrogate
+  - FogVolumeUniform
   - 
   - 
   - 

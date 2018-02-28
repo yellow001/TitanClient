@@ -2388,6 +2388,8 @@ GameObject:
   - component: {fileID: 114118371709139070}
   - component: {fileID: 114153746833938504}
   - component: {fileID: 114866968450118976}
+  - component: {fileID: 54184619562654726}
+  - component: {fileID: 136387759158226020}
   m_Layer: 0
   m_Name: Kuly2
   m_TagString: Untagged
@@ -6457,6 +6459,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1281115765854028}
   m_Mesh: {fileID: 4300042, guid: 9399f3e1b78b3fd4c9049f437580c5d5, type: 3}
+--- !u!54 &54184619562654726
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1947398425740340}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!95 &95900064384268312
 Animator:
   serializedVersion: 3
@@ -6466,7 +6483,7 @@ Animator:
   m_GameObject: {fileID: 1947398425740340}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 97ee19024d9c7f44f85fa43ce6b3da6a, type: 3}
-  m_Controller: {fileID: 9100000, guid: c337a631f4d8cd1479b44cc727490c93, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3afa9afcc31c1c74ba6be96fb20e8ac5, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6707,6 +6724,19 @@ MonoBehaviour:
   targetRender: {fileID: 137965107989107984}
   currentIndex: 0
   targetIndex: 0
+--- !u!136 &136387759158226020
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1947398425740340}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!137 &137086253303243718
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
