@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Kuly/Scenes/Terrain.unity
+    guid: ffd7a52280b314947a989ad668fe4246
+  - enabled: 1
     path: Assets/_Titan/Scenes/Login.unity
     guid: 0709819ae129cff40bbc9e6c351b01e4
   - enabled: 1
