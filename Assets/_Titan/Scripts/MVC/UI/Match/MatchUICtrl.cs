@@ -49,9 +49,9 @@ public class MatchUICtrl : MonoBehaviour {
         int result = (int)args[0];
         switch (result) {
             case 1:
-                //if (!roomPanel.gameObject.activeSelf) {
-                //    this.CallEventList("openRoomPanel");
-                //}
+                if (!roomPanel.gameObject.activeSelf) {
+                    this.CallEventList("openRoomPanel");
+                }
                 break;
             case -1:
                 this.AddMsg("房间已过期");
