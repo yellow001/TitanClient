@@ -115,7 +115,7 @@ public class RoomPanel : BaseUI {
 
         //更新信息
         for (int i = 0; i < model.currentRoom.playerList.Count; i++) {
-            itemList[i].uname = model.currentRoom.playerList[i];
+            itemList[i].currentDTO = model.currentRoom.playerList[i];
             itemList[i].UpdateView();
         }
 
@@ -135,7 +135,7 @@ public class RoomPanel : BaseUI {
             startBtn.interactable = true;
         }
 
-        roomInfo.text = string.Format("房间号：{0}    房主：{1}", model.currentRoom.index, model.currentRoom.masterName);
+        roomInfo.text = string.Format("房间号：{0}    房主：{1}", model.currentRoom.id, model.currentRoom.masterName);
     }
 
     public override void CloseAni() {

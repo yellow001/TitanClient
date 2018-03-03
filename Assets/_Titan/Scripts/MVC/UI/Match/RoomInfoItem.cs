@@ -70,7 +70,7 @@ public class RoomInfoItem : BaseUI {
     void EnterBtnClick() {
         if (string.IsNullOrEmpty(Dto.passwd)) {
             //无密码直接发送请求
-            MatchCtrl.Ins.EnterCREQ(Dto.index, "");
+            MatchCtrl.Ins.EnterCREQ(Dto.id, "");
         }
         else {
             //有密码先打开输入密码框
@@ -99,7 +99,7 @@ public class RoomInfoItem : BaseUI {
         //nameImg.sprite=null;
         if (Dto == null) { return; }
 
-        indexTX.text = Dto.index.ToString();
+        indexTX.text = Dto.id.ToString();
         nameTx.text = Dto.masterName;
         numTx.text = Dto.playerList.Count + " / " + Dto.maxNum;
         countValue = (float)Dto.playerList.Count / (float)Dto.maxNum;

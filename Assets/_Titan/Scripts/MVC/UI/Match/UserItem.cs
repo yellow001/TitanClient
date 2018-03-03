@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using ServerSimple.DTO.Login;
 
 public class UserItem : BaseUI {
     
@@ -13,26 +14,33 @@ public class UserItem : BaseUI {
     [HideInInspector]
     public Transform tra;
 
-    public string uname;
-    Color OColor;
+    [HideInInspector]
+    public Image headImg;
+
+    [HideInInspector]
+    public Image MasterImg;
+
+    public UserDTO currentDTO;
     new void OnEnable() {
         base.OnEnable();
     }
 
     public override void Init() {
         tra = transform;
-        nameTx = tra.Find("nameBg/name").GetComponent<Text>();
+        nameTx = tra.Find("name/nameTx").GetComponent<Text>();
         root = GetComponent<Image>();
         closeBtn = tra.Find("closeBtn").GetComponent<Button>();
 
-        OColor = root.color;
+        headImg = tra.Find("name/head/headImg").GetComponent<Image>();
+        MasterImg = tra.Find("name/MasterImg").GetComponent<Image>();
+
         base.Init();
     }
 
     public override void AddEvent() {
         closeBtn.onClick.AddListener(()=> {
             //踢人请求
-            MatchCtrl.Ins.RemoveCREQ(uname);
+            MatchCtrl.Ins.RemoveCREQ(currentDTO.name);
         });
 
         closeTweenAction += () => Destroy(gameObject,GetComponent<BaseUITween>().duration);
@@ -43,25 +51,20 @@ public class UserItem : BaseUI {
         //effect.sprite=null;
         //name.text="";
         //root.sprite=null;
-        if (string.IsNullOrEmpty(uname)) { return; }
+        if (string.IsNullOrEmpty(currentDTO.name)) { return; }
 
         //不是房主或者item是自己
         string userName = LoginCtrl.Ins.model.GetUserName();
-        if (!MatchCtrl.Ins.model.currentRoom.masterName.Equals(userName) || uname.Equals(userName)) {
+        if (!MatchCtrl.Ins.model.currentRoom.masterName.Equals(userName) || currentDTO.name.Equals(userName)) {
             closeBtn.gameObject.SetActive(false);
         }
         else {
             closeBtn.gameObject.SetActive(true);
         }
 
-        if (uname.Equals(userName)) {
-            root.color = Color.white;
-        }
-        else {
-            root.color = OColor;
-        }
+        nameTx.text = currentDTO.name;
 
-        nameTx.text = uname;
+        MasterImg.gameObject.SetActive(MatchCtrl.Ins.model.currentRoom.masterName.Equals(currentDTO.name));
     }
 
     public override void CloseAni() {

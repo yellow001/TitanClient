@@ -58,7 +58,7 @@ public class PwdWin : BaseUI {
                 MatchCtrl.Ins.CreateCREQ(string.IsNullOrEmpty(pwdInput.text)?"":YUtil.md5(pwdInput.text));
             }
             else {
-                MatchCtrl.Ins.EnterCREQ(info.Dto.index, string.IsNullOrEmpty(pwdInput.text) ? "" : YUtil.md5(pwdInput.text));
+                MatchCtrl.Ins.EnterCREQ(info.Dto.id, string.IsNullOrEmpty(pwdInput.text) ? "" : YUtil.md5(pwdInput.text));
             }
             pwdInput.text = "";
         });

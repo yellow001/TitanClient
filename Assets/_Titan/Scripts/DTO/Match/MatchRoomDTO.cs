@@ -1,4 +1,5 @@
 ﻿using ProtoBuf;
+using ServerSimple.DTO.Login;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +14,7 @@ namespace ServerSimple.DTO.Match
         /// <summary>
         /// 房间id
         /// </summary>
-        public int index;
+        public long id;
 
         [ProtoMember(2)]
         /// <summary>
@@ -31,15 +32,15 @@ namespace ServerSimple.DTO.Match
         public string passwd;
 
         [ProtoMember(5)]
-        public List<string> playerList = new List<string>();
+        public List<UserDTO> playerList = new List<UserDTO>();
 
         public MatchRoomDTO() { }
 
-        public MatchRoomDTO(int inx,int maxNum,string mName,string[] pList,string pwd=null) {
-            index = inx;
+        public MatchRoomDTO(long inx,int maxNum,string mName, UserDTO[] pList,string pwd=null) {
+            id = inx;
             this.maxNum = maxNum;
             masterName = mName;
-            playerList.AddRange(playerList);
+            playerList.AddRange(pList);
             passwd = pwd;
         }
     }

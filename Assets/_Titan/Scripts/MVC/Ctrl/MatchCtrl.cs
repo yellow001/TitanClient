@@ -29,8 +29,8 @@ public class MatchCtrl : BaseCtrl<MatchCtrl> {
         MessageHandler.Send(model);
     }
 
-    public void EnterCREQ(int index,string pwd) {
-        TransModel model = new TransModel(1002005,index);
+    public void EnterCREQ(long index,string pwd) {
+        TransModel model = new TransModel(1002005,(int)index);
         model.SetMsg(pwd);
         MessageHandler.Send(model);
     }

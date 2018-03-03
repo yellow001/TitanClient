@@ -28,7 +28,7 @@ namespace ServerSimple.DTO.Login
 
         public UserDTO() { }
 
-        public UserDTO(string n, string p, string head, string hair, string cloth, int wc = 0) {
+        public UserDTO(string n, string p,string head,string hair,string cloth, int wc=0) {
             name = n;
             password = p;
             headID = head;
