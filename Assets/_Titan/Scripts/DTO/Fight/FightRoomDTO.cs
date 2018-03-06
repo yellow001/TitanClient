@@ -21,7 +21,7 @@ namespace ServerSimple.DTO.Fight
         public float allTime = 0;
 
         [ProtoMember(4)]
-        public List<UserDTO> enterDTO = new List<UserDTO>();
+        public List<UserDTO> completeDTO = new List<UserDTO>();
 
         public FightRoomDTO() { }
     }

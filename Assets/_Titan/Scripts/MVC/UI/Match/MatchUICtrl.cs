@@ -15,8 +15,10 @@ public class MatchUICtrl : MonoBehaviour {
     MatchModel model;
 
     FightModel fightModel;
-	// Use this for initialization
-	void Start () {
+
+    AsyncOperation op;
+    // Use this for initialization
+    void Start () {
         model = MatchCtrl.Ins.model;
         fightModel = FightCtrl.Ins.model;//初始化
         AddEvent();
@@ -39,9 +41,9 @@ public class MatchUICtrl : MonoBehaviour {
 
         model.BindEvent(MatchEvent.CreateSRES, CreateSRES);
         model.BindEvent(MatchEvent.EnterSRES, EnterSRES);
-        //model.BindEvent(MatchEvent.StartSRES, StartSRES);
+        model.BindEvent(MatchEvent.StartSRES, StartSRES);
 
-        //fightModel.BindEvent("OnFightRoomInitDataSRES", InitFightRoomData);
+        fightModel.BindEvent(FightEvent.FightRoomInitData, InitFightRoomData);
     }
 
     void EnterSRES(object[] args) {
@@ -94,8 +96,14 @@ public class MatchUICtrl : MonoBehaviour {
         }
     }
 
+    private void Update() {
+        if (op != null) {
+            progressTx.text = (int)(op.progress * 100+9) + "%";
+        }
+    }
+
     private void InitFightRoomData(object[] args) {
-        AsyncOperation op = SceneManager.LoadSceneAsync("Fight");
+        op = SceneManager.LoadSceneAsync("Fight");
         progressTx.text = (int)(op.progress * 100) + "%";
     }
 }
