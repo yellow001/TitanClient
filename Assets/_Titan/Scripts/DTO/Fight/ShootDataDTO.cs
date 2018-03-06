@@ -14,5 +14,8 @@ namespace ServerSimple.DTO.Fight
 
         [ProtoMember(2)]
         public bool Fire;
+
+        [ProtoMember(3)]
+        public int modelID;
     }
 }

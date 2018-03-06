@@ -38,6 +38,7 @@ namespace ServerSimple.DTO.Fight
         [ProtoMember(12)]
         public Vector3Ex rotation;
 
+
         public BaseModel() { }
 
         public BaseModel(int id, int level, string name, BaseModelData d,Vector3Ex p,Vector3Ex r) {
@@ -70,6 +71,10 @@ namespace ServerSimple.DTO.Fight
         /// <returns></returns>
         int CommonInit(GrowValue v) {
             return v.baseValue + level * v.growValue;
+        }
+
+        public bool IsDead() {
+            return hp <= 0;
         }
     }
 }

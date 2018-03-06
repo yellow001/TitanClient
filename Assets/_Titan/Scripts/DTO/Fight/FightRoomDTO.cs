@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using ProtoBuf;
+using ServerSimple.DTO.Login;
+using System.Linq;
 
 namespace ServerSimple.DTO.Fight
 {
@@ -18,8 +20,8 @@ namespace ServerSimple.DTO.Fight
         [ProtoMember(3)]
         public float allTime = 0;
 
-        [ProtoMember(5)]
-        public List<string> enterName = new List<string>();
+        [ProtoMember(4)]
+        public List<UserDTO> enterDTO = new List<UserDTO>();
 
         public FightRoomDTO() { }
     }

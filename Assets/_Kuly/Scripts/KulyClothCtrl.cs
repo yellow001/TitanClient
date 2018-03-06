@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ public class KulyClothCtrl : MonoBehaviour {
 
     GameObject clothObj;
     string[] color;
+
+    public Action<GameObject> callBack;
     public void RefreshCloth(string id, string[] c) {
         if (!clothID.Equals(id)) {
             clothID = id;
@@ -38,10 +41,19 @@ public class KulyClothCtrl : MonoBehaviour {
                     if (clothObj.GetComponentInChildren<MatColorCtrl>()) {
                         clothObj.GetComponentInChildren<MatColorCtrl>().SetColor(color);
                     }
+
+                    if (callBack != null) {
+                        callBack(clothObj);
+                    }
                 })
             );
 
 
+        }
+        else {
+            if (callBack != null) {
+                callBack(clothObj);
+            }
         }
 
         if (color == null || !color.Equals(c)) {

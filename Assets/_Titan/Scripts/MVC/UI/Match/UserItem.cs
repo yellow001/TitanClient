@@ -62,6 +62,10 @@ public class UserItem : BaseUI {
             closeBtn.gameObject.SetActive(true);
         }
 
+        UserData data = new UserData(currentDTO);
+
+        headImg.sprite = ResMgr.Ins.GetResAsset<Sprite>("head" + "/" + data.headID);
+
         nameTx.text = currentDTO.name;
 
         MasterImg.gameObject.SetActive(MatchCtrl.Ins.model.currentRoom.masterName.Equals(currentDTO.name));

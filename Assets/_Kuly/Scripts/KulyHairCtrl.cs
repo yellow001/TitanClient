@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class KulyHairCtrl : MonoBehaviour {
     public string hairPath = "hair";
 
     GameObject hairObj;
+
+    public Action<GameObject> callBack;
     public void RefreshHair(string id) {
         if (!hairID.Equals(id)) {
             hairID = id;
@@ -24,9 +27,18 @@ public class KulyHairCtrl : MonoBehaviour {
                     }
                     hairObj = Instantiate(obj);
                     hairObj.transform.SetParent(headBone, false);
+
+                    if (callBack != null) {
+                        callBack(hairObj);
+                    }
                 })
             );
 
+        }
+        else {
+            if (callBack != null) {
+                callBack(hairObj);
+            }
         }
     }
 }

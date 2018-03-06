@@ -13,15 +13,20 @@ public class UserModel : BaseModel {
         protected set;
     }
 
-    public string hairID, hairColor;
+    public UserDTO tempData {
+        get;
+        set;
+    }
 
-    public string clothID;
-    public string[] clothColor;
 
+    public bool isTemp=false;
     /// <summary>
     /// 登录消息反馈
     /// </summary>
     public void OnLoginSRES(TransModel model) {
+        if (model.area == 1) {
+            RefreshUserData(model.GetMsg<UserDTO>());
+        }
         CallEvent(LoginEvent.LoginSRES, model.area);
     }
 
@@ -52,33 +57,60 @@ public class UserModel : BaseModel {
         }
     }
 
+    public void SetTempUserData() {
+
+        CallEvent(UserEvent.RefreshUserModel, this);
+    }
+
     public void RefreshUserData(UserDTO dto) {
         data = dto;
+        tempData = dto;
+        CallEvent(UserEvent.RefreshUserModel, this);
+    }
 
-        data.headID = string.IsNullOrEmpty(data.headID) ? "head0" : data.headID;
+    public UserData GetUserData() {
+        if (isTemp) {
+            return new UserData(tempData);
+        }
+        else {
+            return new UserData(data);
+        }
+    }
+}
 
-        if (string.IsNullOrEmpty(data.hairData) || data.hairData.Split('_').Length < 2) {
+public class UserData{
+
+    public string headID;
+
+    public string hairID, hairColor;
+
+    public string clothID;
+    public string[] clothColor;
+
+    public UserData(UserDTO dto) {
+
+        headID = string.IsNullOrEmpty(dto.headID) ? "head0" : dto.headID;
+
+        if (string.IsNullOrEmpty(dto.hairData) || dto.hairData.Split('_').Length < 2) {
             hairID = "hair0";
             hairColor = "#ffffff";
         }
         else {
-            string[] d = data.hairData.Split('_');
+            string[] d = dto.hairData.Split('_');
             hairID = d[0];
             hairColor = d[1];
         }
 
-        if (string.IsNullOrEmpty(data.clothData) || data.clothData.Split('_').Length < 2) {
+        if (string.IsNullOrEmpty(dto.clothData) || dto.clothData.Split('_').Length < 2) {
             clothID = "cloth0";
-            clothColor = new string[]{ "#ffffff" };
+            clothColor = new string[] { "#ffffff" };
         }
         else {
-            string[] d = data.clothData.Split('_');
+            string[] d = dto.clothData.Split('_');
             clothID = d[0];
             Array.Copy(d, 1, clothColor, 0, d.Length - 1);
         }
-
-        CallEvent(UserEvent.RefreshUserModel, this);
-    }
+    }    
 }
 
 public enum LoginEvent {

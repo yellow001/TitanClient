@@ -20,5 +20,9 @@ namespace ServerSimple.DTO.Fight
 
         [ProtoMember(4)]
         public bool Right;
+
+
+        [ProtoMember(5)]
+        public int modelID;
     }
 }
