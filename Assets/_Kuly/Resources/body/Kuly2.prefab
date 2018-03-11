@@ -791,6 +791,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1307712770649808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4918901587002534}
+  m_Layer: 0
+  m_Name: camProtectPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1312103200536374
 GameObject:
   m_ObjectHideFlags: 1
@@ -2390,6 +2405,7 @@ GameObject:
   - component: {fileID: 114866968450118976}
   - component: {fileID: 54184619562654726}
   - component: {fileID: 136387759158226020}
+  - component: {fileID: 114534608607221474}
   m_Layer: 0
   m_Name: Kuly2
   m_TagString: Untagged
@@ -3144,7 +3160,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1314904424031486}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.033500202, z: 0.07011062}
+  m_LocalPosition: {x: -0, y: 0.0352, z: 0.07011062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4184593559343686}
@@ -3229,9 +3245,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4463439812799240}
+  - {fileID: 4918901587002534}
   - {fileID: 4042912706065380}
   - {fileID: 4613024545005290}
+  - {fileID: 4463439812799240}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3653,7 +3670,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4286993095384924}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4479642002093168
 Transform:
@@ -4639,6 +4656,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4954897225871422}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4918901587002534
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1307712770649808}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6098452, z: 0.018926132}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4286993095384924}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4919480233369556
@@ -6468,7 +6498,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: Infinity
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -6682,6 +6712,22 @@ MonoBehaviour:
   m_DistantDisable: 0
   m_ReferenceObject: {fileID: 0}
   m_DistanceToObject: 20
+--- !u!114 &114534608607221474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1947398425740340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776a7d66964871d42bc57d5c3756f016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kulyAni: {fileID: 95900064384268312}
+  inputMgr: {fileID: 0}
+  movForce: 5
+  cam: {fileID: 0}
+  roSpeed: 50
 --- !u!114 &114833127243516874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6709,7 +6755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clothCtrl: {fileID: 114153746833938504}
   hairCtrl: {fileID: 114118371709139070}
-  hairID: hair1
+  hairID: hair0
 --- !u!114 &114971451504731954
 MonoBehaviour:
   m_ObjectHideFlags: 1
