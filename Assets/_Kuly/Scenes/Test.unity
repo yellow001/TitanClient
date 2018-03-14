@@ -13005,7 +13005,7 @@ MonoBehaviour:
   m_DefaultBlend:
     m_Style: 1
     m_Time: 0.5
-  m_CustomBlends: {fileID: 0}
+  m_CustomBlends: {fileID: 11400000, guid: 073cac8aea165b24faf37a93adc765c9, type: 2}
   m_CameraCutEvent:
     m_PersistentCalls:
       m_Calls: []

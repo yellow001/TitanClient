@@ -82,10 +82,10 @@ public class KulyCtrlRealTime : MonoBehaviour {
         if (rmbState != inputMgr.RMB) {
             rmbState = inputMgr.RMB;
             if (rmbState) {
-                SetAimGun();
+                SetAimState();
             }
             else {
-                SetNormalGun();
+                SetNormalState();
             }
         }
 	}
@@ -147,7 +147,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
         }
     }
 
-    void SetNormalGun() {
+    void SetNormalState() {
         this.AddTimeEvent(0.2f, null, (t, p) => { aimIk.solver.SetIKPositionWeight(1-p); });
 
         aimCam.enabled = false;
@@ -163,7 +163,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
         }
     }
 
-    void SetAimGun() {
+    void SetAimState() {
         aimCam.enabled = true;
 
         gunPos.SetTarget(null);
@@ -183,5 +183,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
         gun.transform.SetParent(weaponPos, false);
         gun.transform.localPosition = Vector3.zero;
         gun.transform.localEulerAngles = Vector3.zero;
+
+        rig.rotation = Quaternion.Euler(0, cam.transform.localEulerAngles.y, 0);
     }
 }
