@@ -1290,6 +1290,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1471065941383824
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4490981878072194}
+  m_Layer: 0
+  m_Name: WeaponAim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1483901582780030
 GameObject:
   m_ObjectHideFlags: 1
@@ -1931,6 +1946,21 @@ GameObject:
   - component: {fileID: 23948640864364094}
   m_Layer: 0
   m_Name: pupil
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1734947312353608
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4146632588062424}
+  m_Layer: 0
+  m_Name: WeaponIdle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2892,6 +2922,19 @@ Transform:
   m_Father: {fileID: 4412267932031380}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4146632588062424
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1734947312353608}
+  m_LocalRotation: {x: -0.099988915, y: -0.63728845, z: -0.083900645, w: 0.7594909}
+  m_LocalPosition: {x: -0.03, y: 0.008, z: 0.343}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4192613347025936}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -15, y: -80, z: 0}
 --- !u!4 &4149744419143286
 Transform:
   m_ObjectHideFlags: 1
@@ -2990,6 +3033,8 @@ Transform:
   - {fileID: 4233629679834558}
   - {fileID: 4362742263897900}
   - {fileID: 4160091703948976}
+  - {fileID: 4146632588062424}
+  - {fileID: 4490981878072194}
   m_Father: {fileID: 4708053365004404}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3713,6 +3758,19 @@ Transform:
   m_Father: {fileID: 4373558448499292}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4490981878072194
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1471065941383824}
+  m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
+  m_LocalPosition: {x: 0.111, y: 0.105, z: 0.593}
+  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000002}
+  m_Children: []
+  m_Father: {fileID: 4192613347025936}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
 --- !u!4 &4496461692150230
 Transform:
   m_ObjectHideFlags: 1

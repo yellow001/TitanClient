@@ -14,6 +14,9 @@ public class InputMgr : BaseManager<InputMgr> {
 
     public bool LMB;
 
+    public float MouseX;
+
+    public float MouseY;
 	// Use this for initialization
 	void Start () {
 		
@@ -31,5 +34,9 @@ public class InputMgr : BaseManager<InputMgr> {
         RMB = Input.GetMouseButton(1);
 
         LMB = Input.GetMouseButton(0) || Input.GetMouseButtonDown(0);
-	}
+
+        MouseX = Input.GetAxis("Mouse X");
+
+        MouseY = Input.GetAxis("Mouse Y");
+    }
 }

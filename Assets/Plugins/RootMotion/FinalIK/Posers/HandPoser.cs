@@ -39,17 +39,19 @@ namespace RootMotion.FinalIK {
 			if (poseRoot == null) return;
 			
 			// Something went wrong
-			if (children.Length != poseChildren.Length) {
-				Warning.Log("Number of children does not match with the pose", transform);
-				return;
-			}
+			//if (children.Length != poseChildren.Length) {
+			//	Warning.Log("Number of children does not match with the pose", transform);
+			//	return;
+			//}
 			
 			// Calculate weights
 			float rW = localRotationWeight * weight;
 			float pW = localPositionWeight * weight;
-			
+
+            int length = Mathf.Min(children.Length, poseChildren.Length);
+
 			// Lerping the localRotation and the localPosition
-			for (int i = 0; i < children.Length; i++) {
+			for (int i = 0; i < length; i++) {
 				if (children[i] != transform) {
 					children[i].localRotation = Quaternion.Lerp(children[i].localRotation, poseChildren[i].localRotation, rW);
 					children[i].localPosition = Vector3.Lerp(children[i].localPosition, poseChildren[i].localPosition, pW);
