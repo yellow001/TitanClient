@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using RootMotion.FinalIK;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,20 +13,31 @@ public class AimWeaponCam : MonoBehaviour {
 
     Transform tra;
     Vector3 ro;
-	// Use this for initialization
-	void Start () {
+
+    public Transform bone;
+    public float offsetX = 10;
+
+    public KulyGun gun;
+    // Use this for initialization
+    void Start () {
         inputMgr = InputMgr.Ins;
         tra = transform;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
         if (inputMgr.RMB) {
             tra.Rotate(-inputMgr.MouseY * Time.deltaTime * roSpeed, 0, 0);
             ro = tra.localEulerAngles;
             if (ro.x > 180) { ro.x -= 360; }
             ro.x = ro.x > maxX ? maxX : (ro.x < minX ? minX : ro.x);
             tra.localEulerAngles = ro;
+
+            bone.localEulerAngles = ro + new Vector3(offsetX, 0, 0);
+
+            if (gun != null) {
+                gun.V_LateUpdate();
+            }
         }
     }
 }

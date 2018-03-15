@@ -4,6 +4,7 @@ using UnityEngine;
 using RootMotion.Demos;
 using RootMotion.FinalIK;
 using Cinemachine;
+using System;
 
 public class KulyCtrlRealTime : MonoBehaviour {
     public Animator kulyAni;
@@ -35,18 +36,24 @@ public class KulyCtrlRealTime : MonoBehaviour {
 
     public float rotateSpeed = 10;
 
-    public AimIK aimIk;
+    //public AimIK aimIk;
 
     // Use this for initialization
     IEnumerator Start () {
         inputMgr = InputMgr.Ins;
         rig = GetComponent<Rigidbody>();
+
+        this.AddObjEventFun(gameObject, "Fire", (args) => { Fire(); });
         yield return null;
         InitGunPos();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void Fire() {
+        this.InvokeObjDeList(gun.gameObject, "Fire");
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         speed = new Vector2(inputMgr.Horizontal,inputMgr.Vertical);
         kulyAni.SetFloat("MoveSpeed", Mathf.Abs(speed.magnitude));
@@ -91,9 +98,8 @@ public class KulyCtrlRealTime : MonoBehaviour {
 	}
 
     private void FixedUpdate() {
+        Vector3 f = Vector3.zero;
         if (speed != Vector2.zero) {
-            Vector3 f=Vector3.zero;
-
             if (inputMgr.RMB) {
                 Vector3 f1 = Vector3.zero;
 
@@ -104,7 +110,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
                     f1 = -transform.right;
                 }
 
-                f1 *=Mathf.Abs(speed.x);
+                f1 *= Mathf.Abs(speed.x);
 
 
                 Vector3 f2 = Vector3.zero;
@@ -121,13 +127,17 @@ public class KulyCtrlRealTime : MonoBehaviour {
 
                 //Debug.Log(f1 + "  " + f2);
 
-                f = f.normalized*movForce*0.72f;
+                f = f.normalized * movForce * 0.72f;
             }
             else {
                 //f = new Vector3(speed.x, rig.velocity.y, speed.y);
                 f = transform.forward * movForce;
             }
 
+            rig.velocity = f;
+        }
+        else {
+            f.y = rig.velocity.y;
             rig.velocity = f;
         }
 
@@ -148,7 +158,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
     }
 
     void SetNormalState() {
-        this.AddTimeEvent(0.2f, null, (t, p) => { aimIk.solver.SetIKPositionWeight(1-p); });
+        //this.AddTimeEvent(0.2f, null, (t, p) => { aimIk.solver.SetIKPositionWeight(1-p); });
 
         aimCam.enabled = false;
 
@@ -168,7 +178,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
 
         gunPos.SetTarget(null);
 
-        this.AddTimeEvent(0.2f, null, (t, p) => { aimIk.solver.SetIKPositionWeight(p); });
+        //this.AddTimeEvent(0.2f, null, (t, p) => { aimIk.solver.SetIKPositionWeight(p); });
 
         this.AddTimeEvent(0.2f, null, (t, p) => {
             GetComponent<FullBodyBipedIK>().solver.leftHandEffector.positionWeight=1-p;

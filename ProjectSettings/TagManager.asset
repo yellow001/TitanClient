@@ -9,6 +9,7 @@ TagManager:
   - Vaultable
   - Vaultable_1m
   - Vaultable_2m
+  - User
   layers:
   - Default
   - TransparentFX
