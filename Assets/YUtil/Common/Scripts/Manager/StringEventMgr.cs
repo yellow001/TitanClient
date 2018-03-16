@@ -157,7 +157,7 @@ public class StringEventMgr : BaseManager<StringEventMgr> {
         }
     }
 
-    public void InvokeObjDeList(GameObject obj, string name, params object[] objs) {
+    public void CallObjDeList(GameObject obj, string name, params object[] objs) {
         lock (Ins) {
             if (!ObjDelist.ContainsKey(obj)) {
 #if UNITY_EDITOR

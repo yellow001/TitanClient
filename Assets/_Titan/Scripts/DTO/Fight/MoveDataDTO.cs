@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ProtoBuf;
+using ServerSimple.Data;
 
 namespace ServerSimple.DTO.Fight
 {
@@ -10,19 +11,25 @@ namespace ServerSimple.DTO.Fight
     public class MoveDataDTO
     {
         [ProtoMember(1)]
-        public bool Fwd;
+        public float Horizontal;
 
         [ProtoMember(2)]
-        public bool Bwd;
+        public float Vertical;
 
         [ProtoMember(3)]
-        public bool Left;
+        public int modelID;
 
         [ProtoMember(4)]
-        public bool Right;
-
+        public bool RMB;
 
         [ProtoMember(5)]
-        public int modelID;
+        public float boneRoX;
+
+        [ProtoMember(6)]
+        public bool LMB;
+
+        [ProtoMember(7)]
+        public Vector3Ex Rotation;
+
     }
 }

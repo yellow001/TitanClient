@@ -78,8 +78,8 @@ public static class MonoEx{
         StringEventMgr.Ins.RemoveObjEventFun(obj, name, fun);
     }
 
-    public static void InvokeObjDeList(this MonoBehaviour mono, GameObject obj, string name, params object[] objs) {
-        StringEventMgr.Ins.InvokeObjDeList(obj, name, objs);
+    public static void CallObjDeList(this MonoBehaviour mono, GameObject obj, string name, params object[] objs) {
+        StringEventMgr.Ins.CallObjDeList(obj, name, objs);
     }
     #endregion
 }

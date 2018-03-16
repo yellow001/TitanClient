@@ -17,7 +17,7 @@ public class FireAniBehaviour : StateMachineBehaviour {
         }
         else {
             deltaTime = 0;
-            StringEventMgr.Ins.InvokeObjDeList(animator.gameObject, "Fire");
+            StringEventMgr.Ins.CallObjDeList(animator.gameObject, "Fire");
         }  
     }
 

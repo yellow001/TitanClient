@@ -65,6 +65,8 @@ public class KulyGun : MonoBehaviour {
             obj.transform.eulerAngles = bulletPos.eulerAngles;
         }
 
+        this.CallEventList("GunFire", obj.transform.position, obj.transform.eulerAngles);
+
         //todo
         obj.GetComponent<Bullet>().ResetData();
 

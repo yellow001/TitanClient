@@ -17,5 +17,8 @@ namespace ServerSimple.DTO.Fight
 
         [ProtoMember(3)]
         public int DamageType;
+
+        [ProtoMember(4)]
+        public int DamageValue;
     }
 }

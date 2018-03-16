@@ -49,7 +49,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
 	}
 
     void Fire() {
-        this.InvokeObjDeList(gun.gameObject, "Fire");
+        this.CallObjDeList(gun.gameObject, "Fire");
     }
 
     // Update is called once per frame

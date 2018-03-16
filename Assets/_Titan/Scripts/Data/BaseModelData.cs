@@ -80,14 +80,14 @@ namespace ServerSimple.Data
     [ProtoContract]
     public class Vector3Ex {
         [ProtoMember(1)]
-        public int x;
+        public float x;
         [ProtoMember(2)]
-        public int y;
+        public float y;
         [ProtoMember(3)]
-        public int z;
+        public float z;
 
         public Vector3Ex() { }
-        public Vector3Ex(int x, int y, int z) {
+        public Vector3Ex(float x, float y, float z) {
             this.x = x;
             this.y = y;
             this.z = z;

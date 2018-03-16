@@ -18,7 +18,7 @@ public class PushPool : MonoBehaviour {
         }
         else {
             deltaTime = 0;
-            this.InvokeObjDeList(gameObject, "pushPool");
+            this.CallObjDeList(gameObject, "pushPool");
         }
 	}
 }
