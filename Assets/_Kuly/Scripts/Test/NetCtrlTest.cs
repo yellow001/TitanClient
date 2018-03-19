@@ -58,7 +58,7 @@ public class NetCtrlTest : MonoBehaviour {
 
         dto.BulletRotate = new Vector3Ex(v2.x, v2.y, v2.z);
 
-        receiver.shootDto = dto;
+        //receiver.shootDto = dto;
     }
     #endregion
 }

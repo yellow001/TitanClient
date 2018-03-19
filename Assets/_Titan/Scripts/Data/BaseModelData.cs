@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ProtoBuf;
+using UnityEngine;
 
 namespace ServerSimple.Data
 {
@@ -97,6 +98,16 @@ namespace ServerSimple.Data
             get {
                 return new Vector3Ex(0, 0, 0);
             }
+        }
+
+        public Vector3Ex(Vector3 v) {
+            x = v.x;
+            y = v.y;
+            z = v.z;
+        }
+
+        public Vector3 ToVec3() {
+            return new Vector3(x, y, z);
         }
     }
 }

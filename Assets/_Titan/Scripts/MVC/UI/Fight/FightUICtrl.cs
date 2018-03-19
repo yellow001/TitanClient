@@ -8,6 +8,9 @@ public class FightUICtrl : MonoBehaviour {
     FightModel fightModel;
 
     public Text tipText;
+
+    public GameObject waitMaskPanel;
+    public GameObject waitUserPanel;
 	// Use this for initialization
 	void Start () {
         fightModel = FightCtrl.Ins.model;
@@ -24,7 +27,10 @@ public class FightUICtrl : MonoBehaviour {
     void InitCompleted(int all) {
         if (all == 1) {
             //所有人加载完毕，可以开始游戏
+            //todo 关闭ui
             this.CallEventList(FightEvent.AllInitCompleted.ToString());
+            waitMaskPanel.SetActive(false);
+            waitUserPanel.SetActive(false);
             Debug.Log("over");
         }
 

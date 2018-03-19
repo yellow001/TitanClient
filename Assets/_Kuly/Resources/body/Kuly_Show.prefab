@@ -2391,7 +2391,7 @@ GameObject:
   - component: {fileID: 136387759158226020}
   - component: {fileID: 114829241945644136}
   m_Layer: 0
-  m_Name: Kuly3
+  m_Name: Kuly_Show
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

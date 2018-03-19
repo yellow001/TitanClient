@@ -2327,6 +2327,7 @@ GameObject:
   - component: {fileID: 114064868545242548}
   - component: {fileID: 114972375788197818}
   - component: {fileID: 114171744352621926}
+  - component: {fileID: 114296562346113900}
   m_Layer: 0
   m_Name: Kuly_Player_Test
   m_TagString: Player_1
@@ -7062,6 +7063,16 @@ MonoBehaviour:
       x: 0
       y: 0
       z: 0
+  shootDto:
+    BulletPos:
+      x: 0
+      y: 0
+      z: 0
+    BulletRotate:
+      x: 0
+      y: 0
+      z: 0
+    modelID: 0
 --- !u!114 &114199156695235302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7076,6 +7087,19 @@ MonoBehaviour:
   clothCtrl: {fileID: 114053169278167542}
   hairCtrl: {fileID: 114937022320117132}
   hairID: hair0
+--- !u!114 &114296562346113900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1910986508504192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1e3376aac9e7f40a3354c4da3a4f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelID: 0
+  receiver: {fileID: 114171744352621926}
 --- !u!114 &114351921813567026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7309,11 +7333,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   receiver: {fileID: 114171744352621926}
   kulyAni: {fileID: 95117581049030016}
-  gunPos: {fileID: 0}
-  interactionSystem: {fileID: 114129542226207524}
   gun: {fileID: 0}
+  interactionSystem: {fileID: 114129542226207524}
   gunNormalPos: {fileID: 4353109468901684}
   weaponPos: {fileID: 4615030295812272}
+  Bone: {fileID: 4214648200055118}
+  movForce: 3
+  rigRoSpeed: 10
 --- !u!136 &136003426371139672
 CapsuleCollider:
   m_ObjectHideFlags: 1

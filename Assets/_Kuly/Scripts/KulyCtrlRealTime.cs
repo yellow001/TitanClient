@@ -17,14 +17,16 @@ public class KulyCtrlRealTime : MonoBehaviour {
 
     Rigidbody rig;
 
-    public Camera cam;
+    Camera cam;
 
     public float rigRoSpeed=10;
     Quaternion dstRotation;
 
-    public SyncPos gunPos;
+    public GameObject gun;
+
+    SyncPos gunSyncPos;
     public InteractionSystem interactionSystem;
-    public InteractionObject gun;
+    InteractionObject gunInteraction;
 
     public Transform gunNormalPos;
 
@@ -43,13 +45,15 @@ public class KulyCtrlRealTime : MonoBehaviour {
         inputMgr = InputMgr.Ins;
         rig = GetComponent<Rigidbody>();
 
+        cam = Camera.main;
+
         this.AddObjEventFun(gameObject, "Fire", (args) => { Fire(); });
         yield return null;
         InitGunPos();
 	}
 
     void Fire() {
-        this.CallObjDeList(gun.gameObject, "Fire");
+        this.CallObjDeList(gunInteraction.gameObject, "Fire");
     }
 
     // Update is called once per frame
@@ -147,9 +151,14 @@ public class KulyCtrlRealTime : MonoBehaviour {
     }
 
     void InitGunPos() {
-        gunPos.SetTarget(gunNormalPos);
-        interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, gun,false);
-        interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, gun,false);
+
+        gunSyncPos = gun.GetComponentInChildren<SyncPos>();
+
+        gunInteraction = gun.GetComponentInChildren<InteractionObject>();
+
+        gunSyncPos.SetTarget(gunNormalPos);
+        interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, gunInteraction,false);
+        interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, gunInteraction,false);
 
         HandPoser[] posers = GetComponentsInChildren<HandPoser>();
         for (int i = 0; i < posers.Length; i++) {
@@ -162,10 +171,10 @@ public class KulyCtrlRealTime : MonoBehaviour {
 
         aimCam.enabled = false;
 
-        gun.transform.parent = null;
+        gunInteraction.transform.parent = null;
 
         GetComponent<FullBodyBipedIK>().solver.SetIKPositionWeight(1);
-        gunPos.SetTarget(gunNormalPos);
+        gunSyncPos.SetTarget(gunNormalPos);
 
         HandPoser[] posers = GetComponentsInChildren<HandPoser>();
         for (int i = 0; i < posers.Length; i++) {
@@ -176,7 +185,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
     void SetAimState() {
         aimCam.enabled = true;
 
-        gunPos.SetTarget(null);
+        gunSyncPos.SetTarget(null);
 
         //this.AddTimeEvent(0.2f, null, (t, p) => { aimIk.solver.SetIKPositionWeight(p); });
 
@@ -190,9 +199,9 @@ public class KulyCtrlRealTime : MonoBehaviour {
             posers[i].weight = 1;
         }
 
-        gun.transform.SetParent(weaponPos, false);
-        gun.transform.localPosition = Vector3.zero;
-        gun.transform.localEulerAngles = Vector3.zero;
+        gunInteraction.transform.SetParent(weaponPos, false);
+        gunInteraction.transform.localPosition = Vector3.zero;
+        gunInteraction.transform.localEulerAngles = Vector3.zero;
 
         rig.rotation = Quaternion.Euler(0, cam.transform.localEulerAngles.y, 0);
     }

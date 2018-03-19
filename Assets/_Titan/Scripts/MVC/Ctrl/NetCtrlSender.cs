@@ -37,12 +37,14 @@ public class NetCtrlSender : MonoBehaviour {
             dto.boneRoX = 999;
         }
 
-        dto.Rotation = new Vector3Ex(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+        dto.Rotation = new Vector3Ex(transform.eulerAngles);
 
-        TransModel model = new TransModel(12121212);
-        model.SetMsg(dto);
+        FightCtrl.Ins.MoveCREQ(dto);
 
-        MessageHandler.Send(model);
+        //TransModel model = new TransModel(1003005);
+        //model.SetMsg(dto);
+
+        //MessageHandler.Send(model);
     }
 
 
@@ -59,10 +61,12 @@ public class NetCtrlSender : MonoBehaviour {
 
         dto.BulletRotate = new Vector3Ex(v2.x, v2.y, v2.z);
 
-        TransModel model = new TransModel(12121212);
-        model.SetMsg(dto);
+        FightCtrl.Ins.ShootCREQ(dto);
 
-        MessageHandler.Send(model);
+        //TransModel model = new TransModel(1003007);
+        //model.SetMsg(dto);
+
+        //MessageHandler.Send(model);
     }
     #endregion
 }

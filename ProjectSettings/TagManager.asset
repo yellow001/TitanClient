@@ -10,6 +10,7 @@ TagManager:
   - Vaultable_1m
   - Vaultable_2m
   - User
+  - Player_1
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - FogVolume
   - FogVolumeSurrogate
   - FogVolumeUniform
-  - 
+  - Ground
   - 
   - 
   - 

@@ -1312,13 +1312,14 @@ GameObject:
   - component: {fileID: 114172586791507716}
   - component: {fileID: 114718757825102460}
   - component: {fileID: 114524832039727986}
+  - component: {fileID: 114275228970736310}
   m_Layer: 0
   m_Name: Kuly2_User
   m_TagString: User
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1476287360300822
 GameObject:
   m_ObjectHideFlags: 1
@@ -6715,6 +6716,18 @@ MonoBehaviour:
   targetRender: {fileID: 137898698892541288}
   currentIndex: 0
   targetIndex: 1
+--- !u!114 &114275228970736310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1466374078479424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5bb0c988ccc4874fbf73939846e2b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelID: 0
 --- !u!114 &114281006141626986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7362,11 +7375,9 @@ MonoBehaviour:
   kulyAni: {fileID: 95629866125831116}
   inputMgr: {fileID: 0}
   movForce: 3
-  cam: {fileID: 0}
   rigRoSpeed: 10
-  gunPos: {fileID: 0}
-  interactionSystem: {fileID: 114172586791507716}
   gun: {fileID: 0}
+  interactionSystem: {fileID: 114172586791507716}
   gunNormalPos: {fileID: 4357308005274756}
   weaponPos: {fileID: 4241738292429688}
   aimCam: {fileID: 114931508404410082}

@@ -17,7 +17,7 @@ public class AimWeaponCam : MonoBehaviour {
     public Transform bone;
     public float offsetX = 10;
 
-    public KulyGun gun;
+    public KulyGunUser gun;
     // Use this for initialization
     void Start () {
         inputMgr = InputMgr.Ins;
