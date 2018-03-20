@@ -16,7 +16,7 @@ public class FightHandler : MonoBehaviour {
 
     public KulyCtrlRealTime kuly_user;
 
-    public KulyCtrlSync kuly_sync;
+    public KulyCtrlSync kuly_player;
 
     public KulyGunUser gun_user;
 
@@ -156,7 +156,7 @@ public class FightHandler : MonoBehaviour {
 
     GameObject InitUser(KeyValuePair<int, ServerSimple.DTO.Fight.BaseModel> item) {
         GameObject ga;
-        ga = Instantiate(kuly_user.gameObject);
+        ga = Instantiate(kuly_player.gameObject);
 
         Vector3 pos = item.Value.position.ToVec3();
 
