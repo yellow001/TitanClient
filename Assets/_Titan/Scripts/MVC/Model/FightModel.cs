@@ -5,6 +5,7 @@ using UnityEngine;
 using NetFrame;
 using System;
 using ServerSimple.DTO.Login;
+using System.Linq;
 
 public class FightModel : BaseModel {
 
@@ -12,7 +13,7 @@ public class FightModel : BaseModel {
 
     public Dictionary<int, UserDTO> enterUserDTODic = new Dictionary<int, UserDTO>();
 
-
+    public ServerSimple.DTO.Fight.BaseModel currentModel;
     public FightRoomDTO fightRoom {
         get;
         protected set;
@@ -20,6 +21,11 @@ public class FightModel : BaseModel {
 
     public void OnFightRoomInitDataSRES(TransModel m) {
         fightRoom = m.GetMsg<FightRoomDTO>();
+
+        int id = fightRoom.nameToModelID[LoginCtrl.Ins.model.GetUserName()];
+
+        currentModel = fightRoom.baseModelDic[id];
+
         CallEvent(FightEvent.FightRoomInitData);
     }
 
@@ -46,6 +52,15 @@ public class FightModel : BaseModel {
     }
 
     internal void DamageBRO(TransModel model) {
+
+        DamageDTO dto = model.GetMsg<DamageDTO>();
+
+        fightRoom.baseModelDic[dto.DstID].hp -= dto.DamageValue;
+
+        if (dto.DstID == currentModel.id) {
+            CallEvent(FightEvent.DamageSelf);
+        }
+
         CallEvent(FightEvent.Damage, model);
     }
 
@@ -101,7 +116,15 @@ public enum FightEvent {
     Kill,
 
     /// <summary>
-    /// 失败
+    /// 结束
     /// </summary>
-    Fail,
+    Over,
+
+
+    /// <summary>
+    /// 自己受到伤害
+    /// </summary>
+    DamageSelf,
+
+
 }

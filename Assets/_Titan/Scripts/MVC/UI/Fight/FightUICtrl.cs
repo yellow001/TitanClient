@@ -14,6 +14,8 @@ public class FightUICtrl : MonoBehaviour {
 
     public GameObject waitMaskPanel;
     public GameObject waitUserPanel;
+
+    public OverPanel overPanel;
 	// Use this for initialization
 	void Start () {
         fightModel = FightCtrl.Ins.model;
@@ -23,7 +25,12 @@ public class FightUICtrl : MonoBehaviour {
             InitCompleted((int)args[0]);
 
         });
-	}
+
+        fightModel.BindEvent(FightEvent.Over, (args) => {
+            overPanel.gameObject.SetActive(true);
+            overPanel.SetResult((bool)args[0]);
+        });
+    }
 
     // Update is called once per frame
     void Update () {
