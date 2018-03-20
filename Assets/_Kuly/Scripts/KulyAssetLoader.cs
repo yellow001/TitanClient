@@ -24,6 +24,8 @@ public class KulyAssetLoader : MonoBehaviour {
         userModel = LoginCtrl.Ins.model;
 
         userModel.BindEvent(UserEvent.RefreshUserModel, (args) => { RefreshKulyData(); });
+
+        this.AddObjEventFun(gameObject, UserEvent.RefreshUserModel.ToString(), (args) => { RefreshKulyDataByUserDTO((UserDTO)args[0]); });
     }
 
     void LoadCallBack(GameObject obj) {
@@ -51,5 +53,17 @@ public class KulyAssetLoader : MonoBehaviour {
 
         clothCtrl.RefreshCloth(data.clothID, data.clothColor);
         
+    }
+
+    public void RefreshKulyDataByUserDTO(UserDTO dto) {
+        loadCount = 2;
+
+        //todo refresh
+        UserData data = new UserData(dto);
+
+        hairCtrl.RefreshHair(data.hairID);
+
+        clothCtrl.RefreshCloth(data.clothID, data.clothColor);
+
     }
 }

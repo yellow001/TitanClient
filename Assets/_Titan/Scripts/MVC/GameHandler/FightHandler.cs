@@ -1,9 +1,11 @@
 ﻿using NetFrame;
 using ServerSimple.DTO.Fight;
+using ServerSimple.DTO.Login;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class FightHandler : MonoBehaviour {
     FightModel fightModel;
@@ -77,7 +79,7 @@ public class FightHandler : MonoBehaviour {
 
         MoveDataDTO dto = model.GetMsg<MoveDataDTO>();
 
-        if (IdToObjDic.ContainsKey(dto.modelID)) {
+        if (dto.modelID!=currentID&&IdToObjDic.ContainsKey(dto.modelID)) {
             IdToObjDic[dto.modelID].GetComponentInChildren<NetCtrlReceiver>().movData = dto;
         }
     }
@@ -100,6 +102,7 @@ public class FightHandler : MonoBehaviour {
             else {
                 //其他人的
                 ga = InitUser(item);
+                
             }
 
             IdToObjDic.Add(item.Key, ga);
@@ -119,11 +122,13 @@ public class FightHandler : MonoBehaviour {
         pos.y = height;
 
         RaycastHit hit;
-        if (Physics.Raycast(pos, Vector3.down, out hit, LayerMask.NameToLayer("Ground"))){
+        if (Physics.Raycast(pos, Vector3.down, out hit, 500,LayerMask.NameToLayer("Ground"))){
             pos.y = hit.point.y;
         }
 
         ga.transform.position = pos;
+
+        normalCam.transform.position = pos+Vector3.up;
 
         currentID = item.Key;
         ga.GetComponentInChildren<NetCtrlSender>().modelID = item.Key;
@@ -158,7 +163,8 @@ public class FightHandler : MonoBehaviour {
         pos.y = height;
 
         RaycastHit hit;
-        if (Physics.Raycast(pos, Vector3.down, out hit, LayerMask.NameToLayer("Ground"))) {
+        if (Physics.Raycast(pos, Vector3.down, out hit)) {
+            Debug.Log(hit.point);
             pos.y = hit.point.y;
         }
 
@@ -195,6 +201,9 @@ public class FightHandler : MonoBehaviour {
             //    ga.GetComponentInChildren<KulyCtrlSync>().gun.GetComponentInChildren<KulyGunUser>().enabled = true;
             //}
             item.Value.SetActive(true);
+
+            UserDTO dto = fightModel.enterUserDTODic[item.Key];
+            this.CallObjDeList(item.Value, UserEvent.RefreshUserModel.ToString(), dto);
         }
 
         normalCam.enabled = true;

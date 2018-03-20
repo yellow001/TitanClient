@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System;
 using ServerSimple.DTO.Login;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerEnterPanel : BaseUI {
 
@@ -35,10 +36,13 @@ public class PlayerEnterPanel : BaseUI {
     public override void AddEvent() {
         fightModel = FightCtrl.Ins.model;
 
-        fightModel.BindEvent(FightEvent.InitCompleted, (args) => { UpdateCompleteList((List<UserDTO>)args[1]); });
+        fightModel.BindEvent(FightEvent.InitCompleted, (args) => { UpdateCompleteList((Dictionary<int, UserDTO>)args[1]); });
     }
 
-    void UpdateCompleteList(List<UserDTO> dtos) {
+    void UpdateCompleteList(Dictionary<int, UserDTO> dtoDic) {
+
+        List<UserDTO> dtos = dtoDic.Values.ToList();
+
         //throw new NotImplementedException();
         //刷新完成列表
 

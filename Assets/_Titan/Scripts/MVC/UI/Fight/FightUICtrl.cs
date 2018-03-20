@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using ServerSimple.DTO.Login;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +8,7 @@ using UnityEngine.UI;
 public class FightUICtrl : MonoBehaviour {
 
     FightModel fightModel;
+
 
     public Text tipText;
 
@@ -15,11 +18,15 @@ public class FightUICtrl : MonoBehaviour {
 	void Start () {
         fightModel = FightCtrl.Ins.model;
 
-        fightModel.BindEvent(FightEvent.InitCompleted, (args) => { InitCompleted((int)args[0]); });
+        fightModel.BindEvent(FightEvent.InitCompleted, (args) => {
+
+            InitCompleted((int)args[0]);
+
+        });
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 

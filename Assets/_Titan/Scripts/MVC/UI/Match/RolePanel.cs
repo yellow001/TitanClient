@@ -55,6 +55,8 @@ public class RolePanel : BaseUI {
     }
 
     public override void UpdateView() {
+        if (this == null) { return; }
+
         base.UpdateView();
 
         nameTx.text=userModel.GetUserName();
@@ -92,6 +94,8 @@ public class RolePanel : BaseUI {
     }
 
     void SetObjLayer(GameObject obj,int layer) {
+        if (this == null || obj == null) { return; }
+
         obj.layer = layer;
         for (int i = 0; i < obj.transform.childCount; i++) {
             int index = i;

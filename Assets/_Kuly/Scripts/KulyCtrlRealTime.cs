@@ -39,7 +39,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
     public float rotateSpeed = 10;
 
     //public AimIK aimIk;
-
+    bool init = false;
     // Use this for initialization
     IEnumerator Start () {
         inputMgr = InputMgr.Ins;
@@ -47,17 +47,19 @@ public class KulyCtrlRealTime : MonoBehaviour {
 
         cam = Camera.main;
 
-        this.AddObjEventFun(gameObject, "Fire", (args) => { Fire(); });
+        //this.AddObjEventFun(gameObject, "Fire", (args) => { Fire(); });
         yield return null;
         InitGunPos();
 	}
 
     void Fire() {
-        this.CallObjDeList(gunInteraction.gameObject, "Fire");
+        this.CallObjDeList(gun.gameObject, "Fire");
     }
 
     // Update is called once per frame
     void Update () {
+
+        if (!init) { return; }
 
         speed = new Vector2(inputMgr.Horizontal,inputMgr.Vertical);
         kulyAni.SetFloat("MoveSpeed", Mathf.Abs(speed.magnitude));
@@ -164,6 +166,8 @@ public class KulyCtrlRealTime : MonoBehaviour {
         for (int i = 0; i < posers.Length; i++) {
             posers[i].weight = 1;
         }
+
+        init = true;
     }
 
     void SetNormalState() {
@@ -171,7 +175,9 @@ public class KulyCtrlRealTime : MonoBehaviour {
 
         aimCam.enabled = false;
 
-        gunInteraction.transform.parent = null;
+        if (gun.transform.parent != null) {
+            gun.transform.SetParent(null);
+        }
 
         GetComponent<FullBodyBipedIK>().solver.SetIKPositionWeight(1);
         gunSyncPos.SetTarget(gunNormalPos);
@@ -199,9 +205,9 @@ public class KulyCtrlRealTime : MonoBehaviour {
             posers[i].weight = 1;
         }
 
-        gunInteraction.transform.SetParent(weaponPos, false);
-        gunInteraction.transform.localPosition = Vector3.zero;
-        gunInteraction.transform.localEulerAngles = Vector3.zero;
+        gun.transform.SetParent(weaponPos, false);
+        gun.transform.localPosition = Vector3.zero;
+        gun.transform.localEulerAngles = Vector3.zero;
 
         rig.rotation = Quaternion.Euler(0, cam.transform.localEulerAngles.y, 0);
     }

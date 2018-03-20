@@ -118,6 +118,10 @@ public class KulyCtrlSync : MonoBehaviour {
         }
     }
 
+    void Fire() {
+        this.CallObjDeList(gun.gameObject, "Fire");
+    }
+
     void SetAimState() {
         gunPos.SetTarget(null);
 

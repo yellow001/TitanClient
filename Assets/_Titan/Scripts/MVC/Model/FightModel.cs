@@ -10,6 +10,9 @@ public class FightModel : BaseModel {
 
     public bool comSelf = false;
 
+    public Dictionary<int, UserDTO> enterUserDTODic = new Dictionary<int, UserDTO>();
+
+
     public FightRoomDTO fightRoom {
         get;
         protected set;
@@ -21,16 +24,17 @@ public class FightModel : BaseModel {
     }
 
     internal void OnInitCompleted(TransModel model) {
-        List<UserDTO> dtos = model.GetMsg<List<UserDTO>>();
 
-        foreach (var item in dtos) {
+        enterUserDTODic = model.GetMsg<Dictionary<int, UserDTO>>();
+
+        foreach (var item in enterUserDTODic.Values) {
             if (item.name.Equals(LoginCtrl.Ins.model.GetUserName())) {
                 comSelf = true;
                 break;
             }
         }
 
-        CallEvent(FightEvent.InitCompleted, model.area,model.GetMsg<List<UserDTO>>());
+        CallEvent(FightEvent.InitCompleted, model.area,model.GetMsg<Dictionary<int, UserDTO>>());
     }
 
     internal void Fail() {
