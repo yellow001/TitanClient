@@ -97,11 +97,11 @@ public class FightHandler : MonoBehaviour {
             GameObject ga;
             if (item.Key == fightModel.fightRoom.nameToModelID[userModel.GetUserName()]) {
                 //自己的
-                ga = InitPlayer(item);
+                ga = InitUser(item);
             }
             else {
                 //其他人的
-                ga = InitUser(item);
+                ga = InitPlayer(item);
                 
             }
 
@@ -113,7 +113,7 @@ public class FightHandler : MonoBehaviour {
         FightCtrl.Ins.InitCompletedCREQ();
     }
 
-    GameObject InitPlayer(KeyValuePair<int,ServerSimple.DTO.Fight.BaseModel> item) {
+    GameObject InitUser(KeyValuePair<int,ServerSimple.DTO.Fight.BaseModel> item) {
         GameObject ga;
         ga = Instantiate(kuly_user.gameObject);
 
@@ -154,7 +154,7 @@ public class FightHandler : MonoBehaviour {
         return ga;
     }
 
-    GameObject InitUser(KeyValuePair<int, ServerSimple.DTO.Fight.BaseModel> item) {
+    GameObject InitPlayer(KeyValuePair<int, ServerSimple.DTO.Fight.BaseModel> item) {
         GameObject ga;
         ga = Instantiate(kuly_player.gameObject);
 
