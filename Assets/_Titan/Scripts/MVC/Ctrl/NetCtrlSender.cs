@@ -39,9 +39,9 @@ public class NetCtrlSender : MonoBehaviour {
 
         dto.Rotation = new Vector3Ex(transform.eulerAngles);
 
-        if (dto.Horizontal == 0 && dto.Vertical == 0 && !dto.RMB) {
-            return;
-        }
+        //if (dto.Horizontal == 0 && dto.Vertical == 0 && !dto.RMB) {
+        //    return;
+        //}
 
         FightCtrl.Ins.MoveCREQ(dto);
 

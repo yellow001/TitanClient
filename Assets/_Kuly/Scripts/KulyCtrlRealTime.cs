@@ -19,7 +19,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
 
     Camera cam;
 
-    public float rigRoSpeed=10;
+    public float rigRoSpeed = 10;
     Quaternion dstRotation;
 
     public GameObject gun;
@@ -32,7 +32,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
 
     public Transform weaponPos;
 
-    bool rmbState=true;
+    bool rmbState = true;
 
     public CinemachineVirtualCamera aimCam;
 
@@ -41,7 +41,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
     //public AimIK aimIk;
     bool init = false;
     // Use this for initialization
-    IEnumerator Start () {
+    IEnumerator Start() {
         inputMgr = InputMgr.Ins;
         rig = GetComponent<Rigidbody>();
 
@@ -50,18 +50,18 @@ public class KulyCtrlRealTime : MonoBehaviour {
         //this.AddObjEventFun(gameObject, "Fire", (args) => { Fire(); });
         yield return null;
         InitGunPos();
-	}
+    }
 
     void Fire() {
         this.CallObjDeList(gun.gameObject, "Fire");
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
 
         if (!init) { return; }
 
-        speed = new Vector2(inputMgr.Horizontal,inputMgr.Vertical);
+        speed = new Vector2(inputMgr.Horizontal, inputMgr.Vertical);
         kulyAni.SetFloat("MoveSpeed", Mathf.Abs(speed.magnitude));
 
         Vector3 v = Vector2.zero;
@@ -90,7 +90,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
 
         kulyAni.SetBool("Aim", inputMgr.RMB);
 
-        kulyAni.SetBool("Shoot", inputMgr.RMB&&inputMgr.LMB);
+        kulyAni.SetBool("Shoot", inputMgr.RMB && inputMgr.LMB);
 
         if (rmbState != inputMgr.RMB) {
             rmbState = inputMgr.RMB;
@@ -101,7 +101,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
                 SetNormalState();
             }
         }
-	}
+    }
 
     private void FixedUpdate() {
         Vector3 f = Vector3.zero;
@@ -140,14 +140,12 @@ public class KulyCtrlRealTime : MonoBehaviour {
                 f = transform.forward * movForce;
             }
 
-            rig.velocity = f;
+            //rig.velocity = f;
         }
-        else {
-            f.y = rig.velocity.y;
-            rig.velocity = f;
-        }
+        f.y = rig.velocity.y;
+        rig.velocity = f;
 
-        if ((speed!=Vector2.zero||inputMgr.RMB)&&dstRotation != null) {
+        if ((speed != Vector2.zero || inputMgr.RMB) && dstRotation != null) {
             rig.rotation = Quaternion.Lerp(rig.rotation, dstRotation, rigRoSpeed * Time.fixedDeltaTime);
         }
     }
@@ -159,8 +157,8 @@ public class KulyCtrlRealTime : MonoBehaviour {
         gunInteraction = gun.GetComponentInChildren<InteractionObject>();
 
         gunSyncPos.SetTarget(gunNormalPos);
-        interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, gunInteraction,false);
-        interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, gunInteraction,false);
+        interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, gunInteraction, false);
+        interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, gunInteraction, false);
 
         HandPoser[] posers = GetComponentsInChildren<HandPoser>();
         for (int i = 0; i < posers.Length; i++) {
@@ -196,7 +194,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
         //this.AddTimeEvent(0.2f, null, (t, p) => { aimIk.solver.SetIKPositionWeight(p); });
 
         this.AddTimeEvent(0.2f, null, (t, p) => {
-            GetComponent<FullBodyBipedIK>().solver.leftHandEffector.positionWeight=1-p;
+            GetComponent<FullBodyBipedIK>().solver.leftHandEffector.positionWeight = 1 - p;
         });
         //GetComponent<FullBodyBipedIK>().solver.leftHandEffector.positionWeight = 0 ;
 

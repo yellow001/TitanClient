@@ -40,12 +40,14 @@ public class FightUICtrl : MonoBehaviour {
 
     void InitCompleted(int all) {
         if (all == 1) {
-            //所有人加载完毕，可以开始游戏
+            //所有人加载完毕，可以开始游戏（等待2秒再开始）
             //todo 关闭ui
-            this.CallEventList(FightEvent.AllInitCompleted.ToString());
-            waitMaskPanel.SetActive(false);
-            waitUserPanel.SetActive(false);
-            Debug.Log("over");
+            this.AddTimeEvent(2, () => {
+                this.CallEventList(FightEvent.AllInitCompleted.ToString());
+                waitMaskPanel.SetActive(false);
+                waitUserPanel.SetActive(false);
+                Debug.Log("over");
+            }, null);
         }
 
         if (fightModel.comSelf) {

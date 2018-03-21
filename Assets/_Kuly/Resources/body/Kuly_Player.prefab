@@ -7020,16 +7020,6 @@ MonoBehaviour:
       x: 0
       y: 0
       z: 0
-  shootDto:
-    BulletPos:
-      x: 0
-      y: 0
-      z: 0
-    BulletRotate:
-      x: 0
-      y: 0
-      z: 0
-    modelID: 0
 --- !u!114 &114153382675768420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7044,7 +7034,7 @@ MonoBehaviour:
   receiver: {fileID: 114118895235437534}
   kulyAni: {fileID: 95453936450582312}
   gun: {fileID: 0}
-  interactionSystem: {fileID: 0}
+  interactionSystem: {fileID: 114239572097295564}
   gunNormalPos: {fileID: 4496473616294956}
   weaponPos: {fileID: 4006683102633350}
   Bone: {fileID: 4206366714268074}
@@ -7332,7 +7322,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1019502332304960}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5

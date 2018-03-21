@@ -163,8 +163,7 @@ public class FightHandler : MonoBehaviour {
         pos.y = height;
 
         RaycastHit hit;
-        if (Physics.Raycast(pos, Vector3.down, out hit)) {
-            Debug.Log(hit.point);
+        if (Physics.Raycast(pos, Vector3.down, out hit, 500, LayerMask.NameToLayer("Ground"))) {
             pos.y = hit.point.y;
         }
 

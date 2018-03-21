@@ -28,6 +28,8 @@ public class KulyCtrlSync : MonoBehaviour {
     Quaternion dstRotation;
 
     bool rmbState = true;
+
+    bool init = false;
     // Use this for initialization
     IEnumerator Start() {
         rig = GetComponent<Rigidbody>();
@@ -38,11 +40,12 @@ public class KulyCtrlSync : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
+        if (!init) { return; }
         speed = new Vector2(receiver.movData.Horizontal, receiver.movData.Vertical);
         kulyAni.SetFloat("MoveSpeed", Mathf.Abs(speed.magnitude));
 
-        Vector3 v = new Vector3(receiver.movData.Rotation.x,receiver.movData.Rotation.y,receiver.movData.Rotation.z);
+        Vector3 v = new Vector3(receiver.movData.Rotation.x, receiver.movData.Rotation.y, receiver.movData.Rotation.z);
 
         dstRotation = Quaternion.Euler(v);
 
@@ -98,12 +101,10 @@ public class KulyCtrlSync : MonoBehaviour {
                 f = transform.forward * movForce;
             }
 
-            rig.velocity = f;
+            //rig.velocity = f;
         }
-        else {
-            f.y = rig.velocity.y;
-            rig.velocity = f;
-        }
+        f.y = rig.velocity.y;
+        rig.velocity = f;
 
         if ((speed != Vector2.zero || receiver.movData.RMB) && dstRotation != null) {
             rig.rotation = Quaternion.Lerp(rig.rotation, dstRotation, rigRoSpeed * Time.fixedDeltaTime);
@@ -114,7 +115,7 @@ public class KulyCtrlSync : MonoBehaviour {
         if (receiver.movData.RMB && receiver.movData.boneRoX < 999) {
             Vector3 r = Bone.localEulerAngles;
             r.x = receiver.movData.boneRoX;
-            Bone.eulerAngles =r;
+            Bone.eulerAngles = r;
         }
     }
 
@@ -168,5 +169,7 @@ public class KulyCtrlSync : MonoBehaviour {
         for (int i = 0; i < posers.Length; i++) {
             posers[i].weight = 1;
         }
+
+        init = true;
     }
 }
