@@ -15,7 +15,10 @@ public class KulyGunUser : KulyGunPlayer {
         bulletLookPos = new GameObject("bulletLookPos").transform;
         base.Start();
 	}
-	
+
+    public override void LateUpdate() {
+        
+    }
 
     public void V_LateUpdate() {
 

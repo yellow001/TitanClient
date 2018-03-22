@@ -11,7 +11,7 @@ public class KulyGunPlayer : MonoBehaviour {
         this.AddObjEventFun(gameObject, "Fire", Fire);
     }
 
-    public void LateUpdate() {
+    public virtual void LateUpdate() {
         if (fire) {
             fire = false;
             FireLateUpdate();

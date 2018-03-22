@@ -121,9 +121,12 @@ public class FightHandler : MonoBehaviour {
 
         pos.y = height;
 
-        RaycastHit hit;
-        if (Physics.Raycast(pos, Vector3.down, out hit, 500,LayerMask.NameToLayer("Ground"))){
-            pos.y = hit.point.y;
+        RaycastHit[] hits= Physics.RaycastAll(pos, Vector3.down, 500);
+        foreach (var hit in hits) {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+                pos.y = hit.point.y;
+                break;
+            }
         }
 
         ga.transform.position = pos;
@@ -162,9 +165,12 @@ public class FightHandler : MonoBehaviour {
 
         pos.y = height;
 
-        RaycastHit hit;
-        if (Physics.Raycast(pos, Vector3.down, out hit, 500, LayerMask.NameToLayer("Ground"))) {
-            pos.y = hit.point.y;
+        RaycastHit[] hits = Physics.RaycastAll(pos, Vector3.down, 500);
+        foreach (var hit in hits) {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+                pos.y = hit.point.y;
+                break;
+            }
         }
 
         ga.transform.position = pos;
