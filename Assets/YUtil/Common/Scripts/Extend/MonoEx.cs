@@ -6,14 +6,14 @@ using UnityEngine;
 public static class MonoEx{
 
     #region 时间事件
-    public static void AddTimeEvent(this MonoBehaviour mono, TimeEvent model)
+    public static void AddTimeEvent(this MonoBehaviour mono, TimeEvent model,ExcuteMode mode=ExcuteMode.Update)
     {
-        TimeEventMgr.Ins.AddTimeEvent(model);
+        TimeEventMgr.Ins.AddTimeEvent(model,mode);
     }
 
-    public static void AddTimeEvent(this MonoBehaviour mono, float t,Action overDe,Action<float,float> updateDe,bool ignoreTime=false, int count=1,bool doNow=false)
+    public static void AddTimeEvent(this MonoBehaviour mono, float t,Action overDe,Action<float,float> updateDe,bool ignoreTime=false, int count=1,bool doNow=false, ExcuteMode mode = ExcuteMode.Update)
     {
-        TimeEventMgr.Ins.AddTimeEvent(new TimeEvent(t,overDe,ignoreTime, updateDe,count,doNow));
+        TimeEventMgr.Ins.AddTimeEvent(new TimeEvent(t,overDe,ignoreTime, updateDe,count,doNow),mode);
     }
 
     public static void RemoveTimeEvent(this MonoBehaviour mono, TimeEvent model)

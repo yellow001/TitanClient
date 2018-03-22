@@ -40,4 +40,12 @@ public class BaseUITemple : BaseUI {
         base.OpenAni();
 //@OpenAni
     }
+
+    private void OnDestroy() {
+        RemoveEvent();
+    }
+
+    void RemoveEvent() {
+
+    }
 }
