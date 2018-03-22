@@ -115,7 +115,7 @@ public class KulyCtrlSync : MonoBehaviour {
         if (receiver.movData.RMB && receiver.movData.boneRoX < 999) {
             Vector3 r = Bone.localEulerAngles;
             r.x = receiver.movData.boneRoX;
-            Bone.eulerAngles = r;
+            Bone.localEulerAngles = r;
         }
     }
 
