@@ -34,10 +34,12 @@ public class AimWeaponCam : MonoBehaviour {
             tra.localEulerAngles = ro;
 
             bone.localEulerAngles = ro + new Vector3(offsetX, 0, 0);
-            this.CallEventList("BoneRotation", bone.localEulerAngles.x);
+
             if (gun != null) {
                 gun.V_LateUpdate();
             }
+
+            this.CallEventList("BoneRotation", bone.localEulerAngles.x);
         }
     }
 }

@@ -208,5 +208,7 @@ public class FightHandler : MonoBehaviour {
         normalCam.enabled = true;
 
         normalCam.GetComponent<ProtectCam>().enabled = true;
+
+        this.CallEventList(FightEvent.InitPosPanel.ToString(), currentID, IdToObjDic);
     }
 }

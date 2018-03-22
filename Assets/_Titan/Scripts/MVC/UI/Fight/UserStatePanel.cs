@@ -45,7 +45,7 @@ public class UserStatePanel : BaseUI {
 
         Color color = Color.Lerp(Color.red,Color.green, value);
 
-        color.a = 0.8f;
+        color.a = 0.45f;
 
         HpImg.color =color;
 

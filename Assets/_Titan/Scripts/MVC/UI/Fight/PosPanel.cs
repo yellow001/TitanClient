@@ -70,7 +70,9 @@ public class PosPanel : BaseUI {
 
     public override void AddEvent() {
 
-
+        this.AddEventFun(FightEvent.InitPosPanel.ToString(), (args) => {
+            InitImg((int)args[0], (Dictionary<int, GameObject>)args[1]);
+        });
     }
 
     public override void UpdateView() {

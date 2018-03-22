@@ -126,5 +126,8 @@ public enum FightEvent {
     /// </summary>
     DamageSelf,
 
-
+    /// <summary>
+    /// 初始化位置点面板
+    /// </summary>
+    InitPosPanel,
 }
