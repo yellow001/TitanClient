@@ -9,8 +9,10 @@ public class NetCtrlSender : MonoBehaviour {
     public int modelID;
 
     float boneRoX;
-	// Use this for initialization
-	void Start () {
+
+    float mHorizontal, mVertical;
+    // Use this for initialization
+    void Start () {
         InputMgr.Ins.InputChange += SendCtrlMessage;
         this.AddEventFun("BoneRotation", (args) => {
             boneRoX = (float)args[0];
@@ -38,6 +40,21 @@ public class NetCtrlSender : MonoBehaviour {
         }
 
         dto.Rotation = new Vector3Ex(transform.eulerAngles);
+
+        bool send = true;
+        if (dto.Horizontal == 0 && mHorizontal == 0) {
+            send = false;
+        }
+        if (dto.Vertical == 0 && mVertical == 0) {
+            send = false;
+        }
+        mHorizontal = dto.Horizontal;
+        mVertical = dto.Vertical;
+
+        if (!send&&!dto.RMB) {
+            //如果移动数据不改变且右键不按下，就不发送数据
+            return;
+        }
 
         //if (dto.Horizontal == 0 && dto.Vertical == 0 && !dto.RMB) {
         //    return;
