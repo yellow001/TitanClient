@@ -50,7 +50,7 @@ public class NetIOH5:MonoBehaviour {
     IEnumerator Start() {
         DontDestroyOnLoad(this.gameObject);
 
-        socket = new WebSocket(new Uri("ws://"+AppConst.gateIP+":"+AppConst.gatePort));
+        socket = new WebSocket(new Uri("ws://"+ AppSetting.GetSetting("ServerIP")+":"+AppSetting.GetSetting("ServerPort")));
         yield return StartCoroutine(socket.Connect());
         init = true;
     }

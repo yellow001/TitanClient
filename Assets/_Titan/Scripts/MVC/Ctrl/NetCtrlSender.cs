@@ -41,18 +41,16 @@ public class NetCtrlSender : MonoBehaviour {
 
         dto.Rotation = new Vector3Ex(transform.eulerAngles);
 
-        bool send = true;
-        if (dto.Horizontal == 0 && mHorizontal == 0) {
-            send = false;
+        bool move = true;
+        if ((dto.Horizontal == 0 && mHorizontal == 0)&&(dto.Vertical == 0 && mVertical == 0)) {
+            move = false;
         }
-        if (dto.Vertical == 0 && mVertical == 0) {
-            send = false;
-        }
+
         mHorizontal = dto.Horizontal;
         mVertical = dto.Vertical;
 
-        if (!send&&!dto.RMB) {
-            //如果移动数据不改变且右键不按下，就不发送数据
+        if (!move&&!dto.RMB) {
+            //如果移动数据为0且右键不按下，就不发送数据
             return;
         }
 

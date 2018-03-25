@@ -14,13 +14,6 @@ namespace AQUAS
 				symbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
 			}
 
-			if (symbols.Contains("AQUAS_PRESENT"))
-			{
-				symbols = symbols.Replace("AQUAS_PRESENT;", "");
-				symbols = symbols.Replace("AQUAS_PRESENT", "");
-				PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, symbols);
-			}
-
 			return AssetDeleteResult.DidNotDelete;
 		}
 	}

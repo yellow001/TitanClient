@@ -45,7 +45,7 @@ namespace NetFrame {
 
                 AbsCoding.Ins = new PbCoding();
 
-                socket.Connect(AppConst.gateIP, AppConst.gatePort);
+                socket.Connect(AppSetting.GetSetting("ServerIP"), int.Parse(AppSetting.GetSetting("ServerPort")));
 
                 socket.BeginReceive(readBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, null);
             }
