@@ -25,25 +25,45 @@ public class MatchUICtrl : MonoBehaviour {
 	}
 
     void AddEvent() {
-        this.AddEventFun("openPwdWin", (args) => {
-            pwdWin.info = args==null?null:(RoomInfoItem)args[0];
-            pwdWin.gameObject.SetActive(true);
-        });
+        this.AddEventFun("openPwdWin",OpenPwdWin);
 
-        this.AddEventFun("openRoomList", (args) => {
-            roomList.gameObject.SetActive(true);
-        });
+        this.AddEventFun("openRoomList",OpenRoomList);
 
-        this.AddEventFun("openRoomPanel", (args) => {
-            roomList.CloseAni();
-            roomPanel.gameObject.SetActive(true);
-        });
+        this.AddEventFun("openRoomPanel",OpenRoomPanel);
 
         model.BindEvent(MatchEvent.CreateSRES, CreateSRES);
         model.BindEvent(MatchEvent.EnterSRES, EnterSRES);
         model.BindEvent(MatchEvent.StartSRES, StartSRES);
 
         fightModel.BindEvent(FightEvent.FightRoomInitData, InitFightRoomData);
+    }
+
+    private void OnDestroy() {
+        this.RemoveEventFun("openPwdWin", OpenPwdWin);
+
+        this.RemoveEventFun("openRoomList", OpenRoomList);
+
+        this.RemoveEventFun("openRoomPanel", OpenRoomPanel);
+
+        model.UnBindEvent(MatchEvent.CreateSRES, CreateSRES);
+        model.UnBindEvent(MatchEvent.EnterSRES, EnterSRES);
+        model.UnBindEvent(MatchEvent.StartSRES, StartSRES);
+
+        fightModel.UnBindEvent(FightEvent.FightRoomInitData, InitFightRoomData);
+    }
+
+    void OpenPwdWin(object[] args) {
+        pwdWin.info = args == null ? null : (RoomInfoItem)args[0];
+        pwdWin.gameObject.SetActive(true);
+    }
+
+    void OpenRoomList(object[] args) {
+        roomList.gameObject.SetActive(true);
+    }
+
+    void OpenRoomPanel(object[] args) {
+        roomList.CloseAni();
+        roomPanel.gameObject.SetActive(true);
     }
 
     void EnterSRES(object[] args) {

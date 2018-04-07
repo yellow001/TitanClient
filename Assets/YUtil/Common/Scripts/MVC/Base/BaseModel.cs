@@ -12,6 +12,10 @@ public class BaseModel{
         BindEvent(eventName.ToString(), func);
     }
 
+    public void UnBindEvent(Enum eventName, ModelEventCallBack func) {
+        UnBindEvent(eventName.ToString(), func);
+    }
+
     /// <summary>
     /// 绑定事件名与回调函数（外部尽量不要调用）
     /// </summary>

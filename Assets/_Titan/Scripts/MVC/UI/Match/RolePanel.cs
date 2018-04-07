@@ -54,6 +54,10 @@ public class RolePanel : BaseUI {
         userModel.BindEvent(UserEvent.RefreshUserModel, (args) => { UpdateView(); });
     }
 
+    private void OnDestroy() {
+        userModel.UnBindEvent(UserEvent.RefreshUserModel, (args) => { UpdateView(); });
+    }
+
     public override void UpdateView() {
         if (this == null) { return; }
 

@@ -40,6 +40,8 @@ public class KulyCtrlRealTime : MonoBehaviour {
 
     //public AimIK aimIk;
     bool init = false;
+
+    bool Over = false;
     // Use this for initialization
     IEnumerator Start() {
         inputMgr = InputMgr.Ins;
@@ -50,6 +52,14 @@ public class KulyCtrlRealTime : MonoBehaviour {
         //this.AddObjEventFun(gameObject, "Fire", (args) => { Fire(); });
         yield return null;
         InitGunPos();
+
+        this.AddObjEventFun(gameObject, FightEvent.Kill.ToString(), (args) => {
+            Over = true;
+            kulyAni.SetBool("Dead", Over);
+            SetNormalState();
+            GetComponentInChildren<NetCtrlSender>().enabled = false;
+            this.enabled = false;
+        });
     }
 
     void Fire() {
@@ -59,7 +69,7 @@ public class KulyCtrlRealTime : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (!init) { return; }
+        if (!init||Over) { return; }
 
         speed = new Vector2(inputMgr.Horizontal, inputMgr.Vertical);
         kulyAni.SetFloat("MoveSpeed", Mathf.Abs(speed.magnitude));
@@ -104,6 +114,8 @@ public class KulyCtrlRealTime : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        if (!init || Over) { return; }
+
         Vector3 f = Vector3.zero;
         if (speed != Vector2.zero) {
             if (inputMgr.RMB) {

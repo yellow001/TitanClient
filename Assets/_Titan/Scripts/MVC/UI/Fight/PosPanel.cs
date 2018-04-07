@@ -19,7 +19,9 @@ public class PosPanel : BaseUI {
 
     Dictionary<GameObject, Image> ObjToImgDic = new Dictionary<GameObject, Image>();
 
-    Transform user;
+    Transform userCam;
+
+    float screenWidth;
     float maxValue;
     new void OnEnable() {
         base.OnEnable();
@@ -33,16 +35,22 @@ public class PosPanel : BaseUI {
         pos = tra.Find("Bg/pos").GetComponent<Image>();
 
 
-        maxValue = Bg.sizeDelta.x * 0.5f;
+        maxValue = Bg.sizeDelta.x * 0.5f-5;
+
+        screenWidth = Screen.width*0.5f;
+        Debug.Log(screenWidth);
         base.Init();
     }
 
     private void Update() {
 
-        if (user == null) { return; }
+        if (userCam == null) {
+            userCam = Camera.main.transform;
+            return;
+        }
 
         foreach (var item in ObjToImgDic) {
-            Vector3 p = item.Key.transform.position - user.position;
+            Vector3 p = item.Key.transform.position - userCam.position;
             p = p.normalized;
             float x = GetPosX(p);
             Vector2 pos = item.Value.rectTransform.anchoredPosition;
@@ -52,20 +60,26 @@ public class PosPanel : BaseUI {
     }
 
     private float GetPosX(Vector3 p) {
-        float v = Vector3.Dot(p, user.forward);
+        float v = Vector3.Dot(p, userCam.forward);
         if (v < 0) {
-            v = Vector3.Dot(p, user.right);
+            v = Vector3.Dot(p, userCam.right);
             if (v < 0) {
-                return -1 * maxValue;
+                return -maxValue;
             }
             else {
                 return maxValue;
             }
         }
         else {
-            v = Vector3.Dot(p, user.right);
-            return v * maxValue;
+            v = Vector3.Dot(p, userCam.right);
+            float result = v * screenWidth;
+
+            //return result;
+            return result<-maxValue?-maxValue:(result>maxValue?maxValue:result);
         }
+        //float v = Vector3.Dot(p, userCam.right);
+        //v *= screenWidth;
+        //return v;
     }
 
     public override void AddEvent() {
@@ -85,12 +99,14 @@ public class PosPanel : BaseUI {
     public void InitImg(int currentID,Dictionary<int,GameObject> objDic) {
         foreach (var item in objDic) {
             if (item.Key == currentID) {
-                user = item.Value.transform;
+                //user = item.Value.transform;
+                continue;
             }
             else {
                 Image img= Instantiate(pos, Bg).GetComponent<Image>();
                 ObjToImgDic.Add(item.Value, img);
                 IDToImgDic.Add(item.Key, img);
+                img.gameObject.SetActive(true);
             }
         }
     }

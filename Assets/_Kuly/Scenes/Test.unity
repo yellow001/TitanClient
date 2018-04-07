@@ -2542,7 +2542,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5000
+  far clip plane: 1000
   field of view: 40
   orthographic: 0
   orthographic size: 10
@@ -4927,6 +4927,18 @@ Prefab:
       propertyPath: gun
       value: 
       objectReference: {fileID: 231053474}
+    - target: {fileID: 4436856631603986, guid: 9b1341584512632408c25ecdcefc63bc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436856631603986, guid: 9b1341584512632408c25ecdcefc63bc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436856631603986, guid: 9b1341584512632408c25ecdcefc63bc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.32
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b1341584512632408c25ecdcefc63bc, type: 2}
   m_IsPrefabParent: 0

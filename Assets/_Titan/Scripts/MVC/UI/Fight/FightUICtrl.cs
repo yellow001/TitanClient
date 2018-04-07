@@ -20,16 +20,14 @@ public class FightUICtrl : MonoBehaviour {
 	void Start () {
         fightModel = FightCtrl.Ins.model;
 
-        fightModel.BindEvent(FightEvent.InitCompleted, (args) => {
+        fightModel.BindEvent(FightEvent.InitCompleted,InitCompleted);
 
-            InitCompleted((int)args[0]);
+        fightModel.BindEvent(FightEvent.Over,Over);
+    }
 
-        });
-
-        fightModel.BindEvent(FightEvent.Over, (args) => {
-            overPanel.gameObject.SetActive(true);
-            overPanel.SetResult((bool)args[0]);
-        });
+    private void OnDestroy() {
+        fightModel.UnBindEvent(FightEvent.InitCompleted, InitCompleted);
+        fightModel.UnBindEvent(FightEvent.Over, Over);
     }
 
     // Update is called once per frame
@@ -38,7 +36,8 @@ public class FightUICtrl : MonoBehaviour {
 	}
 
 
-    void InitCompleted(int all) {
+    void InitCompleted(object[] args) {
+        int all = (int)args[0];
         if (all == 1) {
             //所有人加载完毕，可以开始游戏（等待2秒再开始）
             //todo 关闭ui
@@ -53,5 +52,12 @@ public class FightUICtrl : MonoBehaviour {
         if (fightModel.comSelf) {
             tipText.text = "等待其他玩家";
         }
+    }
+
+    void Over(object[] args) {
+        overPanel.gameObject.SetActive(true);
+        overPanel.SetResult((bool)args[0]);
+
+        this.CallEventList(FightEvent.Over.ToString());
     }
 }

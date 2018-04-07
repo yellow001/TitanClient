@@ -27,19 +27,19 @@ public class NetCtrlTest : MonoBehaviour {
 
         dto.modelID = modelID;
 
-        dto.Horizontal = InputMgr.Ins.Horizontal;
-        dto.Vertical = InputMgr.Ins.Vertical;
-        dto.RMB = InputMgr.Ins.RMB;
-        dto.LMB = InputMgr.Ins.RMB && InputMgr.Ins.LMB;
+        //dto.Horizontal = InputMgr.Ins.Horizontal;
+        //dto.Vertical = InputMgr.Ins.Vertical;
+        //dto.RMB = InputMgr.Ins.RMB;
+        //dto.LMB = InputMgr.Ins.RMB && InputMgr.Ins.LMB;
 
-        if (dto.RMB) {
-            dto.boneRoX = boneRoX;
-        }
-        else {
-            dto.boneRoX = 999;
-        }
+        //if (dto.RMB) {
+        //    dto.boneRoX = boneRoX;
+        //}
+        //else {
+        //    dto.boneRoX = 999;
+        //}
 
-        dto.Rotation = new Vector3Ex(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+        //dto.RotationY = new Vector3Ex(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
 
         receiver.movData = dto;
     }

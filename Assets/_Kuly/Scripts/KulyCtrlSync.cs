@@ -25,11 +25,13 @@ public class KulyCtrlSync : MonoBehaviour {
     public float rigRoSpeed = 10;
 
     Vector2 speed;
-    Quaternion dstRotation;
+    Quaternion dstRotation=Quaternion.identity;
 
     bool rmbState = true;
 
     bool init = false;
+
+    bool Over = false;
     // Use this for initialization
     IEnumerator Start() {
         rig = GetComponent<Rigidbody>();
@@ -37,84 +39,124 @@ public class KulyCtrlSync : MonoBehaviour {
         //this.AddObjEventFun(gameObject, "Fire", (args) => { Fire(); });
         yield return null;
         InitGunPos();
+        this.AddObjEventFun(gameObject,FightEvent.Kill.ToString(), (args) => {
+            Over = true;
+            kulyAni.SetBool("Dead", Over);
+            SetNormalState();
+            this.enabled = false;
+        });
     }
 
     // Update is called once per frame
     void Update() {
-        if (!init) { return; }
-        speed = new Vector2(receiver.movData.Horizontal, receiver.movData.Vertical);
-        kulyAni.SetFloat("MoveSpeed", Mathf.Abs(speed.magnitude));
+        if (!init||Over) { return; }
+        //speed = new Vector2(receiver.movData.Horizontal, receiver.movData.Vertical);
+        //kulyAni.SetFloat("MoveSpeed", Mathf.Abs(speed.magnitude));
 
-        Vector3 v = new Vector3(receiver.movData.Rotation.x, receiver.movData.Rotation.y, receiver.movData.Rotation.z);
 
-        dstRotation = Quaternion.Euler(v);
+        if (receiver != null && receiver.movData != null) {
+            Vector3 v = new Vector3(0, receiver.movData.RotationY, 0);
 
-        kulyAni.SetBool("Aim", receiver.movData.RMB);
+            dstRotation = Quaternion.Euler(v);
 
-        kulyAni.SetBool("Shoot", receiver.movData.RMB && receiver.movData.LMB);
+            kulyAni.SetBool("Aim", receiver.RMB);
 
-        if (rmbState != receiver.movData.RMB) {
-            rmbState = receiver.movData.RMB;
-            if (rmbState) {
-                SetAimState();
-            }
-            else {
-                SetNormalState();
+            kulyAni.SetBool("Shoot", receiver.RMB && receiver.LMB);
+
+            kulyAni.SetFloat("MoveSpeed", rig.position != receiver.movData.Position.ToVec3() ? 1 : 0);
+
+            if (rmbState != receiver.RMB) {
+                rmbState = receiver.RMB;
+                if (rmbState) {
+                    SetAimState();
+                }
+                else {
+                    SetNormalState();
+                }
             }
         }
+        
     }
 
     private void FixedUpdate() {
-        Vector3 f = Vector3.zero;
-        if (speed != Vector2.zero) {
-            if (receiver.movData.RMB) {
-                Vector3 f1 = Vector3.zero;
 
-                if (speed.x > 0) {
-                    f1 = transform.right;
+        if (!init || Over) { return; }
+
+        if (receiver.movData != null && receiver.movData.Position != null) {
+
+            Vector3 target = receiver.movData.Position.ToVec3();
+
+            if (rig.position != target) {
+                if ((rig.position - target).magnitude < 0.1f) {
+                    rig.position = target;
                 }
                 else {
-                    f1 = -transform.right;
+                    rig.MovePosition(Vector3.Lerp(rig.position, receiver.movData.Position.ToVec3(), Time.fixedDeltaTime * movForce));
                 }
-
-                f1 *= Mathf.Abs(speed.x);
-
-
-                Vector3 f2 = Vector3.zero;
-                if (speed.y > 0) {
-                    f2 = transform.forward;
-                }
-                else {
-                    f2 = -transform.forward;
-                }
-
-                f2 *= Mathf.Abs(speed.y);
-
-                f = f1 + f2;
-
-                //Debug.Log(f1 + "  " + f2);
-
-                f = f.normalized * movForce * 0.72f;
-            }
-            else {
-                //f = new Vector3(speed.x, rig.velocity.y, speed.y);
-                f = transform.forward * movForce;
             }
 
-            //rig.velocity = f;
-        }
-        f.y = rig.velocity.y;
-        rig.velocity = f;
+            
 
-        if ((speed != Vector2.zero || receiver.movData.RMB) && dstRotation != null) {
-            rig.rotation = Quaternion.Lerp(rig.rotation, dstRotation, rigRoSpeed * Time.fixedDeltaTime);
+            //kulyAni.SetFloat("MoveSpeed", 1);
         }
+        //else {
+        //    kulyAni.SetFloat("MoveSpeed", 0);
+        //}
+
+        if (receiver.movData != null && rig.rotation != dstRotation) {
+            rig.MoveRotation(dstRotation);
+        }
+
+        //Vector3 f = Vector3.zero;
+        //if (speed != Vector2.zero) {
+        //    if (receiver.RMB) {
+        //        Vector3 f1 = Vector3.zero;
+
+        //        if (speed.x > 0) {
+        //            f1 = transform.right;
+        //        }
+        //        else {
+        //            f1 = -transform.right;
+        //        }
+
+        //        f1 *= Mathf.Abs(speed.x);
+
+
+        //        Vector3 f2 = Vector3.zero;
+        //        if (speed.y > 0) {
+        //            f2 = transform.forward;
+        //        }
+        //        else {
+        //            f2 = -transform.forward;
+        //        }
+
+        //        f2 *= Mathf.Abs(speed.y);
+
+        //        f = f1 + f2;
+
+        //        //Debug.Log(f1 + "  " + f2);
+
+        //        f = f.normalized * movForce * 0.72f;
+        //    }
+        //    else {
+        //        //f = new Vector3(speed.x, rig.velocity.y, speed.y);
+        //        f = transform.forward * movForce;
+        //    }
+
+        //    //rig.velocity = f;
+        //}
+        //f.y = rig.velocity.y;
+        //rig.velocity = f;
+
+        //if ((speed != Vector2.zero || receiver.RMB) && dstRotation != null) {
+        //    rig.rotation = Quaternion.Lerp(rig.rotation, dstRotation, rigRoSpeed * Time.fixedDeltaTime);
+        //}
     }
 
     private void LateUpdate() {
-        if (receiver.movData.RMB && receiver.movData.boneRoX < 999) {
+        if (receiver.RMB && receiver.boneRoX < 999) {
             Vector3 r = Bone.localEulerAngles;
-            r.x = receiver.movData.boneRoX;
+            r.x = receiver.boneRoX;
             Bone.localEulerAngles = r;
         }
     }

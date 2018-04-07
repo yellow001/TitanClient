@@ -24,10 +24,16 @@ public class FightNetLogic : BaseNetLogic {
         MessageHandler.Register(1003011, KillBRO);//击杀广播
 
         MessageHandler.Register(10039998, FailSRES);//失败反馈
+
+        MessageHandler.Register(10039999, SucceedSRES);//成功反馈
     }
 
     private void FailSRES(TransModel model) {
         FightCtrl.Ins.model.Fail();
+    }
+
+    private void SucceedSRES(TransModel model) {
+        FightCtrl.Ins.model.Succeed();
     }
 
     private void KillBRO(TransModel model) {

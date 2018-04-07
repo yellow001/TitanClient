@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimeEventMgr : BaseManager<TimeEventMgr> {
 
@@ -13,6 +15,15 @@ public class TimeEventMgr : BaseManager<TimeEventMgr> {
     static List<TimeEvent> late_Events = new List<TimeEvent>();
     static List<TimeEvent> rm_Late_Events = new List<TimeEvent>();
 
+
+    public override void Init() {
+        SceneManager.sceneUnloaded += SceneChange;
+        base.Init();
+    }
+
+    private void SceneChange(Scene arg0) {
+        Clear();
+    }
 
     // Update is called once per frame
     void Update () {
@@ -192,9 +203,28 @@ public class TimeEventMgr : BaseManager<TimeEventMgr> {
             return;
         }
         model.deltaTime = 0;
-        if (!update_Events.Contains(model)) {
-            update_Events.Add(model);
+
+        switch (mode) {
+            case ExcuteMode.Update:
+                if (!update_Events.Contains(model)) {
+                    update_Events.Add(model);
+                }
+                break;
+            case ExcuteMode.FixedUpdate:
+                if (!fixed_Events.Contains(model)) {
+                    fixed_Events.Add(model);
+                }
+                break;
+            case ExcuteMode.LateUpdate:
+                if (!late_Events.Contains(model)) {
+                    late_Events.Add(model);
+                }
+                break;
+            default:
+                break;
         }
+
+        
     }
 
     public void RemoveTimeEvent(TimeEvent model) {
@@ -212,6 +242,12 @@ public class TimeEventMgr : BaseManager<TimeEventMgr> {
     public void Clear() {
         update_Events.Clear();
         rm_Update_Events.Clear();
+
+        fixed_Events.Clear();
+        rm_Fixed_Events.Clear();
+
+        late_Events.Clear();
+        rm_Late_Events.Clear();
     }
 
     private void OnDestroy() {

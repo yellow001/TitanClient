@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class OverPanel : BaseUI {
 
@@ -14,6 +15,8 @@ public class OverPanel : BaseUI {
     public Transform tra;
 
 
+    FightModel fightModel;
+
     new void OnEnable() {
         base.OnEnable();
     }
@@ -25,13 +28,14 @@ public class OverPanel : BaseUI {
         OverTx = tra.Find("OverTx").GetComponent<Text>();
         OKBtn = tra.Find("OKBtn").GetComponent<Button>();
 
+        fightModel = FightCtrl.Ins.model;
         base.Init();
     }
 
     public override void AddEvent() {
-
         OKBtn.onClick.AddListener(()=> {
             //todo 打开匹配场景
+            SceneManager.LoadScene("Match");
         });
 
     }

@@ -52,7 +52,12 @@ public class RoomPanel : BaseUI {
         model.BindEvent(MatchEvent.EnterSRES, EnterSRES);
         model.BindEvent(MatchEvent.ExitSRES, ExitSRES);
     }
-    
+
+    private void OnDestroy() {
+        model.UnBindEvent(MatchEvent.EnterSRES, EnterSRES);
+        model.UnBindEvent(MatchEvent.ExitSRES, ExitSRES);
+    }
+
     private void EnterSRES(object[] args) {
         int result = (int)args[0];
         switch (result) {

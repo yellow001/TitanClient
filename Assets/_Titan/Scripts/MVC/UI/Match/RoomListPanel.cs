@@ -62,6 +62,10 @@ public class RoomListPanel : BaseUI {
         
     }
 
+    private void OnDestroy() {
+        model.UnBindEvent(MatchEvent.RefreshSRES, RefreshRoomList);
+    }
+
     void RefreshRoomList(object[] args) {
         int result = (int)args[0];
         //1 可以刷新;-1 连接在某房间中，不用刷新;-2 连接未登录

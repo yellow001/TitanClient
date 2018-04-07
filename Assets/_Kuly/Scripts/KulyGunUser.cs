@@ -58,7 +58,7 @@ public class KulyGunUser : KulyGunPlayer {
         this.CallEventList("GunFire", obj.transform.position, obj.transform.eulerAngles);
 
         //todo
-        obj.GetComponent<Bullet>().ResetData();
+        obj.GetComponent<Bullet>().ResetData(true);
 
         //Debug.Log("fire"+bulletPos.position);
 

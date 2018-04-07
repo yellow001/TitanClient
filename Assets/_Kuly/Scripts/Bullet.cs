@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ServerSimple.DTO.Fight;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,9 @@ public class Bullet : MonoBehaviour ,IPoolReset{
     Vector3 oPos,dis;
 
     RaycastHit hit;
+
+    FightHandler fightHandler;
+
     public string GetPoolName() {
         return poolName;
     }
@@ -36,6 +40,7 @@ public class Bullet : MonoBehaviour ,IPoolReset{
 
     // Use this for initialization
     void Start () {
+        fightHandler = GameObject.FindObjectOfType<FightHandler>();
         tra = transform;
 	}
 
@@ -56,10 +61,23 @@ public class Bullet : MonoBehaviour ,IPoolReset{
 
         if (isMine) {
             dis = tra.position - oPos;
-            if (Physics.Raycast(oPos, dis, out hit, dis.magnitude)) {
-                if (hit.collider.CompareTag("Player")) {
-                    //todo 发送伤害请求
-                    Debug.Log("hit");
+
+            RaycastHit[] hits= Physics.RaycastAll(oPos, dis, dis.magnitude);
+            if (hits.Length > 0) {
+                Vector3 hitPoint = hits[hits.Length - 1].point;
+                foreach (var item in hits) {
+                    if (item.collider.CompareTag("Player_1")) {
+                        //todo 发送伤害请求
+                        DamageDTO dto = new DamageDTO();
+                        dto.SrcID = fightHandler.currentID;
+                        dto.DstID = fightHandler.ObjToIdDic[item.collider.gameObject];
+                        dto.DamageType = 1;
+                        dto.DamageValue = 20;
+                        FightCtrl.Ins.DamageCREQ(dto);
+                        //Debug.Log("hit");
+                        hitPoint = item.point;
+                        break;
+                    }
                 }
             }
         }

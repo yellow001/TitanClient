@@ -24,7 +24,36 @@ public class FightCtrl : BaseCtrl<FightCtrl> {
     }
 
     public void MoveCREQ(MoveDataDTO dto) {
-        TransModel model = new TransModel(1003005);
+        TransModel model = new TransModel(1003005,0);
+        model.SetMsg(dto);
+
+        MessageHandler.Send(model);
+    }
+
+    public void RMBCREQ(MouseBtnDTO dto) {
+        TransModel model = new TransModel(1003005, 1);
+
+        model.SetMsg(dto);
+
+        MessageHandler.Send(model);
+    }
+
+    public void LMBCREQ(MouseBtnDTO dto) {
+        TransModel model = new TransModel(1003005, 2);
+        model.SetMsg(dto);
+
+        MessageHandler.Send(model);
+    }
+
+    public void RotateYCREQ(RotateYDTO dto) {
+        TransModel model = new TransModel(1003005, 3);
+        model.SetMsg(dto);
+
+        MessageHandler.Send(model);
+    }
+
+    public void BoneRotateCREQ(RotateYDTO dto) {
+        TransModel model = new TransModel(1003005, 4);
         model.SetMsg(dto);
 
         MessageHandler.Send(model);
@@ -33,6 +62,14 @@ public class FightCtrl : BaseCtrl<FightCtrl> {
     public void ShootCREQ(ShootDTO dto) {
 
         TransModel model = new TransModel(1003007);
+        model.SetMsg(dto);
+
+        MessageHandler.Send(model);
+    }
+
+    public void DamageCREQ(DamageDTO dto) {
+
+        TransModel model = new TransModel(1003009);
         model.SetMsg(dto);
 
         MessageHandler.Send(model);

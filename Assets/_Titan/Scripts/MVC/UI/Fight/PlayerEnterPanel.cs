@@ -36,10 +36,16 @@ public class PlayerEnterPanel : BaseUI {
     public override void AddEvent() {
         fightModel = FightCtrl.Ins.model;
 
-        fightModel.BindEvent(FightEvent.InitCompleted, (args) => { UpdateCompleteList((Dictionary<int, UserDTO>)args[1]); });
+        fightModel.BindEvent(FightEvent.InitCompleted,UpdateCompleteList);
     }
 
-    void UpdateCompleteList(Dictionary<int, UserDTO> dtoDic) {
+    private void OnDestroy() {
+        fightModel.UnBindEvent(FightEvent.InitCompleted, UpdateCompleteList);
+    }
+
+    void UpdateCompleteList(object[] args) {
+
+        Dictionary<int, UserDTO> dtoDic=(Dictionary<int, UserDTO>)args[1];
 
         List<UserDTO> dtos = dtoDic.Values.ToList();
 

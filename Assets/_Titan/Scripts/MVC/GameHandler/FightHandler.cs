@@ -13,6 +13,8 @@ public class FightHandler : MonoBehaviour {
     UserModel userModel;
 
     Dictionary<int, GameObject> IdToObjDic = new Dictionary<int, GameObject>();
+    public Dictionary<GameObject,int> ObjToIdDic = new Dictionary< GameObject,int>();
+    Dictionary<int, NetCtrlReceiver> IdToReceiveDic = new Dictionary<int, NetCtrlReceiver>();
 
     public KulyCtrlRealTime kuly_user;
 
@@ -24,12 +26,13 @@ public class FightHandler : MonoBehaviour {
 
     public CameraController normalCam;
 
-    int currentID;
+    public int currentID;
 
     public int height = 300;
+    public string bulletPath;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         //Debug.Log(FightCtrl.Ins.model.fightRoom);
 
         userModel = LoginCtrl.Ins.model;
@@ -39,14 +42,24 @@ public class FightHandler : MonoBehaviour {
         AddEvent();
 
         InitFightData();
-	}
+    }
 
     void AddEvent() {
-        this.AddEventFun(FightEvent.AllInitCompleted.ToString(), (args) => AllCompleted(args));
+        this.AddEventFun(FightEvent.AllInitCompleted.ToString(),AllCompleted);
 
-        fightModel.BindEvent(FightEvent.Move, (args) => MoveBRO(args));
-        fightModel.BindEvent(FightEvent.Shoot, (args) => ShootBRO(args));
-        fightModel.BindEvent(FightEvent.Damage, (args) => DamageBRO(args));
+        fightModel.BindEvent(FightEvent.Move,MoveBRO);
+        fightModel.BindEvent(FightEvent.Shoot,ShootBRO);
+        fightModel.BindEvent(FightEvent.Damage,DamageBRO);
+        fightModel.BindEvent(FightEvent.Kill,KillBRO);
+    }
+
+    private void OnDestroy() {
+        this.RemoveEventFun(FightEvent.AllInitCompleted.ToString(),AllCompleted);
+
+        fightModel.UnBindEvent(FightEvent.Move,MoveBRO);
+        fightModel.UnBindEvent(FightEvent.Shoot,ShootBRO);
+        fightModel.UnBindEvent(FightEvent.Damage,DamageBRO);
+        fightModel.UnBindEvent(FightEvent.Kill,KillBRO);
     }
 
     private void DamageBRO(object[] args) {
@@ -56,7 +69,18 @@ public class FightHandler : MonoBehaviour {
         if (IdToObjDic.ContainsKey(dto.DstID)) {
             if (dto.DstID == currentID) {
                 //受伤害的是自己时刷新血量
+                fightModel.currentModel.hp -= dto.DamageValue;
+                fightModel.currentModel.hp = fightModel.currentModel.hp < 0 ? 0 : fightModel.currentModel.hp;
+                this.CallEventList(FightEvent.DamageSelf.ToString());
             }
+        }
+    }
+
+    private void KillBRO(object[] args) {
+        DamageDTO dto = (DamageDTO)args[0];
+
+        if (IdToObjDic.ContainsKey(dto.DstID)) {
+            this.CallObjDeList(IdToObjDic[dto.DstID], FightEvent.Kill.ToString());
         }
     }
 
@@ -70,6 +94,13 @@ public class FightHandler : MonoBehaviour {
             //不是玩家自身时发射子弹
             if (currentID != dto.modelID) {
                 //生成子弹（只是用于显示的而已）
+                GameObject obj = PoolMgr.Ins.GetResObj(bulletPath);
+                obj.transform.position = dto.BulletPos.ToVec3();
+
+                obj.transform.eulerAngles = dto.BulletRotate.ToVec3();
+
+                //todo
+                obj.GetComponent<Bullet>().ResetData();
             }
         }
     }
@@ -77,19 +108,50 @@ public class FightHandler : MonoBehaviour {
     private void MoveBRO(object[] args) {
         TransModel model = (TransModel)args[0];
 
-        MoveDataDTO dto = model.GetMsg<MoveDataDTO>();
+        switch (model.area) {
+            case 0:
+                MoveDataDTO dto = model.GetMsg<MoveDataDTO>();
 
-        if (dto.modelID!=currentID&&IdToObjDic.ContainsKey(dto.modelID)) {
-            IdToObjDic[dto.modelID].GetComponentInChildren<NetCtrlReceiver>().movData = dto;
+                if (dto.modelID != currentID && IdToReceiveDic.ContainsKey(dto.modelID)) {
+                    IdToReceiveDic[dto.modelID].movData = dto;
+                }
+                break;
+            case 1:
+                MouseBtnDTO dto1 = model.GetMsg<MouseBtnDTO>();
+                if (dto1.modelID != currentID && IdToReceiveDic.ContainsKey(dto1.modelID)) {
+                    IdToReceiveDic[dto1.modelID].RMB = dto1.btn;
+                }
+                break;
+            case 2:
+                MouseBtnDTO dto2 = model.GetMsg<MouseBtnDTO>();
+                if (dto2.modelID != currentID && IdToReceiveDic.ContainsKey(dto2.modelID)) {
+                    IdToReceiveDic[dto2.modelID].LMB = dto2.btn;
+                }
+                break;
+            case 3:
+                RotateYDTO dto3 = model.GetMsg<RotateYDTO>();
+                if (dto3.modelID != currentID && IdToReceiveDic.ContainsKey(dto3.modelID)) {
+                    IdToReceiveDic[dto3.modelID].movData.RotationY = dto3.rotateY;
+                }
+                break;
+            case 4:
+                RotateYDTO dto4 = model.GetMsg<RotateYDTO>();
+                if (dto4.modelID != currentID && IdToReceiveDic.ContainsKey(dto4.modelID)) {
+                    IdToReceiveDic[dto4.modelID].boneRoX = dto4.rotateY;
+                }
+                break;
+            default:
+                break;
         }
+
     }
 
 
 
     // Update is called once per frame
-    void Update () {
-		
-	}
+    void Update() {
+
+    }
 
     void InitFightData() {
         //初始化模型  当是玩家自己时，加上 实时控制 脚本，其余加上 同步控制 脚本
@@ -102,18 +164,18 @@ public class FightHandler : MonoBehaviour {
             else {
                 //其他人的
                 ga = InitPlayer(item);
-                
+
             }
 
             IdToObjDic.Add(item.Key, ga);
-
+            ObjToIdDic.Add(ga, item.Key);
         }
 
         //发送初始化完成
         FightCtrl.Ins.InitCompletedCREQ();
     }
 
-    GameObject InitUser(KeyValuePair<int,ServerSimple.DTO.Fight.BaseModel> item) {
+    GameObject InitUser(KeyValuePair<int, ServerSimple.DTO.Fight.BaseModel> item) {
         GameObject ga;
         ga = Instantiate(kuly_user.gameObject);
 
@@ -121,7 +183,7 @@ public class FightHandler : MonoBehaviour {
 
         pos.y = height;
 
-        RaycastHit[] hits= Physics.RaycastAll(pos, Vector3.down, 500);
+        RaycastHit[] hits = Physics.RaycastAll(pos, Vector3.down, 500);
         foreach (var hit in hits) {
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) {
                 pos.y = hit.point.y;
@@ -131,7 +193,7 @@ public class FightHandler : MonoBehaviour {
 
         ga.transform.position = pos;
 
-        normalCam.transform.position = pos+Vector3.up;
+        normalCam.transform.position = pos + Vector3.up;
 
         currentID = item.Key;
         ga.GetComponentInChildren<NetCtrlSender>().modelID = item.Key;
@@ -180,6 +242,10 @@ public class FightHandler : MonoBehaviour {
         KulyCtrlSync ctrl = ga.GetComponentInChildren<KulyCtrlSync>();
 
         ctrl.gun = gunObj;
+
+        IdToReceiveDic.Add(item.Key, ga.GetComponentInChildren<NetCtrlReceiver>());
+
+        IdToReceiveDic[item.Key].movData.Position = new ServerSimple.Data.Vector3Ex(pos);
 
         //gunObj.GetComponent<KulyGunUser>().enabled = false;
 

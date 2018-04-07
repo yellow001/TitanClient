@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 所有监听事件的通用委托(无返回值)
@@ -13,6 +15,20 @@ public class StringEventMgr : BaseManager<StringEventMgr> {
     public Dictionary<string, List<InvokeDe>> DeList=new Dictionary<string, List<InvokeDe>>();
 
     public Dictionary<GameObject, Dictionary<string, List<InvokeDe>>> ObjDelist=new Dictionary<GameObject, Dictionary<string, List<InvokeDe>>>();
+
+    public override void Init() {
+        SceneManager.sceneUnloaded += SceneChange;
+        base.Init();
+    }
+
+    private void SceneChange(Scene arg0) {
+        Clear();
+    }
+
+    private void Clear() {
+        DeList.Clear();
+        ObjDelist.Clear();
+    }
 
     #region 注册、移除、调用事件
     public void AddEventName(string name) {

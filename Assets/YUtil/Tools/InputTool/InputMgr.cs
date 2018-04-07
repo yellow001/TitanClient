@@ -19,9 +19,9 @@ public class InputMgr : BaseManager<InputMgr> {
 
     public float MouseY=0;
 
-    public Action InputChange;
+    public Action InputChange,PositionChange,LMBChange,RMBChange,RotateY;
 
-    bool change = false;
+    bool change = false,move=false;
 	// Use this for initialization
 	void Start () {
 		
@@ -31,6 +31,7 @@ public class InputMgr : BaseManager<InputMgr> {
     void Update() {
 
         change = false;
+        move = false;
 
         if (Horizontal != Input.GetAxis("Horizontal")) {
             Horizontal = Input.GetAxis("Horizontal");
@@ -49,11 +50,13 @@ public class InputMgr : BaseManager<InputMgr> {
 
         if (RMB != Input.GetMouseButton(1)) {
             RMB = Input.GetMouseButton(1);
+            RMBChange?.Invoke();
             change = true;
         }
 
         if (LMB != (Input.GetMouseButton(0) || Input.GetMouseButtonDown(0))) {
             LMB = Input.GetMouseButton(0) || Input.GetMouseButtonDown(0);
+            LMBChange?.Invoke();
             change = true;
         }
 
@@ -67,9 +70,22 @@ public class InputMgr : BaseManager<InputMgr> {
             change = true;
         }
 
+        if (RMB && MouseX != 0 && (Vertical == 0 && Horizontal == 0)) {
+            RotateY?.Invoke();
+        }
+
+        if (Horizontal != 0 || Vertical != 0) {
+            move = true;
+        }
+
         if (change) {
             change = false;
             InputChangeFun();
+        }
+
+        if (move) {
+            move = false;
+            PositionChange?.Invoke();
         }
     }
 

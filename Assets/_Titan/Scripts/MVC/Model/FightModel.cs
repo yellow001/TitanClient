@@ -14,12 +14,18 @@ public class FightModel : BaseModel {
     public Dictionary<int, UserDTO> enterUserDTODic = new Dictionary<int, UserDTO>();
 
     public ServerSimple.DTO.Fight.BaseModel currentModel;
+
+    bool over = false;
+
     public FightRoomDTO fightRoom {
         get;
         protected set;
     }
 
     public void OnFightRoomInitDataSRES(TransModel m) {
+
+        over = true;
+
         fightRoom = m.GetMsg<FightRoomDTO>();
 
         int id = fightRoom.nameToModelID[LoginCtrl.Ins.model.GetUserName()];
@@ -45,21 +51,30 @@ public class FightModel : BaseModel {
 
     internal void Fail() {
         //throw new NotImplementedException();
+        over = true;
+        CallEvent(FightEvent.Over, true);
+    }
+
+    internal void Succeed() {
+        over = true;
+        //throw new NotImplementedException();
+        CallEvent(FightEvent.Over, false);
     }
 
     internal void KillBRO(TransModel model) {
         //throw new NotImplementedException();
+        CallEvent(FightEvent.Kill, model.GetMsg<DamageDTO>());
     }
 
     internal void DamageBRO(TransModel model) {
 
-        DamageDTO dto = model.GetMsg<DamageDTO>();
+        //DamageDTO dto = model.GetMsg<DamageDTO>();
 
-        fightRoom.baseModelDic[dto.DstID].hp -= dto.DamageValue;
+        //fightRoom.baseModelDic[dto.DstID].hp -= dto.DamageValue;
 
-        if (dto.DstID == currentModel.id) {
-            CallEvent(FightEvent.DamageSelf);
-        }
+        //if (dto.DstID == currentModel.id) {
+        //    CallEvent(FightEvent.DamageSelf);
+        //}
 
         CallEvent(FightEvent.Damage, model);
     }
@@ -74,6 +89,10 @@ public class FightModel : BaseModel {
     /// <param name="model"></param>
     internal void MoveBRO(TransModel model) {
         CallEvent(FightEvent.Move, model);
+    }
+
+    public bool IsOver() {
+        return over;
     }
 }
 

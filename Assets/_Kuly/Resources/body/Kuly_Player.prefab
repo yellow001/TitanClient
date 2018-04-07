@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 114358851820503974}
   - component: {fileID: 114153382675768420}
   - component: {fileID: 114118895235437534}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Kuly_Player
   m_TagString: Player_1
   m_Icon: {fileID: 0}
@@ -7010,16 +7010,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movData:
-    Horizontal: 0
-    Vertical: 0
     modelID: 0
-    RMB: 0
-    boneRoX: 0
-    LMB: 0
-    Rotation:
+    Position:
       x: 0
       y: 0
       z: 0
+    RotationY: 0
+  boneRoX: 0
+  RMB: 0
+  LMB: 0
 --- !u!114 &114153382675768420
 MonoBehaviour:
   m_ObjectHideFlags: 1

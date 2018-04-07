@@ -34,7 +34,7 @@ public class UserStatePanel : BaseUI {
 
     public override void AddEvent() {
 
-        fightModel.BindEvent(FightEvent.DamageSelf, (args) => { UpdateView(); });
+        this.AddEventFun(FightEvent.DamageSelf.ToString(), (args) => { UpdateView(); });
     }
 
     public override void UpdateView() {
