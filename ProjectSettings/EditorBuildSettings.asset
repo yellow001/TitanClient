@@ -5,15 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/_Titan/Scenes/Login.unity
-    guid: 0709819ae129cff40bbc9e6c351b01e4
-  - enabled: 1
-    path: Assets/_Titan/Scenes/Match.unity
-    guid: 522143edea4fa6141afdefcff3d94a83
-  - enabled: 1
-    path: Assets/_Titan/Scenes/Fight.unity
-    guid: 346f5a3fc0f4ec64ea8da88c5cbed8ec
   - enabled: 0
-    path: Assets/_Kuly/Scenes/Test.unity
-    guid: 1deacea9b7ee729418b0f6a310734000
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000

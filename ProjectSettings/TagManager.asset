@@ -4,13 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PlayerTrigger
-  - Vaultable_05m
-  - Vaultable
-  - Vaultable_1m
-  - Vaultable_2m
-  - User
-  - Player_1
+  - Carpet
+  - Glass
+  - MetalHeavy
+  - MetalLight
+  - Rubber
+  - BuddyBot
+  - HUD
   layers:
   - Default
   - TransparentFX
@@ -20,14 +20,14 @@ TagManager:
   - UI
   - 
   - 
-  - render
-  - FogVolumeShadowCaster
-  - FogVolume
-  - FogVolumeSurrogate
-  - FogVolumeUniform
-  - Ground
-  - Grow
-  - Player
+  - DynamicObjects
+  - LightingHidden
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
